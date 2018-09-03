@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'Tour of Heroes';
-  heroes = ['Black Panther', 'Spiderman']
-  myHero = this.heroes[0];
+  title = 'WEB2 Project';
+  members = 'This project is made by Hafizh, Nhi and Thibault'
 }
