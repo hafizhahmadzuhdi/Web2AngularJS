@@ -6,6 +6,35 @@
 
 <tbody>
 	<tr *ngFor="let emp of employees">
-		<td>{{emp}}</td>
+		<td *ngIf="current_edit_emp_id !== emp.id">
+			<tr class='name'>
+				{{emp.first_name}} {{emp.last_name}}
+			</tr>
+			<tr class='view-more' (click)='emp.show_extra = !emp.show_extra'>
+				<span *ngIf='!emp.show_extra'>show more</span>
+				<span *ngIf='emp.show_extra'>show less</span>
+			</tr>
+			<tr class='extras' *ngIf="emp.show_extra">
+				{{emp.extra}}
+			</tr>
+		</td>
+		<td *ngIf="current_edit_emp_id === emp.id" class="form">
+			<input name='edit_first_name' type='text' placeholder='First name' [(ngModel)]="edit_first_name" />
+			<input name='edit_last_name' type='text' placeholder='Last name' [(ngModel)]="edit_last_name" />
+			<input name='edit_extra' type='text' placeholder='Extras' [(ngModel)]="edit_extra" />
+			<input type='submit' value='save' (click)='update(emp.id)' />
+		</td>
+		<td class='delete-btn' (click)="delete(emp.id)">X</td>
+		<td class='edit-btn' (click)="switch_edit_emp(emp.id, emp.first_name, emp.last_name, emp.extra)">edit</td>
 	</tr>
 </tbody>
+
+<div class='add'>
+	Add an employee to the list
+	<form>
+		<input name='first_name' type='text' placeholder='First name' [(ngModel)]="first_name" />
+		<input name='last_name' type='text' placeholder='Last name' [(ngModel)]="last_name" />
+		<input name='extra' type='text' placeholder='Extras' [(ngModel)]="extra" />
+		<input type='submit' value='add employee' (click)='add()' />
+	</form>
+</div>

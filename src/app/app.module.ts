@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { EmployeesComponent } from './employees/employees.component';
     EmployeesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
