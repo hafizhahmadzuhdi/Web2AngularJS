@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
 
+    // initalizing our templates variables
     first_name = null;
     last_name = null;
     extra = null;
@@ -34,6 +35,7 @@ export class EmployeesComponent implements OnInit {
     add() {
         // get the higher id from employees array
         let max_id = Math.max.apply(Math, this.employees.map(emp => emp.id));
+        // add new employee to array
         this.employees.push(
             {
                 id: max_id + 1,
