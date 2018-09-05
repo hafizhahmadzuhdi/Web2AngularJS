@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from './employee.service';
+
 
 @Component({
     selector: 'app-employees',
@@ -18,35 +20,35 @@ export class EmployeesComponent implements OnInit {
     edit_last_name = null;
     edit_extra = null;
 
-    constructor() {
+    employees = [];
+
+    constructor(private employeeService: EmployeeService) {
     }
 
     ngOnInit() {
+        this.getEmployees();
+    }
+
+    getEmployees() : void {
+        this.employees = this.employeeService.getAll();
     }
 
     delete(id) {
-        this.employees = this.employees.filter(
-            (emp) => {
-                return emp.id !== id;
-            }
-        );
+        this.employeeService.delete(id);
+        this.getEmployees();
     }
 
     add() {
-        // get the higher id from employees array
-        let max_id = Math.max.apply(Math, this.employees.map(emp => emp.id));
-        // add new employee to array
-        this.employees.push(
-            {
-                id: max_id + 1,
-                first_name: this.first_name,
-                last_name: this.last_name,
-                extra: this.extra,
-                show_extra: false
-            }
-        );
+        this.employeeService.add(this.first_name, this.last_name, this.extra);
+        this.getEmployees();
     }
 
+    update(id) {
+        this.employeeService.update(id, this.edit_first_name, this.edit_last_name, this.edit_extra);
+        this.current_edit_emp_id = null;
+    }
+
+    // used to make sure only one of the employees is being edited at a time (ux choice)
     switch_edit_emp(id, f_name, l_name, extra) {
         // if it's already the current emp we clicked, we just reinit
         if (this.current_edit_emp_id === id)
@@ -58,56 +60,4 @@ export class EmployeesComponent implements OnInit {
             this.edit_extra = extra;
         }
     }
-
-    update(id) {
-        this.employees.map(
-            (emp) => {
-                if (emp.id === id) {
-                    emp.first_name = this.edit_first_name;
-                    emp.last_name = this.edit_last_name;
-                    emp.extra = this.edit_extra;
-                }
-            }
-        );
-        this.current_edit_emp_id = null;
-    }
-
-    employees = [
-        {
-            id: 0,
-            first_name: 'John',
-            last_name: 'Doe',
-            extra: 'bla bla bla',
-            show_extra: false
-        },
-        {
-            id: 1,
-            first_name: 'Bob',
-            last_name: 'Hee',
-            extra: 'bli bli bli',
-            show_extra: false
-        },
-        {
-            id: 3,
-            first_name: 'Louis',
-            last_name: 'Armstrong',
-            extra: 'blo blo blo',
-            show_extra: false
-        },
-        {
-            id: 4,
-            first_name: 'Eric',
-            last_name: 'Ahhg',
-            extra: 'ble ble ble',
-            show_extra: false
-        },
-        {
-            id: 5,
-            first_name: 'Alex',
-            last_name: 'Ghoey',
-            extra: 'zzzz zzz zzz',
-            show_extra: false
-        }
-    ];
-
 }
