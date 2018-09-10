@@ -1,9 +1,63 @@
 <thead>
-	<tr>
-		<th>Tasks</th>
-	</tr>
+	<th>Task Description</th>
+	<th>Delete</th>
+	<th>Edit</th>
+	<th>Details</th>
 </thead>
-
 <tbody>
-	<tr *ngFor="let task of tasks"><td>{{task}}</td></tr>
+	
+	<tr *ngFor="let task of tasks">
+		<td *ngIf="current_taskID !== task.taskID">
+			<tr class='description'>
+				{{task.description}}
+			</tr>
+		<tr class='taskID' *ngIf="task.show_more">
+			taskID : {{task.taskID}}
+		<tr class='priority' *ngIf="task.show_more">
+				Priority : {{task.priority}}
+		</tr>
+		<tr class='due_date' *ngIf="task.show_more">
+				Task Due Date : {{task.due_date}}
+		</tr>
+	</td>
+	<td *ngIf="current_taskID === task.taskID" class="form">
+			<input name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
+			<select [(ngModel)]="get_priority">
+  			<option value="Urgent">Urgent</option>
+  			<option value="Medium">Medium</option>
+  			<option value="Low">Low</option>
+			</select>
+			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date">
+			<input type='submit' value='save' (click)='edit(task.taskID)' />
+		</td>
+
+	<td><button class="btn-function1" (click)='deleteq(task.taskID)'>Delete</button></td>
+	<td><button class="btn-function2" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date)'>Edit</button></td>
+	<td class='view-more' (click)='task.show_more =!task.show_more'>
+	<span *ngIf='!task.show_more'>Show More</span>
+	<span *ngIf='task.show_more'>Show Less</span>
+
+	</td>
+
+
+
+	</tr>
+
 </tbody>
+
+<div class="addTask">
+	<form>
+		<input name='description' type='text' placeholder='description' [(ngModel)]="description" />
+		 <!-- <input type="radio" name="priority" value="Urgent" [(ngModel)]="priority" checked> Urgent <br>
+  		<input type="radio" name="priority" value="Medium" [(ngModel)]="priority"> Medium <br>
+  		<input type="radio" name="priority" value="Low" [(ngModel)]="priority"> Low <br> -->
+  		<select name="priority" [(ngModel)]="priority">
+  		<option value="Urgent">Urgent</option>
+  		<option value="Medium">Medium</option>
+  		<option value="Low">Low</option>
+		</select>
+		<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date">
+		<input type="submit" value='add Task' (click)='insert()' />
+</form>
+</div>
+ 
