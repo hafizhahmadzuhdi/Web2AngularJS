@@ -22,7 +22,11 @@ export class EmployeeService {
                 first_name: first_name,
                 last_name: last_name,
                 extra: extra,
-                show_extra: false
+                edit: {
+                    first_name: false,
+                    last_name: false,
+                    extra: false
+                }
             }
         );
     }
@@ -35,16 +39,19 @@ export class EmployeeService {
         );
     }
 
-    update(id: number, first_name: string, last_name: string, extra: string){
-        this.employees.map(
-            (emp) => {
-                if (emp.id === id) {
-                    emp.first_name = first_name;
-                    emp.last_name = last_name;
-                    emp.extra = extra;
-                }
-            }
-        );
+    start_editing(employee, field){
+        switch (field) {
+            case 'first_name':
+                employee.edit.first_name = !employee.edit.first_name;
+                break;
+            case 'last_name':
+                employee.edit.last_name = !employee.edit.last_name;
+                break;
+            case 'extra':
+                employee.edit.extra = !employee.edit.extra;
+                break;
+        }
+        console.log(this.employees);
     }
 
     employees = [
@@ -53,35 +60,55 @@ export class EmployeeService {
             first_name: 'John',
             last_name: 'Doe',
             extra: 'bla bla bla',
-            show_extra: false
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            }
         },
         {
             id: 1,
             first_name: 'Bob',
             last_name: 'Hee',
             extra: 'bli bli bli',
-            show_extra: false
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            }
         },
         {
             id: 3,
             first_name: 'Louis',
             last_name: 'Armstrong',
             extra: 'blo blo blo',
-            show_extra: false
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            }
         },
         {
             id: 4,
             first_name: 'Eric',
             last_name: 'Ahhg',
             extra: 'ble ble ble',
-            show_extra: false
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            }
         },
         {
             id: 5,
             first_name: 'Alex',
             last_name: 'Ghoey',
             extra: 'zzzz zzz zzz',
-            show_extra: false
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            }
         }
     ];
 }

@@ -14,12 +14,6 @@ export class EmployeesComponent implements OnInit {
     last_name = null;
     extra = null;
 
-    current_edit_emp_id = null;
-
-    edit_first_name = null;
-    edit_last_name = null;
-    edit_extra = null;
-
     employees = [];
 
     constructor(private employeeService: EmployeeService) {
@@ -41,23 +35,22 @@ export class EmployeesComponent implements OnInit {
     add() {
         this.employeeService.add(this.first_name, this.last_name, this.extra);
         this.getEmployees();
+        this.first_name = null;
+        this.last_name = null;
+        this.extra = null;
     }
 
-    update(id) {
-        this.employeeService.update(id, this.edit_first_name, this.edit_last_name, this.edit_extra);
-        this.current_edit_emp_id = null;
-    }
-
-    // used to make sure only one of the employees is being edited at a time (ux choice)
-    switch_edit_emp(id, f_name, l_name, extra) {
-        // if it's already the current emp we clicked, we just reinit
-        if (this.current_edit_emp_id === id)
-            this.current_edit_emp_id = null;
-        else {
-            this.current_edit_emp_id = id;
-            this.edit_first_name = f_name;
-            this.edit_last_name = l_name;
-            this.edit_extra = extra;
+    edit(employee, field) {
+        switch (field) {
+            case 'first_name':
+                this.employeeService.start_editing(employee, 'first_name');
+                break;
+            case 'last_name':
+                this.employeeService.start_editing(employee, 'last_name');
+                break;
+            case 'extra':
+                this.employeeService.start_editing(employee, 'extra');
+                break;
         }
     }
 }
