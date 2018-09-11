@@ -51,7 +51,6 @@ export class EmployeeService {
                 employee.edit.extra = !employee.edit.extra;
                 break;
         }
-        console.log(this.employees);
     }
 
     employees = [

@@ -41,16 +41,6 @@ export class EmployeesComponent implements OnInit {
     }
 
     edit(employee, field) {
-        switch (field) {
-            case 'first_name':
-                this.employeeService.start_editing(employee, 'first_name');
-                break;
-            case 'last_name':
-                this.employeeService.start_editing(employee, 'last_name');
-                break;
-            case 'extra':
-                this.employeeService.start_editing(employee, 'extra');
-                break;
-        }
+        this.employeeService.start_editing(employee, field);
     }
 }
