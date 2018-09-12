@@ -1,47 +1,82 @@
-<table>
-	<caption>
-		<span class='title'>Employees</span>
-		<span class='add-btn' (click)='show_add_form = !show_add_form'>ADD</span>
-		<div class='add' *ngIf='show_add_form'>
-			<form>
-				<input name='first_name' type='text' placeholder='First name' [(ngModel)]="first_name" />
-				<input name='last_name' type='text' placeholder='Last name' [(ngModel)]="last_name" />
-				<input name='extra' type='text' placeholder='Extras' [(ngModel)]="extra" />
-				<input type='submit' value='add employee' (click)='add()' />
-			</form>
-		</div>
-	</caption>
-  	<tr>
-		<th class='delete-btn'></th>
-    	<th>First Name</th>
-    	<th>Last Name</th>
-    	<th>Extras</th>
-  	</tr>
-  	<tr *ngFor="let emp of employees">
+<form>
+
+<caption>
+	<span class='title'>Employees</span>
+	<!-- <span class='add-btn' (click)='show_add_form = !show_add_form'>ADD</span>
+	<div class='add' *ngIf='show_add_form'>
+		<form>
+			<input name='first_name' type='text' placeholder='First name' [(ngModel)]="first_name" />
+			<input name='last_name' type='text' placeholder='Last name' [(ngModel)]="last_name" />
+			<input name='extra' type='text' placeholder='Extras' [(ngModel)]="extra" />
+			<input type='submit' value='add employee' (click)='add()' />
+		</form>
+	</div> -->
+</caption>
+<thead>
+	<th class='delete-btn'></th>
+	<th>First Name</th>
+	<th>Last Name</th>
+	<th>Extras</th>
+</thead>
+<tbody>
+	<tr *ngFor="let emp of employees; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
 		<td class='delete-btn' (click)="delete(emp.id)">X</td>
 		<td>
 			<span class='field'>
 				<span *ngIf='!emp.edit.first_name'>{{emp.first_name}}</span>
-				<input *ngIf='emp.edit.first_name' name='first_name' type='text' placeholder='First name'
+				<input *ngIf='emp.edit.first_name' name='{{emp.first_name}}' type='text' placeholder='First name'
 				[(ngModel)]="emp.first_name" />
 			</span>
-			<span class='edit-field' (click)="edit(emp, 'first_name')">edit</span>
+			<span class='edit-field' (click)="edit(emp, 'first_name')">
+				<span *ngIf='!emp.edit.first_name'>edit</span>
+				<span *ngIf='emp.edit.first_name'>done</span>
+			</span>
 		</td>
 		<td>
 			<span class='field'>
 				<span *ngIf='!emp.edit.last_name'>{{emp.last_name}}</span>
-				<input *ngIf='emp.edit.last_name' name='last_name' type='text' placeholder='First name'
+				<input *ngIf='emp.edit.last_name' name='{{emp.last_name}}' type='text' placeholder='First name'
 				[(ngModel)]="emp.last_name" />
 			</span>
-			<span class='edit-field' (click)="edit(emp, 'last_name')">edit</span>
+			<span class='edit-field' (click)="edit(emp, 'last_name')">
+				<span *ngIf='!emp.edit.last_name'>edit</span>
+				<span *ngIf='emp.edit.last_name'>done</span>
+			</span>
 		</td>
 		<td>
 			<span class='field'>
 				<span *ngIf='!emp.edit.extra'>{{emp.extra}}</span>
-				<input *ngIf='emp.edit.extra' name='extra' type='text' placeholder='First name'
+				<input *ngIf='emp.edit.extra' name='{{emp.extra}}' type='text' placeholder='First name'
 				[(ngModel)]="emp.extra" />
 			</span>
-			<span class='edit-field' (click)="edit(emp, 'extra')">edit</span>
+			<span class='edit-field' (click)="edit(emp, 'extra')">
+				<span *ngIf='!emp.edit.extra'>edit</span>
+				<span *ngIf='emp.edit.extra'>done</span>
+			</span>
 		</td>
 	</tr>
-</table>
+	<tr class='add-emp'>
+		<td class='add-emp-td' (click)="add()">
+			<input type='submit' class='add-emp-btn' value='add new employee' />
+		</td>
+		<td>
+			<span class='field'>
+				<input name='new_first_name' type='text' placeholder='First name'
+				[(ngModel)]="first_name" />
+			</span>
+		</td>
+		<td>
+			<span class='field'>
+				<input name='new_last_name' type='text' placeholder='Last Name'
+				[(ngModel)]="last_name" />
+			</span>
+		</td>
+		<td>
+			<span class='field'>
+				<input name='new_extra' type='text' placeholder='Extras'
+				[(ngModel)]="extra" />
+			</span>
+		</td>
+	</tr>
+</tbody>
+</form>
