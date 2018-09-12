@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Dpt } from './dpt';
 import { _appIdRandomProviderFactory } from '@angular/core/src/application_tokens';
+import { DepartmentService } from './department.service';
 
 @Component({
   selector: 'app-departments',
@@ -10,9 +11,10 @@ import { _appIdRandomProviderFactory } from '@angular/core/src/application_token
 
 export class DepartmentsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private departmentService: DepartmentService) { }
 
   ngOnInit() {
+    this.getDepartments();
   }
 
   id: null;
@@ -22,15 +24,12 @@ export class DepartmentsComponent implements OnInit {
   editName: null;
   editDescription: null;
 
-  departments: Dpt[] = [
-    { id: 1, name: 'Accounting', description: 'AR, AP, internal audit', show_extra: false },
-    { id: 2, name: 'Customer Service', description: 'Phone and email support', show_extra: false },
-    { id: 3, name: 'Human Resources', description: 'Hiring, employee development, performance reviews', show_extra: false },
-    { id: 4, name: 'Payroll', description: 'Pay employees', show_extra: false },
-    { id: 5, name: 'Research and Development', description: 'Programming, testing', show_extra: false },
-    { id: 6, name: 'Sales', description: 'External Sales', show_extra: false},
-  ]
-
+  departments: Dpt[];
+  
+  getDepartments(): void {
+    this.departments = this.departmentService.getDepartments();
+  }
+  
   addDpt() {
     //Gets ID last used for department object for new department id's to continue from
     let prevId = Math.max.apply(Math, this.departments.map(department => department.id));
