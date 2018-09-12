@@ -1,5 +1,4 @@
 th, td, caption {
-    border: 1px solid black;
     font-family: sans-serif;
 }
 
@@ -11,43 +10,55 @@ caption {
 }
 
 th {
+    text-align: left;
     padding: 10px;
+    border-bottom: solid 2px black;
 }
 
 td {
     padding: 5px;
     width: 190px;
     height: 30px;
+    border-bottom: solid 1px black;
 }
 
 .title {
     padding: 10px;
 }
 
-.add-btn {
-    border: 1px solid black;
-    border-radius: 15px;
-    background: #fb8686;
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.5s ease;
-}
-
-.add-btn:hover {
-    background: red;
-    transition: background 0.5s ease;
-}
-
-.add {
-    margin-top: 20px;
-}
-
 .delete-btn {
     cursor: pointer;
-    font-family: sans-serif;
-    border: none;
+    text-align: center;
     color: red;
-    width: 10px;
+    width: 15px;
+}
+
+.add-emp {
+    background: #ff4949;
+}
+
+.add-emp:hover {
+    background: #ff4949;
+}
+
+.add-emp-td {
+    width: 15px;
+    text-align: center;
+    color: white;
+}
+
+.add-emp-btn {
+    border-radius: 50px;
+    cursor: pointer;
+    border: solid 1px white;
+    padding: 5px 10px;
+    background: #ff4949;
+    color: white;
+}
+
+.add-emp-btn:hover {
+    color: #ff4949;
+    background: white;
 }
 
 .field {
@@ -60,9 +71,18 @@ td {
     cursor: pointer;
     float: right;
     color: red;
+    transition: all 0.3s ease;
 }
 
 .edit-field:hover {
-    color: #fb8686;
-    transition: color 0.5s ease;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.colored-tr {
+    background: #ffc9c9;
+}
+
+tr:hover {
+    background: #fc7979;
 }
