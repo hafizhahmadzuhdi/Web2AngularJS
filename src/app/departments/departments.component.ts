@@ -61,8 +61,8 @@ export class DepartmentsComponent implements OnInit {
   }
 
   deleteDpt(id) {
-    let n = this.departments.find(x => x.id === id);
-    this.departments.splice(n.id = id, 1);
+    let i = this.departments.findIndex(x => x.id === id);
+    this.departments.splice(i, 1);
   }
 
 }
