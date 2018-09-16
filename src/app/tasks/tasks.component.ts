@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from './task';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,16 +15,59 @@ export class TasksComponent implements OnInit {
 
 	current_taskID = null;
   selected_taskID = null;
-  position = null;
+  position = null;//this is a variable for array position
 
 	get_description = null;
 	get_priority = null;
 	get_due_date = null;
 
-  constructor() { }
+  tasks: Task[];
+
+
+  constructor(private tasksService: TasksService, ) { 
+  }
+  //generate variable tasksService for service access
+
 
   ngOnInit() {
+  this.getTasks();
+}
+
+  //Task datas are not imported in this file, because
+  //One of service duties is to get the data itself
+  getTasks(): void {
+    this.tasks = this.tasksService.getTasks();
   }
+
+/*  getTasknDeptnEmp(): void{
+
+  }*/
+
+
+
+
+/*  getTasks() : void{
+    this.tasks = this.tasksService.getAll();
+  }
+
+  deleteq(){
+    this.tasksService.deleteq(this.selected_taskID);
+  }
+
+  edit(current_taskID) {
+    this.tasksService.getValueOfSelectedId(this.current_taskID, this.get_description, this.get_priority, this.get_due_date);
+    this.tasksService.edit(this.current_taskID);
+    this.get_description = null;
+    this.get_due_date = null;
+    this.get_priority = null;
+  }*/
+
+
+
+/*  getTasks(): void {
+    this.tasksService.getTasks()
+    .subscribe(tasks => this.tasks = tasks);
+  }*/
 
 
   deleteq(taskID){
@@ -88,6 +133,8 @@ export class TasksComponent implements OnInit {
     this.current_taskID = null;
   }
 
+  /*
+
   tasks = [
   {
   	taskID: 1001,
@@ -145,7 +192,7 @@ export class TasksComponent implements OnInit {
   	due_date: '2018-12-01',
   	show_more: false
   }
- ];
+ ];*/
 
 
 }
