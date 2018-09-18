@@ -1,19 +1,30 @@
 import { Injectable } from '@angular/core';
+import { Employee } from './employee';
+import { DatabaseService } from '../database.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-    constructor() {
+    employees: Employee[];
+
+    constructor(private db: DatabaseService) {
+    }
+
+    // used to save the list in localStorage
+    private persist(): void {
+        this.db.save('employees', this.employees);
     }
 
     getAll() {
+        this.employees = this.db.getEmployees();
         return this.employees;
     }
 
     add(first_name: string, last_name: string, extra: string) {
         // get the higher id from employees array
+        console.log(this.employees);
         let max_id = Math.max.apply(Math, this.employees.map(emp => emp.id));
         // add new employee to array
         this.employees.push(
@@ -29,6 +40,7 @@ export class EmployeeService {
                 }
             }
         );
+        this.persist();
     }
 
     delete(id: number) {
@@ -37,77 +49,27 @@ export class EmployeeService {
                 return emp.id !== id;
             }
         );
+        this.persist();
     }
 
     start_editing(employee, field){
         switch (field) {
             case 'first_name':
                 employee.edit.first_name = !employee.edit.first_name;
+                // if we just closed the edit field, we have to save the new value
+                if (!employee.edit.first_name)
+                    this.persist();
                 break;
             case 'last_name':
                 employee.edit.last_name = !employee.edit.last_name;
+                if (!employee.edit.last_name)
+                    this.persist();
                 break;
             case 'extra':
                 employee.edit.extra = !employee.edit.extra;
+                if (!employee.edit.extra)
+                    this.persist();
                 break;
         }
     }
-
-    employees = [
-        {
-            id: 0,
-            first_name: 'John',
-            last_name: 'Doe',
-            extra: 'bla bla bla',
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            }
-        },
-        {
-            id: 1,
-            first_name: 'Bob',
-            last_name: 'Hee',
-            extra: 'bli bli bli',
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            }
-        },
-        {
-            id: 3,
-            first_name: 'Louis',
-            last_name: 'Armstrong',
-            extra: 'blo blo blo',
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            }
-        },
-        {
-            id: 4,
-            first_name: 'Eric',
-            last_name: 'Ahhg',
-            extra: 'ble ble ble',
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            }
-        },
-        {
-            id: 5,
-            first_name: 'Alex',
-            last_name: 'Ghoey',
-            extra: 'zzzz zzz zzz',
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            }
-        }
-    ];
 }
