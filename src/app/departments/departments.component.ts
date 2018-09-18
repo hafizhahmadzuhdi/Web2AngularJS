@@ -13,10 +13,12 @@ import { EmployeeService } from '../employees/employee.service';
 
 export class DepartmentsComponent implements OnInit {
 
-  constructor(private departmentService: DepartmentService) { }
+  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService) { }
 
   ngOnInit() {
     this.getDepartments();
+    this.getEmployees();
+    this.addEmpToDept();
   }
 
   id: null;
@@ -25,12 +27,34 @@ export class DepartmentsComponent implements OnInit {
   currentDptId: null;
   editName: null;
   editDescription: null;
+  emps: [];
+  empNames: [];
 
   departments: Dpt[];
-  employees: Employee[]; //
- 
+  employees: Employee[];
+
   getDepartments(): void {
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
+  }
+
+  getEmployees() : void {
+    this.employees = this.employeeService.getAll();
+  }
+
+  
+  //eToD = (x, y)=>this.departments[x].emps.push(this.employees[y].first_name + ' ' + this.employees[y].last_name); //for when testing with string array.
+
+  //Makes adding an employee to a department easier
+  eToD = (x, y)=>this.departments[x].emps.push(this.employees[y]);
+  eToDNames = (x, y)=>this.departments[x].empNames.push(this.employees[y].first_name + ' ' + this.employees[y].last_name);
+  
+  addEmpToDept() {
+    this.eToD(0, 1); //department with index 0 gets pushed employee of index 1
+    this.eToDNames(0, 1);
+    this.eToD(0, 2); 
+    this.eToDNames(0, 2);
+    this.eToD(1, 0);
+    this.eToDNames(1, 0);
   }
 
   addDpt() {
@@ -40,7 +64,9 @@ export class DepartmentsComponent implements OnInit {
       id: prevId + 1,
       name: this.name,
       description: this.description,
-      show_extra: false
+      show_extra: false,
+      emps: this.emps,
+      empNames: this.empNames
     });
   }
 
