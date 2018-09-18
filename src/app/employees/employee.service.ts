@@ -24,8 +24,12 @@ export class EmployeeService {
 
     add(first_name: string, last_name: string, extra: string) {
         // get the higher id from employees array
-        console.log(this.employees);
         let max_id = Math.max.apply(Math, this.employees.map(emp => emp.id));
+
+        // if we do not have any employees_id we have to fix max_id at -1 in order to get 0
+        if (max_id === Number.NEGATIVE_INFINITY)
+            max_id = -1;
+            
         // add new employee to array
         this.employees.push(
             {
