@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Dpt } from './dpt';
 import { _appIdRandomProviderFactory } from '@angular/core/src/application_tokens';
 import { DepartmentService } from './department.service';
+import { Employee } from '../employees/employee' //
+import { EmployeeService } from '../employees/employee.service';
 
 @Component({
   selector: 'app-departments',
@@ -25,11 +27,12 @@ export class DepartmentsComponent implements OnInit {
   editDescription: null;
 
   departments: Dpt[];
-  
+  employees: Employee[]; //
+ 
   getDepartments(): void {
-    this.departments = this.departmentService.getDepartments();
+    this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
   }
-  
+
   addDpt() {
     //Gets ID last used for department object for new department id's to continue from
     let prevId = Math.max.apply(Math, this.departments.map(department => department.id));
