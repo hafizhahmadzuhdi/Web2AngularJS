@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Employee } from './employee';
 import { DatabaseService } from '../database.service'
+import { EMPLOYEES } from './employees'
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,15 @@ export class EmployeeService {
     }
 
     // used to save the list in localStorage
-    private persist(): void {
-        this.db.save('employees', this.employees);
-    }
+    // TODO uncomment this to use localstorage
+    // private persist(): void {
+    //     this.db.save('employees', this.employees);
+    // }
 
     getAll() {
-        this.employees = this.db.getEmployees();
+        // TODO uncomment this to use localstorage
+        //this.employees = this.db.getEmployees();
+        this.employees = EMPLOYEES;
         return this.employees;
     }
 
@@ -29,7 +33,7 @@ export class EmployeeService {
         // if we do not have any employees_id we have to fix max_id at -1 in order to get 0
         if (max_id === Number.NEGATIVE_INFINITY)
             max_id = -1;
-            
+
         // add new employee to array
         this.employees.push(
             {
@@ -44,7 +48,8 @@ export class EmployeeService {
                 }
             }
         );
-        this.persist();
+        // TODO uncomment this to use localstorage
+        //this.persist();
     }
 
     delete(id: number) {
@@ -53,7 +58,8 @@ export class EmployeeService {
                 return emp.id !== id;
             }
         );
-        this.persist();
+        // TODO uncomment this to use localstorage
+        //this.persist();
     }
 
     start_editing(employee, field){
@@ -61,18 +67,19 @@ export class EmployeeService {
             case 'first_name':
                 employee.edit.first_name = !employee.edit.first_name;
                 // if we just closed the edit field, we have to save the new value
-                if (!employee.edit.first_name)
-                    this.persist();
+                // TODO uncomment this to use localstorage
+                //if (!employee.edit.first_name)
+                //    this.persist();
                 break;
             case 'last_name':
                 employee.edit.last_name = !employee.edit.last_name;
-                if (!employee.edit.last_name)
-                    this.persist();
+                //if (!employee.edit.last_name)
+                //    this.persist();
                 break;
             case 'extra':
                 employee.edit.extra = !employee.edit.extra;
-                if (!employee.edit.extra)
-                    this.persist();
+                //if (!employee.edit.extra)
+                //    this.persist();
                 break;
         }
     }
