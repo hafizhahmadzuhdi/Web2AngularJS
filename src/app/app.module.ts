@@ -6,6 +6,7 @@ import { DepartmentsComponent } from './departments/departments.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { FormsModule } from '@angular/forms';
+import { TaskdirectiveDirective } from './tasks/taskdirective.directive';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     DepartmentsComponent,
     TasksComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    TaskdirectiveDirective
   ],
   imports: [
     BrowserModule,

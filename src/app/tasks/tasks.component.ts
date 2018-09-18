@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../employees/employee';
 import { Task } from './task';
+import { Dpt } from '../departments/dpt';
 import { TasksService } from './tasks.service';
+import { DepartmentService } from '../departments/department.service';
+import { EmployeeService } from '../employees/employee.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,6 +16,8 @@ export class TasksComponent implements OnInit {
 	description = null;
 	priority = null;
 	due_date = null;
+  emp_id = null;
+  dept_id = null;
 
 	current_taskID = null;
   selected_taskID = null;
@@ -22,26 +28,32 @@ export class TasksComponent implements OnInit {
 	get_due_date = null;
 
   tasks: Task[];
+  depts: Dpt[];
+  emp: Employee[];
 
-
-  constructor(private tasksService: TasksService, ) { 
+  constructor(private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) { 
   }
   //generate variable tasksService for service access
 
 
   ngOnInit() {
+  //this.getTasknDeptnEmp();
   this.getTasks();
 }
 
   //Task datas are not imported in this file, because
   //One of service duties is to get the data itself
-  getTasks(): void {
-    this.tasks = this.tasksService.getTasks();
+  getTasks(): void{
+    this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
   }
 
-/*  getTasknDeptnEmp(): void{
 
-  }*/
+
+ getTasknDeptnEmp(): void{
+    //this.tasks = this.tasksService.getTasks();
+    //this.depts = this.deptService.getDepartments()
+    //this.emp = this.empService.getAll();
+  }
 
 
 
@@ -104,7 +116,9 @@ export class TasksComponent implements OnInit {
     description: this.description,
     priority: this.priority,
     due_date: this.due_date,
-    show_more: false
+    show_more: false,
+    emp_id: this.emp_id,
+    dept_id: this.dept_id
   }
   );
   }

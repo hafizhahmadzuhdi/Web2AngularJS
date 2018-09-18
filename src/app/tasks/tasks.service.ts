@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
 import { TASKS } from './mytask';
+import { EMPLOYEES } from '../employees/employees';
+import { DEPARTMENTS } from '../departments/dptList';
 import { Observable, of} from 'rxjs';
+import { DepartmentService } from '../departments/department.service';
+import { EmployeeService } from '../employees/employee.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +20,8 @@ export class TasksService {
   //Service is useful for getting data only
   //The rests method still need to accessed via other component
 
-  getTasks(){
-    return TASKS;
+  getTasks(): Observable<Task[]>{
+    return of(TASKS);
   }
 
 

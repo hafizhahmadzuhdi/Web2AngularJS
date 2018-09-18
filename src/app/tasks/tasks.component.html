@@ -9,7 +9,7 @@
 	<tr *ngFor="let task of tasks">
 		<td *ngIf="current_taskID !== task.taskID">
 			<tr class='description'>
-				{{task.description}}
+				<p appTaskdirective>{{task.description}}</p>
 			</tr>
 		<tr class='taskID' *ngIf="task.show_more">
 			taskID : {{task.taskID}}
@@ -18,6 +18,12 @@
 		</tr>
 		<tr class='due_date' *ngIf="task.show_more">
 				Task Due Date : {{task.due_date}}
+		</tr>
+		<tr class='emp_id' *ngIf="task.show_more">
+				Employee Id : {{task.emp_id}}
+		</tr>
+		<tr class="dept_id" *ngIf="task.show_more">
+				Department Id : {{task.dept_id}}
 		</tr>
 	</td>
 	<td *ngIf="current_taskID === task.taskID" class="form">
