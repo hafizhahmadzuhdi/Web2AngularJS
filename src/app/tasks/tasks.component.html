@@ -34,11 +34,28 @@
   			<option value="Low">Low</option>
 			</select>
 			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date">
+
+			<select [(ngModel)]="get_emp_id">
+			<option value="">Employee</option>
+	  		<option value=0>0</option>
+	  		<option value=1>1</option>
+	  		<option value=2>2</option>
+			</select>
+
+			<select [(ngModel)]="get_dept_id">
+			<option value="">Department</option>
+  			<option value=1>1</option>
+  			<option value=2>2</option>
+  			<option value=3>3</option>
+  			<option value=4>4</option>
+  			<option value=5>5</option>
+  			<option value=6>6</option>
+			</select>
 			<input type='submit' value='save' (click)='edit(task.taskID)' />
 		</td>
 
 	<td><button class="btn-function1" (click)='deleteq(task.taskID)'>Delete</button></td>
-	<td><button class="btn-function2" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date)'>Edit</button></td>
+	<td><button class="btn-function2" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date, task.emp_id, task.dept_id)'>Edit</button></td>
 	<td class='view-more' (click)='task.show_more =!task.show_more'>
 	<span *ngIf='!task.show_more'>Show More</span>
 	<span *ngIf='task.show_more'>Show Less</span>
@@ -63,6 +80,17 @@
   		<option value="Low">Low</option>
 		</select>
 		<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date">
+
+		<select name="employee" [(ngModel)]="emp_id">
+		<option value="">Employee</option>
+  		<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
+		</select>
+
+		<select name="department" [(ngModel)]="dept_id">
+		<option value="">Department</option>
+  		<option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
+		</select>
+
 		<input type="submit" value='add Task' (click)='insert()' />
 </form>
 </div>

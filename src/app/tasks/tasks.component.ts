@@ -13,19 +13,21 @@ import { EmployeeService } from '../employees/employee.service';
 })
 export class TasksComponent implements OnInit {
 
-	description = null;
-	priority = null;
-	due_date = null;
+  description = null;
+  priority = null;
+  due_date = null;
   emp_id = null;
   dept_id = null;
 
-	current_taskID = null;
+  current_taskID = null;
   selected_taskID = null;
   position = null;//this is a variable for array position
 
-	get_description = null;
-	get_priority = null;
-	get_due_date = null;
+  get_description = null;
+  get_priority = null;
+  get_due_date = null;
+  get_emp_id = null;
+  get_dept_id = null;
 
   tasks: Task[];
   depts: Dpt[];
@@ -37,9 +39,14 @@ export class TasksComponent implements OnInit {
 
 
   ngOnInit() {
-  //this.getTasknDeptnEmp();
   this.getTasks();
+  this.getEmployee();
+  this.getDepartments();
+  /*this.getEmpId();
+  this.getDeptId();*/
 }
+
+//ngOnInit will initialize when we refreshed our browser
 
   //Task datas are not imported in this file, because
   //One of service duties is to get the data itself
@@ -47,13 +54,36 @@ export class TasksComponent implements OnInit {
     this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
   }
 
+  getEmployee(): void{
+    this.emp = this.empService.getAll();
+  }
+
+  getDepartments(): void{
+    //this.DepartmentService.getDepartments().subscribe(depts =>this.depts = depts);
+    this.deptService.getDepartments().subscribe(depts =>this.depts = depts);
+    
+  }
+
+/*  getEmpId(): void{
+    this.init_emp_id = this.emp.filter(empl => {
+    return empl.id }
+    );
+  }
+
+  getDeptId(): void{
+    this.init_dept_id = this.depts.filter(mydep => {
+      return mydep.id}
+    );
+  }*/
 
 
- getTasknDeptnEmp(): void{
+
+/* getTasknDeptnEmp(): void{
+    //this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
+    //this.EmployeeService.getAll().subscribe(emp =>this.emp = emp);
     //this.tasks = this.tasksService.getTasks();
     //this.depts = this.deptService.getDepartments()
-    //this.emp = this.empService.getAll();
-  }
+  }*/
 
 
 
@@ -121,9 +151,12 @@ export class TasksComponent implements OnInit {
     dept_id: this.dept_id
   }
   );
+    console.log(this.emp_id);
+    console.log(this.dept_id);
   }
+  
 
-  getValueOfSelectedId(taskID, description, priority, due_date){
+  getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
     if(this.current_taskID === taskID)
       this.current_taskID = null; //it means that if its already selected return null
     else{ //if no then fill the variable
@@ -131,8 +164,17 @@ export class TasksComponent implements OnInit {
       this.get_description = description;
       this.get_priority = priority;
       this.get_due_date = due_date;
-      console.log(this.get_priority);
+      this.get_emp_id = emp_id;
+      this.get_dept_id = dept_id;
+      
     }
+
+    console.log(this.get_priority);
+    console.log(this.get_description);
+    console.log(this.get_due_date);
+    console.log(this.get_emp_id);
+    console.log(this.get_dept_id);
+
   }
 
   edit(taskID){
@@ -142,71 +184,15 @@ export class TasksComponent implements OnInit {
             task.description = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
+            task.emp_id = this.get_emp_id;
+            task.dept_id = this.get_dept_id;
           }
       });
     this.current_taskID = null;
   }
 
-  /*
-
-  tasks = [
-  {
-  	taskID: 1001,
-  	description: 'Documents Financial Transactions',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  }, 
-  {
-  	taskID: 1002,
-  	description: 'Reconciles Financial Discrepancies',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1003,
-  	description: 'Mails products presentation to prospective buyers',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1004,
-  	description: 'Acquires a new customers',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1005,
-  	description: 'Conducts a Training sessions',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1006,
-  	description:  'Responds customer complaints',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1007,
-  	description:  'Monitors and Evaluates worker performance',
-  	priority: 'Medium',
-  	due_date: '2018-12-01',
-  	show_more: false
-  },
-  {
-  	taskID: 1008,
-  	description: 'Creates and Commercializes inventions',
-  	priority: 'Urgent',
-  	due_date: '2018-12-01',
-  	show_more: false
-  }
- ];*/
-
 
 }
+
+
+
