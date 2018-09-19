@@ -44,11 +44,11 @@ export class DepartmentsComponent implements OnInit {
   //Makes adding an employee to a department easier
   eToD = (x, y)=>this.departments[x].emps.push(this.employees[y]);
   eToDNames = (x, y)=>this.departments[x].empNames.push(this.employees[y].first_name + ' ' + this.employees[y].last_name);
-  
+
   addEmpToDept() {
     this.eToD(0, 1); //department with index 0 gets pushed employee of index 1
     this.eToDNames(0, 1);
-    this.eToD(0, 2); 
+    this.eToD(0, 2);
     this.eToDNames(0, 2);
     this.eToD(1, 0);
     this.eToDNames(1, 0);

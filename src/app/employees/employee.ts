@@ -8,4 +8,5 @@ export class Employee {
         last_name: boolean;
         extra: boolean;
     }
+    dpt_id: number;
 }
