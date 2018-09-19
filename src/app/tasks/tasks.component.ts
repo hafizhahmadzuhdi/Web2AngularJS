@@ -149,12 +149,13 @@ export class TasksComponent implements OnInit {
     priority: this.priority,
     due_date: this.due_date,
     show_more: false,
-    emp_id: this.emp_id,
-    dept_id: this.dept_id
+    emp_id: Number(this.emp_id),
+    dept_id: Number(this.dept_id)
   }
   );
     console.log(this.emp_id);
     console.log(this.dept_id);
+    console.log(this.tasks);
   }
   
 
