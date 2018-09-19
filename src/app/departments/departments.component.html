@@ -3,7 +3,7 @@
       <th>Departments</th>
     </tr>
   </thead>
-  
+
   <tbody>
     <tr *ngFor="let department of departments">
       <td *ngIf="currentDptId !== department.id">
@@ -20,7 +20,7 @@
           <input type='text' [(ngModel)]="editName" name='editName' placeholder='Department Name'>
           <input type='text' [(ngModel)]="editDescription" name='editDesc' placeholder='Description'>
           <input type='submit' value='save' (click)='updateDpt(department.id)'>
-        </form> 
+        </form>
       </td>
   <!--Delete and Edit Functions-->
       <td class='delete-btn' (click)='deleteDpt(department.id)'>X</td>
@@ -31,7 +31,7 @@
   <!--Add Form-->
   <div class = 'add'>
       Add a department to the list
-      <form #add="ngForm" (ngSubmit)=addDpt(add.value)>
+      <form #add="ngForm" (ngSubmit)=addDpt()>
         <input type="text" [(ngModel)]="name" name="name" placeholder="Department Name">
         <input type="text" [(ngModel)]="description" name="description" placeholder="Description">
         <input type="submit" name="addDpt" value="Add Department">
