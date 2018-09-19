@@ -2,6 +2,6 @@ This project is a web application that stores information for multiple tasks, de
 
 There is a dashboard that displays the overview of all of this information for the users to view. Users can search for a specific task, department and employee. There is also a calendar that displays the tasks for the users to view.
 
-Running the web application:
+Access the web application at http://i420882.hera.fhict.nl/
 
 Authors: Nhi Do, Thibault Hentges, and Hafizh Zuhdi.
