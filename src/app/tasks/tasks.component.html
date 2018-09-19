@@ -19,12 +19,22 @@
 		<tr class='due_date' *ngIf="task.show_more">
 				Task Due Date : {{task.due_date}}
 		</tr>
-		<tr class='emp_id' *ngIf="task.show_more">
-				Employee Id : {{task.emp_id}}
+
+		<div *ngFor="let myemp2 of emp"> 
+		<div *ngIf="task.show_more && task.emp_id === myemp2.id">
+		<tr class='emp_id'>
+				Employee Name : {{myemp2.first_name}} {{myemp2.last_name}}
 		</tr>
-		<tr class="dept_id" *ngIf="task.show_more">
-				Department Id : {{task.dept_id}}
+		</div>
+		</div>
+
+		<div *ngFor="let mydept2 of depts">
+		<div *ngIf="task.show_more && task.dept_id === mydept2.id">
+		<tr class="dept_id">
+				Department Name : {{mydept2.name}}
 		</tr>
+		</div>
+		</div>
 	</td>
 	<td *ngIf="current_taskID === task.taskID" class="form">
 			<input name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
