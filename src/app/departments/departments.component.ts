@@ -27,8 +27,8 @@ export class DepartmentsComponent implements OnInit {
   currentDptId: null;
   editName: null;
   editDescription: null;
-  emps: [];
-  empNames: [];
+  emps: null;
+  empNames: null;
 
   departments: Dpt[];
   employees: Employee[];
@@ -40,9 +40,6 @@ export class DepartmentsComponent implements OnInit {
   getEmployees() : void {
     this.employees = this.employeeService.getAll();
   }
-
-  
-  //eToD = (x, y)=>this.departments[x].emps.push(this.employees[y].first_name + ' ' + this.employees[y].last_name); //for when testing with string array.
 
   //Makes adding an employee to a department easier
   eToD = (x, y)=>this.departments[x].emps.push(this.employees[y]);
