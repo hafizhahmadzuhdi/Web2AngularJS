@@ -26,7 +26,7 @@ export class EmployeeService {
         return this.employees;
     }
 
-    add(first_name: string, last_name: string, extra: string) {
+    add(first_name: string, last_name: string, extra: string, dpt_id: number) : Employee {
         // get the higher id from employees array
         let max_id = Math.max.apply(Math, this.employees.map(emp => emp.id));
 
@@ -34,22 +34,25 @@ export class EmployeeService {
         if (max_id === Number.NEGATIVE_INFINITY)
             max_id = -1;
 
+        const new_emp = {
+            id: max_id + 1,
+            first_name: first_name,
+            last_name: last_name,
+            extra: extra,
+            edit: {
+                first_name: false,
+                last_name: false,
+                extra: false
+            },
+            dpt_id
+        }
+
         // add new employee to array
-        this.employees.push(
-            {
-                id: max_id + 1,
-                first_name: first_name,
-                last_name: last_name,
-                extra: extra,
-                edit: {
-                    first_name: false,
-                    last_name: false,
-                    extra: false
-                }
-            }
-        );
+        this.employees.push(new_emp);
         // TODO uncomment this to use localstorage
         //this.persist();
+
+        return new_emp;
     }
 
     delete(id: number) {

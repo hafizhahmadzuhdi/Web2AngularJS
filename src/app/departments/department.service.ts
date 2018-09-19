@@ -16,6 +16,15 @@ export class DepartmentService {
     return of(DEPARTMENTS);
   }
 
+    addEmpToDept(emp : Employee, dpt_id : number) {
+        DEPARTMENTS.map(dpt => {
+            if (dpt.id == dpt_id) {
+                dpt.emps.push(emp);
+                dpt.empNames.push(`${emp.first_name} ${emp.last_name}`);
+            }
+        });
+    }
+
   /*
   getDepartments(): Dpt[] {
     return DEPARTMENTS;

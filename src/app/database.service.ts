@@ -4,6 +4,8 @@ import { Employee } from './employees/employee';
 @Injectable({
   providedIn: 'root'
 })
+
+// this service is not used atm, we will use it to store db in localstorage
 export class DatabaseService {
 
     constructor() { }

@@ -10,7 +10,8 @@ export const EMPLOYEES: Employee[] = [
             first_name: false,
             last_name: false,
             extra: false
-        }
+        },
+        dpt_id: 2
     },
     {
         id: 1,
@@ -21,7 +22,8 @@ export const EMPLOYEES: Employee[] = [
             first_name: false,
             last_name: false,
             extra: false
-        }
+        },
+        dpt_id: 5
     },
     {
         id: 2,
@@ -32,6 +34,7 @@ export const EMPLOYEES: Employee[] = [
             first_name: false,
             last_name: false,
             extra: false
-        }
+        },
+        dpt_id: 3
     },
 ]

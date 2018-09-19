@@ -8,6 +8,7 @@
 	<th>First Name</th>
 	<th>Last Name</th>
 	<th>Extras</th>
+	<th>Department</th>
 </thead>
 <tbody>
 	<tr *ngFor="let emp of employees; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
@@ -45,6 +46,11 @@
 				<span *ngIf='emp.edit.extra'>done</span>
 			</span>
 		</td>
+		<td>
+			<span *ngIf='emp.dpt'>
+				{{emp.dpt.name}}
+			</span>
+		</td>
 	</tr>
 	<tr class='add-emp'>
 		<td class='add-emp-td' (click)="add()">
@@ -66,6 +72,16 @@
 			<span class='field'>
 				<input name='new_extra' type='text' placeholder='Extras'
 				[(ngModel)]="extra" />
+			</span>
+		</td>
+		<td>
+			<span class='field'>
+				<select [(ngModel)]="dpt_id" name="new_dpt_id">
+					<option value=null selected disabled hidden>Choose a department</option>
+  					<option *ngFor="let dpt of departments; let i = index" value="{{dpt.id}}">
+						{{dpt.name}}
+					</option>
+				</select>
 			</span>
 		</td>
 	</tr>
