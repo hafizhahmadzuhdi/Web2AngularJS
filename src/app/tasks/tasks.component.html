@@ -27,7 +27,6 @@
 		</tr>
 		</div>
 		</div>
-
 		<div *ngFor="let mydept2 of depts">
 		<div *ngIf="task.show_more && task.dept_id === mydept2.id">
 		<tr class="dept_id">
@@ -36,6 +35,8 @@
 		</div>
 		</div>
 	</td>
+
+
 	<td *ngIf="current_taskID === task.taskID" class="form">
 			<input name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
 			<select [(ngModel)]="get_priority">
