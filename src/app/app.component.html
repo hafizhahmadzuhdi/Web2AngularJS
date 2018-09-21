@@ -1,14 +1,8 @@
 <h1>{{title}}</h1>
 <h2>{{members}}</h2>
-<app-dashboard></app-dashboard>
-<div class="row">
-	<div class="column">
-		<app-departments></app-departments>
-	</div>
-	<div class="column">
-		<app-tasks></app-tasks>
-	</div>
-	<div class="column">
-		<app-employees></app-employees>
-	</div>
+<div class='row'>
+	<app-navbar></app-navbar>
+</div>
+<div class='row'>
+	<router-outlet></router-outlet>
 </div>

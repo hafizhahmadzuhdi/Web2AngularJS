@@ -9,6 +9,27 @@ import { FormsModule } from '@angular/forms';
 import { TaskdirectiveDirective } from './tasks/taskdirective.directive';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { RouterModule, Routes } from '@angular/router';
+import { NavbarComponent } from './navbar/navbar.component';
+
+const appRoutes: Routes = [
+  {
+      path: 'departments',
+      component: DepartmentsComponent
+  },
+  {
+      path: 'employees',
+      component: EmployeesComponent
+  },
+  {
+      path: 'tasks',
+      component: TasksComponent
+  },
+  {
+      path: '',
+      component: DashboardComponent
+   }
+];
 
 @NgModule({
   declarations: [
@@ -17,13 +38,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     TasksComponent,
     EmployeesComponent,
     TaskdirectiveDirective,
-    DashboardComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
