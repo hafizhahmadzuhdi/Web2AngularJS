@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: false
 })
 
 export class FilterPipe implements PipeTransform {
 
-    transform(items: any[], searchText: string) {  
+    transform(items: any[], searchText: string) {
           if (searchText == null)
               searchText = "";
           searchText = searchText.toLowerCase();
