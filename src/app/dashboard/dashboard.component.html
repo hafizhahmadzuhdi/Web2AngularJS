@@ -3,28 +3,74 @@
 </h1>
 
 <div class="row">
-	<div class="column">
+
+	<div class="list">
     <thead>
       <th>Tasks</th>
     </thead>
-    <tbody>	
-      <tr *ngFor="let task of tasks"><td>{{task.description}}</td></tr>
+    <tbody>
+      <ul>
+        <li *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)"><td>{{task.description}}</td></li>
+      </ul>
     </tbody>
-	</div>
-	<div class="column">
+  </div>
+  
+	<div class="list">
     <thead>
       <th>Departments</th>
     </thead>
     <tbody>	
-      <tr *ngFor="let department of departments"><td>{{department.name}}</td></tr>
+        <ul>
+            <li *ngFor="let department of departments" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)"><td>{{department.name}}</td></li>
+        </ul>
     </tbody>
 	</div>
-	<div class="column">
+	<div class="list">
     <thead>
       <th>Employees</th>
     </thead>
-    <tbody>	
-      <tr *ngFor="let employee of employees"><td>{{employee.first_name}} {{employee.last_name}}</td></tr>
+    <tbody>
+        <ul>
+            <li *ngFor="let employee of employees" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)"><td>{{employee.first_name}} {{employee.last_name}}</td></li>
+        </ul>
     </tbody>
 	</div>
 </div>
+
+<div [ngSwitch]="selected">
+
+  <div *ngSwitchCase="'t'">
+    <div *ngIf="selectedTask">
+      <h2>Task: {{selectedTask.description}}</h2>
+      <div>ID: {{selectedTask.taskID}}</div>
+      <div>Priority: {{selectedTask.priority}}</div>
+      <div>Due Date: {{selectedTask.due_date}}</div>
+     <div>Employees Assigned: {{selectedTask.emp_id}}</div>
+      <div>Departments Assigned: {{selectedTask.dept_id}}</div>
+    </div>
+  </div>
+  <div *ngSwitchCase="'d'">
+    <div *ngIf="selectedDepartment">
+      <h2>Department: {{selectedDepartment.name}}</h2>
+      <div>ID: {{selectedDepartment.id}}</div>
+      <div>Description: {{selectedDepartment.description}}</div>
+      <div>Employees: {{selectedDepartment.empNames}}</div>
+    </div>
+  </div>
+  <div *ngSwitchCase="'e'">
+    <div *ngIf="selectedEmployee">
+      <h2>Employee: {{selectedEmployee.first_name}} {{selectedEmployee.last_name}}</h2>
+      <div>ID: {{selectedEmployee.id}}</div>
+      <div>Department: {{selectedEmployee.dpt_id}}</div>
+    </div>
+  </div>
+
+</div>
+
+   <!--
+    <div>
+      <label>Description: 
+        <input [(ngModel)]="selectedTask.description" placeholder="name">
+      </label>
+    </div>
+    -->

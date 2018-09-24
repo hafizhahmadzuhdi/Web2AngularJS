@@ -24,6 +24,25 @@ export class DashboardComponent implements OnInit {
   departments: Dpt[];
   employees: Employee[];
   tasks: Task[];
+  selectedTask: Task;
+  selectedDepartment: Dpt;
+  selectedEmployee: Employee;
+  selected: string;
+
+  onSelectT(task: Task): void {
+    this.selectedTask = task;
+    this.selected = "t";
+  }
+
+  onSelectD(dpt: Dpt): void {
+    this.selectedDepartment = dpt;
+    this.selected = "d";
+  }
+
+  onSelectE(emp: Employee): void {
+    this.selectedEmployee = emp;
+    this.selected = "e";
+  }
 
   getTasks(): void{
     this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
