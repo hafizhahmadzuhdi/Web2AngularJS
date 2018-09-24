@@ -22,7 +22,9 @@ export class EmployeeService {
     getAll() {
         // TODO uncomment this to use localstorage
         //this.employees = this.db.getEmployees();
-        this.employees = EMPLOYEES;
+        if (!this.employees)
+            this.employees = EMPLOYEES;
+
         return this.employees;
     }
 
