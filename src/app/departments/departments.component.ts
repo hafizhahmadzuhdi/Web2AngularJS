@@ -29,6 +29,7 @@ export class DepartmentsComponent implements OnInit {
   editDescription: null;
   emps: null;
   empNames: null;
+  searchText: string;
 
   departments: Dpt[];
   employees: Employee[];
