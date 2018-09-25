@@ -10,6 +10,15 @@ export class FilterPipe implements PipeTransform {
           if (searchText == null)
               searchText = "";
           searchText = searchText.toLowerCase();
-          return items.filter(elem => elem.name.toLowerCase().indexOf(searchText) > -1);
+          return items.filter(
+              elem => {
+                    if (elem.name)
+                        return elem.name.toLowerCase().indexOf(searchText) > -1;
+                    else if (elem.first_name && elem.last_name) {
+                         const full_name = `${elem.first_name} ${elem.last_name}`;
+                         return full_name.toLowerCase().indexOf(searchText) > -1;
+                    }
+              }
+          );
       }
 }
