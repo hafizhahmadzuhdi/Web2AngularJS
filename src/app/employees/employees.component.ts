@@ -16,6 +16,11 @@ export class EmployeesComponent implements OnInit {
     last_name = null;
     extra = null;
     dpt_id = null;
+    current_edit_emp_id = null;
+    edit_first_name = null;
+    edit_last_name = null;
+    edit_extra = null;
+
 
     employees = [];
     departments = [];
@@ -63,9 +68,35 @@ export class EmployeesComponent implements OnInit {
         this.dpt_id = null;
     }
 
-    edit(employee, field) {
-        this.employeeService.start_editing(employee, field);
+    // edit(employee, field) {
+    //     this.employeeService.start_editing(employee, field);
+    // }
+
+    switch_edit_emp(id, f_name, l_name, extra) {
+        // if it's already the current emp we clicked, we just reinit
+        if (this.current_edit_emp_id === id)
+            this.current_edit_emp_id = null;
+        else {
+            this.current_edit_emp_id = id;
+            this.edit_first_name = f_name;
+            this.edit_last_name = l_name;
+            this.edit_extra = extra;
+        }
     }
+
+    update(id) {
+        this.employees.map(
+            (emp) => {
+                if (emp.id === id) {
+                    emp.first_name = this.edit_first_name;
+                    emp.last_name = this.edit_last_name;
+                    emp.extra = this.edit_extra;
+                }
+            }
+        );
+        this.current_edit_emp_id = null;
+    }
+
 
     getDepartmentById(dpt_id): Dpt {
         const dep = this.departments.filter(dpt => {
