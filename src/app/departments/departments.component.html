@@ -1,5 +1,6 @@
 <div>Search Department:</div>
-<input [(ngModel)]="searchText" placeholder="Department Name">
+<input class="form-control" [(ngModel)]="searchText" placeholder="Department Name">
+<hr>
 <thead>
     <tr>
       <th>Departments</th>
@@ -10,32 +11,32 @@
     <tr *ngFor="let department of departments | filter: searchText">
       <td *ngIf="currentDptId !== department.id">
         <tr class='name'>{{department.name}}</tr>
-        <tr class='view-more' (click)='department.show_extra=!department.show_extra'>
-          <span *ngIf='!department.show_extra'>show more</span>
-          <span *ngIf='department.show_extra'>show less</span>
-        </tr>
-        <tr class='extras' *ngIf="department.show_extra">ID: {{department.id}}<br>{{department.description}}<br><div>Employees: {{department.empNames}}</div></tr>
+        <td *ngIf="department.show_extra">ID: {{department.id}}<br>{{department.description}}<br><div>Employees: {{department.empNames}}</div></td>
       </td>
   <!--Edit Form-->
       <td *ngIf="currentDptId === department.id" class="form">
         <form>
-          <input type='text' [(ngModel)]="editName" name='editName' placeholder='Department Name'>
-          <input type='text' [(ngModel)]="editDescription" name='editDesc' placeholder='Description'>
-          <input type='submit' value='save' (click)='updateDpt(department.id)'>
+          <input type='text' class="form-control" [(ngModel)]="editName" name='editName' placeholder='Department Name'>
+          <input type='text' class="form-control" [(ngModel)]="editDescription" name='editDesc' placeholder='Description'>
+          <input type='submit' id = "right" class="btn-primary" value='Save' (click)='updateDpt(department.id)'>
         </form>
       </td>
   <!--Delete and Edit Functions-->
-      <td class='delete-btn' (click)='deleteDpt(department.id)'>X</td>
-      <td class='edit-btn' (click)='editForm(department.id, department.name, department.description)'>Edit</td>
+      <td class="btn btn-outline-primary" (click)='department.show_extra=!department.show_extra'>
+        <span *ngIf='!department.show_extra'>Show More</span>
+        <span *ngIf='department.show_extra'>Show Less</span>
+      </td>
+      <td class="btn btn-outline-primary" (click)='editForm(department.id, department.name, department.description)'>Edit</td>
+      <td class="btn btn-outline-primary" (click)='deleteDpt(department.id)'>Delete</td>
     </tr>
   </tbody>
 
   <!--Add Form-->
   <div class = 'add'>
-      Add a department to the list
+      Add a department to the list:
       <form #add="ngForm" (ngSubmit)=addDpt()>
-        <input type="text" [(ngModel)]="name" name="name" placeholder="Department Name">
-        <input type="text" [(ngModel)]="description" name="description" placeholder="Description">
-        <input type="submit" name="addDpt" value="Add Department">
+        <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Department Name">
+        <input type="text" class="form-control" [(ngModel)]="description" name="description" placeholder="Description">
+        <input type="submit" id = "right" class="btn-primary" name="addDpt" value="Add Department">
       </form>
   </div>

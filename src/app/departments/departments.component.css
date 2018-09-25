@@ -1,7 +1,7 @@
-th, td {
+/*th, td {
     border: 1px solid black;
  }
-
+*/
 th {
     background: #ff4949;
     padding: 10px;
@@ -45,4 +45,8 @@ td {
 
 .add {
     margin-top: 15px;
+}
+
+#right {
+    float: right
 }
