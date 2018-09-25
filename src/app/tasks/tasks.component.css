@@ -1,5 +1,6 @@
 th, td {
     border: 0.5px solid black;
+    
  }
 
  th {
@@ -13,6 +14,22 @@ th, td {
 td {
     padding: 5px;
 }
+
+/*thead, tbody {
+    margin-right: auto;
+    margin-left: auto;
+}*/
+
+  div.container {
+    width:98%; 
+    margin:1%;
+  }
+  table#table1 {
+    text-align:center; 
+    margin-left:auto; 
+    margin-right:auto; 
+    width:700px;
+  }
 
 .delete-btn {
     cursor: pointer;
@@ -70,4 +87,24 @@ td {
     display: inline-block;
     font-size: 10px;
     text-align: center;
+}
+
+.searchbar {
+    text-align: justify-all;
+    padding: 5px;
+}
+
+#search {
+    font-size: 15px;
+    text-align: center;
+
+}
+
+input#desc_edit {
+    width: 100%;
+
+}
+
+input#calendarduedate {
+    width: 100px;
 }

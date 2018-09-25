@@ -5,6 +5,9 @@ import { Dpt } from '../departments/dpt';
 import { TasksService } from './tasks.service';
 import { DepartmentService } from '../departments/department.service';
 import { EmployeeService } from '../employees/employee.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-tasks',
@@ -38,7 +41,12 @@ export class TasksComponent implements OnInit {
   employees = [];
   departments = [];
 
-  constructor(private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) { 
+  closeResult: string;
+
+
+  //
+
+  constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) { 
   }
   //generate variable tasksService for service access
 
@@ -69,6 +77,28 @@ export class TasksComponent implements OnInit {
     
   }
 
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+   private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
+
+  //Modal Component
 
 
 /*  getEmpId(): void{

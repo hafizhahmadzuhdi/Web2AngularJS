@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe} from './filter.pipe';
 import { FilterTaskPipe } from './tasks/filtertask.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false }

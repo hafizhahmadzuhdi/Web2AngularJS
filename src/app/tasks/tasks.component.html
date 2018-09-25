@@ -1,7 +1,36 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="">Read this carefully! Our group are consisted of Thibault, Nhi and Hafizh. This project is designed by using Angular and Bootstrap</label>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Read This</button>
+
+
+
+
 <div class="searchbar">
-<input [(ngModel)]="searchText" placeholder="Task Description">
+<label id="search">Search for a task :</label>
+<input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="searchText"/>
+
+<!-- <input [(ngModel)]="" placeholder="Task Description"> -->
 </div>
 
+<div class="container">
+<table id="table1">
 <thead>
 	<th>Task Description</th>
 	<th>Delete</th>
@@ -15,14 +44,21 @@
 			<tr class='name'>
 				<p appTaskdirective>{{task.description}}</p>
 			</tr>
+		<div>
 		<tr class='taskID' *ngIf="task.show_more">
 			taskID : {{task.taskID}}
+		</tr>
+		</div>
+		<div>
 		<tr class='priority' *ngIf="task.show_more">
 				Priority : {{task.priority}}
 		</tr>
+		</div>
+		<div>
 		<tr class='due_date' *ngIf="task.show_more">
 				Task Due Date : {{task.due_date}}
 		</tr>
+		</div>
 
 		<div *ngFor="let myemp2 of emp"> 
 		<div *ngIf="task.show_more && task.emp_id === myemp2.id">
@@ -42,21 +78,28 @@
 
 
 	<td *ngIf="current_taskID === task.taskID" class="form">
-			<input name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
+			<tr>
+			<input id="desc_edit" name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
+			</tr>
+			<tr>
 			<select [(ngModel)]="get_priority">
   			<option value="Urgent">Urgent</option>
   			<option value="Medium">Medium</option>
   			<option value="Low">Low</option>
 			</select>
+			</tr>
+			<tr>
 			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date">
-
+			</tr>
+			<tr>
 			<select [(ngModel)]="get_emp_id">
 			<option value="">Employee</option>
 	  		<option value=0>0</option>
 	  		<option value=1>1</option>
 	  		<option value=2>2</option>
 			</select>
-
+			</tr>
+			<tr>
 			<select [(ngModel)]="get_dept_id">
 			<option value="">Department</option>
   			<option value=1>1</option>
@@ -66,7 +109,10 @@
   			<option value=5>5</option>
   			<option value=6>6</option>
 			</select>
+			</tr>
+			<tr>
 			<input type='submit' value='save' (click)='edit(task.taskID)' />
+			</tr>
 		</td>
 
 	<td><button class="btn-function1" (click)='deleteq(task.taskID)'>Delete</button></td>
@@ -82,6 +128,11 @@
 	</tr>
 
 </tbody>
+</table>
+</div>
+
+
+
 
 <div class="addTask">
 	<form>
@@ -94,7 +145,24 @@
   		<option value="Medium">Medium</option>
   		<option value="Low">Low</option>
 		</select>
-		<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date">
+		<!-- <input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date"> -->
+		<input type="text" id="calendarduedate" ngbDatepicker (dateSelect) = [(ngModel)] />
+		<button (click)="d.toggle()">Due Date</button>
+
+
+
+		<!-- <div class="row">
+			<div class="col">
+				<div ngbDropdown class="d-inline-block">
+      			<button [(ngModel)]="dept_id" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Employee</button>
+      			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+		        <button *ngFor="let myemp of emp" value={{myemp.id}} class="dropdown-item">{{myemp.first_name}} {{myemp.last_name}}</button>
+		      </div>
+		    </div>
+		  </div>
+		</div> -->
+
+
 
 		<select name="employee" [(ngModel)]="emp_id">
 		<option value="">Employee</option>
@@ -105,6 +173,8 @@
 		<option value="">Department</option>
   		<option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
 		</select>
+
+
 
 		<input type="submit" value='add Task' (click)='insert()' />
 </form>
