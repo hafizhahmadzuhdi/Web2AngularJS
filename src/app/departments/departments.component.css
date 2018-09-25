@@ -1,16 +1,18 @@
-th, td {
+/*th, td {
     border: 1px solid black;
  }
-
+*/
 th {
     background: #ff4949;
     padding: 10px;
     min-width: 370px;
     vertical-align: text-top;
+    border-radius: 4px;
 }
 
 td {
     padding: 5px;
+    border-radius: 4px;
 }
 
 .delete-btn {
@@ -41,10 +43,10 @@ td {
     height: 36px;
 }
 
-.extras {
-
-}
-
 .add {
     margin-top: 15px;
+}
+
+#right {
+    float: right
 }

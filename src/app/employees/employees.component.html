@@ -1,8 +1,6 @@
-<form>
+<input [(ngModel)]='search' placeholder="Search Employees"  />
 
-<caption>
-	<span class='title'>Employees</span>
-</caption>
+<form>
 <thead *ngIf='employees.length > 0'>
 	<th class='delete-btn'></th>
 	<th>First Name</th>
@@ -11,7 +9,7 @@
 	<th>Department</th>
 </thead>
 <tbody>
-	<tr *ngFor="let emp of employees; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
+	<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
 		<td class='delete-btn' (click)="delete(emp.id)">X</td>
 		<td>
 			<span class='field'>

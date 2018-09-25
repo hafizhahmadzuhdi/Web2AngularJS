@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'WEB2 Project';
-  members = 'This project is made by Hafizh, Nhi and Thibault'
+  members = 'Authors: Hafizh, Nhi and Thibault'
 }
