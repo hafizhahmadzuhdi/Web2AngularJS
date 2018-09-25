@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
     width: 100%;
     display: flex;
 }
@@ -17,4 +17,12 @@
 
 .active {
     background: #ff4949;
+} */
+
+nav {
+    margin-bottom: 30px;
+}
+
+.white {
+    color: white;
 }

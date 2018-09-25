@@ -7,6 +7,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'WEB2 Project';
-  members = 'Authors: Hafizh, Nhi and Thibault'
+  
 }

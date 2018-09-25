@@ -1,44 +1,30 @@
-<h1>
-  Dashboard
-</h1>
+<div class="container-fluid">
+<div class="row justify-content-center">
 
-<div class="row">
+  <div class="col-2">
+      <h3>Tasks</h3>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.description}}</li>
+        </ul>
+  </div>
 
-	<div class="list">
-    <thead>
-      <th>Tasks</th>
-    </thead>
-    <tbody>
-      <ul>
-        <li *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)"><td>{{task.description}}</td></li>
-      </ul>
-    </tbody>
+  <div class="col-2">
+      <h3>Departments</h3>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let department of departments" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
+        </ul>
   </div>
   
-	<div class="list">
-    <thead>
-      <th>Departments</th>
-    </thead>
-    <tbody>	
-        <ul>
-            <li *ngFor="let department of departments" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)"><td>{{department.name}}</td></li>
+  <div class="col-2">
+      <h3>Employees</h3>
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let employee of employees" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
         </ul>
-    </tbody>
-	</div>
-	<div class="list">
-    <thead>
-      <th>Employees</th>
-    </thead>
-    <tbody>
-        <ul>
-            <li *ngFor="let employee of employees" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)"><td>{{employee.first_name}} {{employee.last_name}}</td></li>
-        </ul>
-    </tbody>
-	</div>
+  </div>
 </div>
+<br>
 
-<div [ngSwitch]="selected">
-
+<div [ngSwitch]="selected" class="row justify-content-center">
   <div *ngSwitchCase="'t'">
     <div *ngIf="selectedTask">
       <h2>Task: {{selectedTask.description}}</h2>
@@ -64,7 +50,6 @@
       <div>Department: {{selectedEmployee.dpt_id}}</div>
     </div>
   </div>
-
 </div>
 
    <!--
