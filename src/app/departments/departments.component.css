@@ -7,10 +7,12 @@ th {
     padding: 10px;
     min-width: 370px;
     vertical-align: text-top;
+    border-radius: 4px;
 }
 
 td {
     padding: 5px;
+    border-radius: 4px;
 }
 
 .delete-btn {
