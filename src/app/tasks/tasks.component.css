@@ -1,4 +1,4 @@
-th, td {
+/* th, td {
     border: 0.5px solid black;
     
  }
@@ -15,10 +15,10 @@ td {
     padding: 5px;
 }
 
-/*thead, tbody {
-    margin-right: auto;
-    margin-left: auto;
-}*/
+//thead, tbody {
+  //  margin-right: auto;
+    //margin-left: auto;
+//}
 
   div.container {
     width:98%; 
@@ -68,7 +68,7 @@ td {
 }
 
 .btn-function1 {
-    background-color: red; /* Green */
+    background-color: red;
     border: none;
     color: white;
     text-align: center;
@@ -79,7 +79,7 @@ td {
 }
 
 .btn-function2 {
-    background-color: #e7e7e7; /* gray */
+    background-color: #e7e7e7;
     border: none;
     color: black;
     text-align: center;
@@ -107,4 +107,24 @@ input#desc_edit {
 
 input#calendarduedate {
     width: 100px;
+} */
+
+.text {
+    font-size: 30px;
+}
+
+#right {
+    float: right
+}
+
+tr .btn {
+    margin-left: 5px;
+}
+
+.leftCol {
+    width: 65%;
+}
+
+.rightCol {
+    width: 35%;
 }

@@ -1,33 +1,180 @@
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="">Read this carefully! Our group are consisted of Thibault, Nhi and Hafizh. This project is designed by using Angular and Bootstrap</label>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-  </div>
-</ng-template>
+		<div class="modal-header">
+		  <h4 class="modal-title" id="modal-basic-title">Warning!</h4>
+		  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form>
+			<div class="form-group">
+			  <label for="">Read this carefully! Our group are consisted of Thibault, Nhi and Hafizh. This project is designed by using Angular and Bootstrap</label>
+			</div>
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+		</div>
+	  </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Read This</button>
+	  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Read This</button>
+
+<div class="container">
+		<div class="row justify-content-center">
+		<div class="col-8">
+		<div class="text">Search Task:</div>
+		<input class="form-control" [(ngModel)]="searchText" placeholder="Task Description">
+		<br>
+		
+		<h2>Tasks</h2>
+		<table class="table table-hover">
+			<tbody>
+			  <tr *ngFor="let department of departments | filter: searchText">
+				  <td class="leftCol" *ngIf="currentDptId !== department.id">
+					<tr>{{department.name}}</tr>
+					<td *ngIf="department.show_extra">ID: {{department.id}}<br>{{department.description}}<br><div>Employees: {{department.empNames}}</div></td>
+				  </td>
+			  <!--Edit Form-->
+				  <td *ngIf="currentDptId === department.id" class="form">
+					<form>
+					  <input type='text' class="form-control" [(ngModel)]="editName" name='editName' placeholder='Department Name'>
+					  <input type='text' class="form-control" [(ngModel)]="editDescription" name='editDesc' placeholder='Description'>
+					  <input type='submit' id = "right" class="btn-info" value='Save' (click)='updateDpt(department.id)'>
+					</form>
+				  </td>
+
+				</tr>
+			</tbody>
+
+		  <tr *ngFor="let task of tasks | filterTask: searchText">
+				<td class="leftCol" *ngIf="current_taskID !== task.taskID">
+					<tr>
+						<p appTaskdirective>{{task.description}}</p>
+					</tr>
+				<div>
+				<tr *ngIf="task.show_more">
+					Task ID : {{task.taskID}}
+				</tr>
+				</div>
+				<div>
+				<tr class='priority' *ngIf="task.show_more">
+						Priority : {{task.priority}}
+				</tr>
+				</div>
+				<div>
+				<tr class='due_date' *ngIf="task.show_more">
+						Task Due Date : {{task.due_date}}
+				</tr>
+				</div>
+		
+				<div *ngFor="let myemp2 of emp"> 
+				<div *ngIf="task.show_more && task.emp_id === myemp2.id">
+				<tr class='emp_id'>
+						Employee Name : {{myemp2.first_name}} {{myemp2.last_name}}
+				</tr>
+				</div>
+				</div>
+				<div *ngFor="let mydept2 of depts">
+				<div *ngIf="task.show_more && task.dept_id === mydept2.id">
+				<tr class="dept_id">
+						Department Name : {{mydept2.name}}
+				</tr>
+				</div>
+				</div>
+			</td>
+		
+		<!--Edit form-->
+			<td *ngIf="current_taskID === task.taskID" class="form">
+					<tr>
+					<input class="form-control" name='get_description' type='text' placeholder='Description' [(ngModel)]="get_description" />
+					</tr>
+					<tr>
+					<select class="d-inline-block form-control" [(ngModel)]="get_priority">
+					  <option value="Urgent">Urgent</option>
+					  <option value="Medium">Medium</option>
+					  <option value="Low">Low</option>
+					</select>
+					</tr>
+					<tr>
+					<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date" class="form-control">
+					</tr>
+					<tr>
+					<select class="d-inline-block form-control" [(ngModel)]="get_emp_id">
+					<option value="">Employee</option>
+					  <option value=0>0</option>
+					  <option value=1>1</option>
+					  <option value=2>2</option>
+					</select>
+					</tr>
+					<tr>
+					<select class="d-inline-block form-control" [(ngModel)]="get_dept_id">
+					<option value="">Department</option>
+					  <option value=1>1</option>
+					  <option value=2>2</option>
+					  <option value=3>3</option>
+					  <option value=4>4</option>
+					  <option value=5>5</option>
+					  <option value=6>6</option>
+					</select>
+					</tr>
+					<tr>
+					<input type='submit'  id = "right" class="btn-info" value='Save' (click)='edit(task.taskID)' />
+					</tr>
+				</td>
+
+			<td class="rightCol">
+				<div class="btn btn-sm btn-info" (click)='task.show_more =!task.show_more'>
+					<span *ngIf='!task.show_more'>Show More</span>
+					<span *ngIf='task.show_more'>Show Less</span>
+				</div>
+				<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date, task.emp_id, task.dept_id)'>Edit</div>
+				<div class="btn btn-sm btn-dark" (click)='deleteq(task.taskID)'>Delete</div>
+			</td>
 
 
+			</tr>		
+		</table>
+
+		  <!--Add Form-->
+			  <div class="text">Add a task to the list:</div>
+			  <div>
+					<form>
+						<input name='description' type='text' placeholder='Description' [(ngModel)]="description" class="form-control"/>
+						 <!-- <input type="radio" name="priority" value="Urgent" [(ngModel)]="priority" checked> Urgent <br>
+						  <input type="radio" name="priority" value="Medium" [(ngModel)]="priority"> Medium <br>
+						  <input type="radio" name="priority" value="Low" [(ngModel)]="priority"> Low <br> -->
+						  <select name="priority" [(ngModel)]="priority" class="d-inline-block form-control">
+						  <option value="Urgent">Urgent</option>
+						  <option value="Medium">Medium</option>
+						  <option value="Low">Low</option>
+						</select>
+<!--DATE ISN'T LINKED-->
+<!--
+						<input type="text" id="calendarduedate" ngbDatepicker (dateSelect) = [(ngModel)] class="form-control"/>
+					-->					
+						<input type="date" name="due_date" placeholder="due_date" ngbDatepicker (dateSelect) = [(ngModel)] class="form-control">
+	
+				
+						<select name="employee" [(ngModel)]="emp_id" class="d-inline-block form-control">
+						<option value="">Employee</option>
+						  <option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
+						</select>
+				
+						<select name="department" [(ngModel)]="dept_id" class="d-inline-block form-control">
+						  <option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
+						</select>
+				
+						<input type="submit" value='Add Task' (click)='insert()' id = "right" class="btn btn-info"/>
+				</form>
+				</div>
+
+		  </div>
+		</div>
+		</div>
 
 
-<div class="searchbar">
-<label id="search">Search for a task :</label>
-<input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="searchText"/>
+<!--HAFIZH'S CODE-->
 
-<!-- <input [(ngModel)]="" placeholder="Task Description"> -->
-</div>
 
 <div class="container">
 <table id="table1">
@@ -131,9 +278,6 @@
 </table>
 </div>
 
-
-
-
 <div class="addTask">
 	<form>
 		<input name='description' type='text' placeholder='description' [(ngModel)]="description" />
@@ -149,6 +293,20 @@
 		<input type="text" id="calendarduedate" ngbDatepicker (dateSelect) = [(ngModel)] />
 		<button (click)="d.toggle()">Due Date</button>
 
+		<select name="employee" [(ngModel)]="emp_id">
+		<option value="">Employee</option>
+  		<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
+		</select>
+
+		<select name="department" [(ngModel)]="dept_id">
+		<option value="">Department</option>
+  		<option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
+		</select>
+
+		<input type="submit" value='add Task' (click)='insert()' />
+</form>
+</div>
+
 
 
 		<!-- <div class="row">
@@ -162,21 +320,3 @@
 		  </div>
 		</div> -->
 
-
-
-		<select name="employee" [(ngModel)]="emp_id">
-		<option value="">Employee</option>
-  		<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
-		</select>
-
-		<select name="department" [(ngModel)]="dept_id">
-		<option value="">Department</option>
-  		<option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
-		</select>
-
-
-
-		<input type="submit" value='add Task' (click)='insert()' />
-</form>
-</div>
- 
