@@ -18,7 +18,7 @@ export class DepartmentsComponent implements OnInit {
   ngOnInit() {
     this.getDepartments();
     this.getEmployees();
-    this.addEmpToDept();
+    this.addEmpToDept(this.departments);
   }
 
   id: null;
@@ -42,6 +42,7 @@ export class DepartmentsComponent implements OnInit {
     this.employees = this.employeeService.getAll();
   }
 
+  /*
   //Makes adding an employee to a department easier
   eToD = (x, y)=>this.departments[x].emps.push(this.employees[y]);
   eToDNames = (x, y)=>this.departments[x].empNames.push(this.employees[y].first_name + ' ' + this.employees[y].last_name);
@@ -53,6 +54,18 @@ export class DepartmentsComponent implements OnInit {
     this.eToDNames(0, 2);
     this.eToD(1, 0);
     this.eToDNames(1, 0);
+  }
+  */
+
+  addEmpToDept(departments) : void {
+    this.departments.map(department=> {department.empNames = []})
+    this.employees.map(employee => {
+      this.departments.map(department=> {
+        if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
+          department.empNames.push(employee.first_name + " " + employee.last_name);
+          department.emps.push(employee);
+      })
+    })
   }
 
   addDpt() {
