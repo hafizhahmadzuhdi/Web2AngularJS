@@ -14,8 +14,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe} from './filter.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilterTaskPipe } from './tasks/filtertask.pipe';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 const appRoutes: Routes = [
   {
       path: 'departments',
