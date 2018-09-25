@@ -1,3 +1,7 @@
+<div class="searchbar">
+<input [(ngModel)]="searchText" placeholder="Task Description">
+</div>
+
 <thead>
 	<th>Task Description</th>
 	<th>Delete</th>
@@ -6,9 +10,9 @@
 </thead>
 <tbody>
 	
-	<tr *ngFor="let task of tasks">
+	<tr *ngFor="let task of tasks | filterTask: searchText">
 		<td *ngIf="current_taskID !== task.taskID">
-			<tr class='description'>
+			<tr class='name'>
 				<p appTaskdirective>{{task.description}}</p>
 			</tr>
 		<tr class='taskID' *ngIf="task.show_more">
