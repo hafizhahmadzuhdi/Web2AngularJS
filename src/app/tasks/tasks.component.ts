@@ -29,9 +29,14 @@ export class TasksComponent implements OnInit {
   get_emp_id = null;
   get_dept_id = null;
 
+
+  searchText: string;
   tasks: Task[];
   depts: Dpt[];
   emp: Employee[];
+
+  employees = [];
+  departments = [];
 
   constructor(private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) { 
   }
@@ -129,6 +134,11 @@ export class TasksComponent implements OnInit {
     this.tasks.splice(this.position, 1);
     console.log(this.tasks);
   }
+
+  //when you want to make our project live version
+  //you have to typed in this syntax
+  //ng build --prod --build-optimizer
+  //and
 
 
 

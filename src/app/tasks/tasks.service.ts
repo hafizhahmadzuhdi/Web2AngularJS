@@ -3,6 +3,8 @@ import { Task } from './task';
 import { TASKS } from './mytask';
 import { EMPLOYEES } from '../employees/employees';
 import { DEPARTMENTS } from '../departments/dptList';
+import { Employee } from '../employees/employee';
+import { Dpt } from '../departments/dpt'; 
 import { Observable, of} from 'rxjs';
 import { DepartmentService } from '../departments/department.service';
 import { EmployeeService } from '../employees/employee.service';
@@ -23,6 +25,14 @@ export class TasksService {
   getTasks(): Observable<Task[]>{
     return of(TASKS);
   }
+
+/*  addEmpToTask(emp: Employee, task_id : number){
+    TASKS.map(task => {
+      if(task.taskID == task_id) {
+        task.emp_id.push(emp;
+      }
+    });
+  }*/
 
 
 

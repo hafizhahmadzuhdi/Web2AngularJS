@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe} from './filter.pipe';
+import { FilterTaskPipe } from './tasks/filtertask.pipe';
 
 const appRoutes: Routes = [
   {
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     TaskdirectiveDirective,
     DashboardComponent,
     NavbarComponent,
-    FilterPipe
+    FilterPipe,
+    FilterTaskPipe
   ],
   imports: [
     BrowserModule,
