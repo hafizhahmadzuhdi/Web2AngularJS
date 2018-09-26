@@ -21,6 +21,7 @@ export class EmployeesComponent implements OnInit {
     edit_last_name = null;
     edit_extra = null;
 
+    search = null;
 
     employees = [];
     departments = [];
