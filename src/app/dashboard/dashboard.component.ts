@@ -32,16 +32,22 @@ export class DashboardComponent implements OnInit {
   onSelectT(task: Task): void {
     this.selectedTask = task;
     this.selected = "t";
+    this.selectedDepartment = null;
+    this.selectedEmployee = null;
   }
 
   onSelectD(dpt: Dpt): void {
     this.selectedDepartment = dpt;
     this.selected = "d";
+    this.selectedTask = null;
+    this.selectedEmployee = null;
   }
 
   onSelectE(emp: Employee): void {
     this.selectedEmployee = emp;
     this.selected = "e";
+    this.selectedTask = null;
+    this.selectedDepartment = null;
   }
 
   getTasks(): void{

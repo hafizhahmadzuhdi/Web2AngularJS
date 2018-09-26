@@ -3,21 +3,21 @@
 
   <div class="col-2">
       <h3>Tasks</h3>
-      <ul class="list-group">
+      <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.description}}</li>
         </ul>
   </div>
 
   <div class="col-2">
       <h3>Departments</h3>
-      <ul class="list-group">
+      <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let department of departments" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
         </ul>
   </div>
   
   <div class="col-2">
       <h3>Employees</h3>
-      <ul class="list-group">
+      <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let employee of employees" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
         </ul>
   </div>
