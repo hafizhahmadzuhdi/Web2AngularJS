@@ -88,4 +88,17 @@ export class EmployeeService {
                 break;
         }
     }
+
+    addDeptToEmp(departments) {
+        this.employees.map(emp => {
+            emp.dpt = this.getDepartmentById(emp.dpt_id, departments);
+        })
+    }
+
+    getDepartmentById(dpt_id, dpt_array): Dpt {
+        const dep = dpt_array.filter(dpt => {
+            return dpt.id === dpt_id;
+        });
+        return dep[0];
+    }
 }

@@ -58,14 +58,7 @@ export class DepartmentsComponent implements OnInit {
   */
 
   addEmpToDept(departments) : void {
-    this.departments.map(department=> {department.empNames = []})
-    this.employees.map(employee => {
-      this.departments.map(department=> {
-        if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
-          department.empNames.push(employee.first_name + " " + employee.last_name);
-          department.emps.push(employee);
-      })
-    })
+    this.departmentService.addEmpToDept(departments, this.employees);
   }
 
   addDpt() {

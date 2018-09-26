@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
     this.getTasks();
     this.getEmployee();
     this.getDepartments();
+    this.departmentService.addEmpToDept(this.departments, this.employees);
+    this.employeeService.addDeptToEmp(this.departments);
   }
 
   departments: Dpt[];
@@ -63,5 +65,4 @@ export class DashboardComponent implements OnInit {
   getDepartments(): void{
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
   }
-
 }

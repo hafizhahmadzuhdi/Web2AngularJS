@@ -21,7 +21,7 @@
           <li class="list-group-item" *ngFor="let department of departments | filter: searchDpt" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
         </ul>
   </div>
-  
+
   <div class="col-2">
       <h3>Employees</h3>
       <ul class="list-group list-group-flush">
@@ -54,14 +54,14 @@
     <div *ngIf="selectedEmployee">
       <h2>Employee: {{selectedEmployee.first_name}} {{selectedEmployee.last_name}}</h2>
       <div>ID: {{selectedEmployee.id}}</div>
-      <div>Department: {{selectedEmployee.dpt_id}}</div>
+      <div>Department: {{selectedEmployee.dpt.name}}</div>
     </div>
   </div>
 </div>
 
    <!--
     <div>
-      <label>Description: 
+      <label>Description:
         <input [(ngModel)]="selectedTask.description" placeholder="name">
       </label>
     </div>

@@ -49,9 +49,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     addDeptToEmp() : void {
-        this.employees.map(emp => {
-            emp.dpt = this.getDepartmentById(emp.dpt_id);
-        })
+        this.employeeService.addDeptToEmp(this.departments);
     }
 
     delete(id) {
@@ -61,7 +59,7 @@ export class EmployeesComponent implements OnInit {
 
     add() {
         const emp = this.employeeService.add(this.first_name, this.last_name, this.extra, Number(this.dpt_id));
-        this.dptService.addEmpToDept(emp, this.dpt_id);
+        this.dptService.addDeptToEmp(emp, this.dpt_id);
         this.refresh();
         this.first_name = null;
         this.last_name = null;
@@ -96,13 +94,5 @@ export class EmployeesComponent implements OnInit {
             }
         );
         this.current_edit_emp_id = null;
-    }
-
-
-    getDepartmentById(dpt_id): Dpt {
-        const dep = this.departments.filter(dpt => {
-            return dpt.id === dpt_id;
-        });
-        return dep[0];
     }
 }

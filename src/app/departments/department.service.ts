@@ -16,13 +16,24 @@ export class DepartmentService {
     return of(DEPARTMENTS);
   }
 
-    addEmpToDept(emp : Employee, dpt_id : number) {
+    addDeptToEmp(emp : Employee, dpt_id : number) {
         DEPARTMENTS.map(dpt => {
             if (dpt.id == dpt_id) {
                 dpt.emps.push(emp);
                 dpt.empNames.push(`${emp.first_name} ${emp.last_name}`);
             }
         });
+    }
+
+    addEmpToDept(departments, employees) : void {
+      DEPARTMENTS.map(department=> {department.empNames = []})
+     employees.map(employee => {
+        DEPARTMENTS.map(department=> {
+          if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
+            department.empNames.push(employee.first_name + " " + employee.last_name);
+            department.emps.push(employee);
+        })
+      })
     }
 
   /*
