@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from './employee';
 import { DatabaseService } from '../database.service'
 import { EMPLOYEES } from './employees'
+import { Dpt } from '../departments/dpt'
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,8 @@ export class EmployeeService {
             first_name: first_name,
             last_name: last_name,
             extra: extra,
-            edit: {
-                first_name: false,
-                last_name: false,
-                extra: false
-            },
-            dpt_id
+            dpt_id,
+            dpt: null
         }
 
         // add new employee to array
