@@ -13,7 +13,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterPipe} from './filter.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FilterTaskPipe } from './tasks/filtertask.pipe';
 const appRoutes: Routes = [
   {
       path: 'departments',
@@ -42,8 +41,7 @@ const appRoutes: Routes = [
     TaskdirectiveDirective,
     DashboardComponent,
     NavbarComponent,
-    FilterPipe,
-    FilterTaskPipe
+    FilterPipe
   ],
   imports: [
     BrowserModule,
