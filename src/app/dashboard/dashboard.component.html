@@ -1,5 +1,12 @@
-<div class="container-fluid">
+<div class="container-fluid" id="dash">
 <div class="row justify-content-center">
+
+    <div id="search">
+        <div class="text">Search Department:</div>
+        <input class="form-control" [(ngModel)]="searchDpt" placeholder="Department Name">
+        <div class="text">Search Employee:</div>
+        <input class="form-control" [(ngModel)]="searchEmp" placeholder="Employee Name">
+      </div>
 
   <div class="col-2">
       <h3>Tasks</h3>
@@ -11,14 +18,14 @@
   <div class="col-2">
       <h3>Departments</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let department of departments" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
+          <li class="list-group-item" *ngFor="let department of departments | filter: searchDpt" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
         </ul>
   </div>
   
   <div class="col-2">
       <h3>Employees</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let employee of employees" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
+          <li class="list-group-item" *ngFor="let employee of employees | filter: searchEmp" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
         </ul>
   </div>
 </div>
