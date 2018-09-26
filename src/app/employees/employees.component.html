@@ -8,19 +8,18 @@
 			<h2>Employees</h2>
 			<table class="table table-hover">
 				<tbody>
-					<!-- <tr *ngFor="let department of departments | filter: searchText"> -->
 					<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
 						<td class="leftCol" *ngIf="current_edit_emp_id !== emp.id">
 					<tr>{{emp.first_name}} {{emp.last_name}}</tr>
-					<td *ngIf="emp.show_extra">Extra: {{emp.extra}}<br>Department: {{emp.dpt_id}}<br></td>
+					<td *ngIf="emp.show_extra">Extra: {{emp.extra}}<br>Department: {{emp.dpt.name}}<br></td>
 					</td>
 
 					<!--Edit Form-->
 					<td *ngIf="current_edit_emp_id === emp.id">
 						<form>
-							<input type='text' class="form-control" [(ngModel)]="edit_first_name" placeholder='First Name'>
-							<input type='text' class="form-control" [(ngModel)]="edit_last_name" placeholder='Last Name'>
-							<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="edit_extra" />
+							<input type='text' class="form-control" [(ngModel)]="edit_first_name" placeholder='First Name' name="edit_first_name">
+							<input type='text' class="form-control" [(ngModel)]="edit_last_name" placeholder='Last Name' name="edit_last_name">
+							<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="edit_extra" name="edit_extra" />
 							<input type='submit' id="right" class="btn-info" value='Save' (click)='update(emp.id)'>
 							<!--Doesn't look -->
 						</form>
@@ -44,10 +43,10 @@
 			<div>
 				<div class='text'>Add an Employee to the list:</div>
 				<form>
-					<input type="text" class="form-control" [(ngModel)]="name" placeholder="First Name">
-					<input type="text" class="form-control" [(ngModel)]="description" placeholder="Last Name">
-					<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="extra" />
-					<select class="d-inline-block form-control" [(ngModel)]="dpt_id" name="new_dpt_id">
+					<input type="text" class="form-control" [(ngModel)]="first_name" placeholder="First Name" name="first_name">
+					<input type="text" class="form-control" [(ngModel)]="last_name" placeholder="Last Name" name="last_name">
+					<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="extra" name="extra"/>
+					<select class="d-inline-block form-control" [(ngModel)]="dpt_id" name="dpt_id">
 						<option value=null selected disabled hidden>Choose a department</option>
 						<option *ngFor="let dpt of departments; let i = index" value="{{dpt.id}}">
 							{{dpt.name}}
@@ -60,7 +59,7 @@
 	</div>
 </div>
 
-<!-- 
+<!--
 
 
 <input [(ngModel)]='search' placeholder="Search Employees"  />

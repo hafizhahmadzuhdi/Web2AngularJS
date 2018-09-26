@@ -3,10 +3,5 @@ export class Employee {
     first_name: string;
     last_name: string;
     extra: string;
-    edit: {
-        first_name: boolean;
-        last_name: boolean;
-        extra: boolean;
-    }
     dpt_id: number;
 }
