@@ -66,18 +66,11 @@
 			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date" class="form-control">
 			<select class="d-inline-block form-control" [(ngModel)]="get_emp_id">
 				<!-- should not be fixed values -->
-				<option value=0>0</option>
-				<option value=1>1</option>
-				<option value=2>2</option>
+				<option *ngFor="let myempedit of emp" value={{myempedit.id}}>{{myempedit.first_name}} {{myempedit.last_name}}</option>
 			</select>
 			<select class="d-inline-block form-control" [(ngModel)]="get_dept_id">
 				<!--should not be fixed values-->
-				<option value=1>1</option>
-				<option value=2>2</option>
-				<option value=3>3</option>
-				<option value=4>4</option>
-				<option value=5>5</option>
-				<option value=6>6</option>
+				<option *ngFor="let mydeptedit of depts" value={{mydeptedit.id}}>{{mydeptedit.name}}</option>
 			</select>
 			<input type='submit' id="right" class="btn-info" value='Save' (click)='edit(task.taskID)' />
 		</form>
