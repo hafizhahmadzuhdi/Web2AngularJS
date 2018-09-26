@@ -18,6 +18,9 @@ export class FilterPipe implements PipeTransform {
                          const full_name = `${elem.first_name} ${elem.last_name}`;
                          return full_name.toLowerCase().indexOf(searchText) > -1;
                     }
+                    else if (elem.description) {
+                          return elem.description.toLowerCase().indexOf(searchText) > -1;
+                    }
               }
           );
       }
