@@ -28,6 +28,8 @@ export class DashboardComponent implements OnInit {
   selectedDepartment: Dpt;
   selectedEmployee: Employee;
   selected: string;
+  searchDpt: string;
+  searchEmp: string;
 
   onSelectT(task: Task): void {
     this.selectedTask = task;
