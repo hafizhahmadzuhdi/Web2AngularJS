@@ -187,7 +187,7 @@ export class TasksComponent implements OnInit {
     taskID: lastID + 1,
     description: this.description,
     priority: this.priority,
-    due_date: this.due_date,
+    due_date: this.due_date.year + "-" + this.due_date.month + "-" + this.due_date.day,
     show_more: false,
     emp_id: Number(this.emp_id),
     dept_id: Number(this.dept_id)
@@ -196,6 +196,7 @@ export class TasksComponent implements OnInit {
     console.log(this.emp_id);
     console.log(this.dept_id);
     console.log(this.tasks);
+    console.log(this.due_date);
   }
   
 

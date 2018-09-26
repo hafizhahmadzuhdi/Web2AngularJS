@@ -105,17 +105,17 @@
 						  <input type="radio" name="priority" value="Medium" [(ngModel)]="priority"> Medium <br>
 						  <input type="radio" name="priority" value="Low" [(ngModel)]="priority"> Low <br> -->
 			<select name="priority" [(ngModel)]="priority" class="d-inline-block form-control">
-					<option value=null selected disabled hidden>Priority</option>
+				<option value=null selected disabled hidden>Priority</option>
 				<option value="Urgent">Urgent</option>
 				<option value="Medium">Medium</option>
 				<option value="Low">Low</option>
 			</select>
-
-			<!--DATE ISN'T LINKED-->
-			<!--
-						<input type="text" id="calendarduedate" ngbDatepicker (dateSelect) = [(ngModel)] class="form-control"/>
-					-->
-			<!-- <input type="date" name="due_date" placeholder="due_date" ngbDatepicker (dateSelect)=[(ngModel)] class="form-control"> -->
+<!-- 			<input type="text" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="due_date"/>
+ -->			
+ 				<!-- <input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date">	
+ 				<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date"> -->
+			
+			<input type="date" name="due_date" placeholder="due_date" ngbDatepicker [(ngModel)]="due_date" class="form-control">
 
 
 			<select name="employee" [(ngModel)]="emp_id" class="d-inline-block form-control">
