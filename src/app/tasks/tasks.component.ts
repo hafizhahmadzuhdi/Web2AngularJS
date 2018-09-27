@@ -228,10 +228,12 @@ export class TasksComponent implements OnInit {
             task.description = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
-            task.emp_id = this.get_emp_id;
-            task.dept_id = this.get_dept_id;
+            task.emp_id = Number(this.get_emp_id);
+            task.dept_id = Number(this.get_dept_id);
           }
       });
+      console.log(this.get_emp_id);
+      console.log(this.get_dept_id);
     this.current_taskID = null;
   }
 

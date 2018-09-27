@@ -56,24 +56,24 @@
 
 	<!--Edit form-->
 	<td *ngIf="current_taskID === task.taskID">
-		<form>
+		
 			<input class="form-control" name='get_description' type='text' placeholder='Description' [(ngModel)]="get_description" />
-			<select class="d-inline-block form-control" [(ngModel)]="get_priority">
+			<select class="d-inline-block form-control" name="get_priority" [(ngModel)]="get_priority">
 				<option value="Urgent">Urgent</option>
 				<option value="Medium">Medium</option>
 				<option value="Low">Low</option>
 			</select>
 			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date" class="form-control">
-			<select class="d-inline-block form-control" [(ngModel)]="get_emp_id">
-				<!-- should not be fixed values -->
-				<option *ngFor="let myempedit of emp" value={{myempedit.id}}>{{myempedit.first_name}} {{myempedit.last_name}}</option>
+			<select class="d-inline-block form-control" name="get_emp_id" [(ngModel)]="get_emp_id">
+				<option *ngFor="let myemp2 of emp" name="emp_id" value={{myemp2.id}}>{{myemp2.first_name}} {{myemp2.last_name}}</option>
 			</select>
-			<select class="d-inline-block form-control" [(ngModel)]="get_dept_id">
-				<!--should not be fixed values-->
-				<option *ngFor="let mydeptedit of depts" value={{mydeptedit.id}}>{{mydeptedit.name}}</option>
+
+
+			<select class="d-inline-block form-control" name="dept_id" [(ngModel)]="get_dept_id">
+				<option *ngFor="let mydept2 of depts" value={{mydept2.id}}>{{mydept2.name}}</option>
 			</select>
 			<input type='submit' id="right" class="btn-info" value='Save' (click)='edit(task.taskID)' />
-		</form>
+		
 	</td>
 
 	<td class="rightCol">
