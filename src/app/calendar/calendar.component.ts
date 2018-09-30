@@ -20,6 +20,21 @@ import {
   CalendarView
 } from 'angular-calendar';
 
+  const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
+
 
 @Component({
   selector: 'app-calendar',
@@ -27,6 +42,8 @@ import {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
+	
+	description : object;
 
 	tasks: Task[];
 
@@ -34,13 +51,29 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
   	this.getTasks();
+  	console.log(this.tasks);
+  	this.getTaskDescription();
   }
 
   getTasks(): void{
     this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
   }
 
+  getTaskDescription(): void{
+  	this.description = this.tasks['description'];
+  }
+
+
   viewDate: Date = new Date();
+  
+  events: CalendarEvent[] = [
+    {
+      start: startOfDay(new Date()),
+      title: 'Doing presentation to the client',
+      color: colors.red,
+    }
+  ];
+ 
 
 
 }

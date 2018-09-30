@@ -1,7 +1,12 @@
+import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Task } from './task';
 
-export const TASKS: Task[] = [
-  {
+export class InMemoryDataTaskService implements InMemoryDbService {
+
+
+  createDb() {
+  	const tasks = [
+  	{
     taskID: 1001,
     description: 'Documents Financial Transactions',
     priority: 'Urgent',
@@ -73,4 +78,13 @@ export const TASKS: Task[] = [
     emp_id: 1,
     dept_id: 6
   }
- ];
+  ];
+
+  return {tasks};
+}
+
+genId(tasks: Task[]): number {
+    return tasks.length > 0 ? Math.max(...tasks.map(task => task.taskID)) + 1 : 1001;
+  }
+
+}

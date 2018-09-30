@@ -8,13 +8,17 @@ import { Dpt } from '../departments/dpt';
 import { Observable, of} from 'rxjs';
 import { DepartmentService } from '../departments/department.service';
 import { EmployeeService } from '../employees/employee.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
 
-  constructor() { 
+  private tasksUrl = 'api/tasks';  // URL to web api
+
+  constructor(private http: HttpClient) { 
 
   }
 
@@ -22,9 +26,17 @@ export class TasksService {
   //Service is useful for getting data only
   //The rests method still need to accessed via other component
 
+
+
   getTasks(): Observable<Task[]>{
-    return of(TASKS);
+    //return of(TASKS);
+    return this.http.get<Task[]>(this.tasksUrl)
+    .pipe(
+      catchError(this.handleError('getTasks', []))
+    );
   }
+
+
 
 /*  addEmpToTask(emp: Employee, task_id : number){
     TASKS.map(task => {
@@ -101,6 +113,29 @@ export class TasksService {
 
 
 
+
+
+
+
+/**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
+private handleError<T> (operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+ 
+    // TODO: send the error to remote logging infrastructure
+    console.error(error); // log to console instead
+ 
+    // TODO: better job of transforming error for user consumption
+/*    this.log(`${operation} failed: ${error.message}`);
+*/ 
+    // Let the app keep running by returning an empty result.
+    return of(result as T);
+  };
+}
 
 
 
