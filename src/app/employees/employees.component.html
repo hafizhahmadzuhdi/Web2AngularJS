@@ -11,7 +11,7 @@
 					<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
 						<td class="leftCol" *ngIf="current_edit_emp_id !== emp.id">
 					<tr>{{emp.first_name}} {{emp.last_name}}</tr>
-					<td *ngIf="emp.show_extra">Extra: {{emp.extra}}<br>Department: {{emp.dpt.name}}<br></td>
+					<td *ngIf="emp.show_extra">Birth Date: {{emp.birth_date}}<br>Department: {{emp.dpt.name}}<br></td>
 					</td>
 
 					<!--Edit Form-->
@@ -19,7 +19,7 @@
 						<form>
 							<input type='text' class="form-control" [(ngModel)]="edit_first_name" placeholder='First Name' name="edit_first_name">
 							<input type='text' class="form-control" [(ngModel)]="edit_last_name" placeholder='Last Name' name="edit_last_name">
-							<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="edit_extra" name="edit_extra" />
+							<input type='text' class="form-control" placeholder='birth_date' [(ngModel)]="edit_bd" name="edit_bd" />
 							<input type='submit' id="right" class="btn-info" value='Save' (click)='update(emp.id)'>
 							<!--Doesn't look -->
 						</form>
@@ -27,7 +27,7 @@
 
 					<!--Delete and Edit Functions-->
 					<td class="rightCol">
-						<div class="btn btn-sm btn-info" (click)='emp.show_extra = !emp.show_extra'>
+						<div class="btn btn-sm btn-info" (click)='show_extra(emp)'>
 							<span *ngIf='!emp.show_extra'>Show More</span>
 							<span *ngIf='emp.show_extra'>Show Less</span>
 						</div>
@@ -45,8 +45,8 @@
 				<form>
 					<input type="text" class="form-control" [(ngModel)]="first_name" placeholder="First Name" name="first_name">
 					<input type="text" class="form-control" [(ngModel)]="last_name" placeholder="Last Name" name="last_name">
-					<input type='text' class="form-control" placeholder='Extras' [(ngModel)]="extra" name="extra"/>
-					<select class="d-inline-block form-control" [(ngModel)]="dpt_id" name="dpt_id">
+					<input type='text' class="form-control" placeholder='Birth Date' [(ngModel)]="birth_date" name="birth_date"/>
+					<select class="d-inline-block form-control" [(ngModel)]="department_id" name="department_id">
 						<option value=null selected disabled hidden>Choose a department</option>
 						<option *ngFor="let dpt of departments; let i = index" value="{{dpt.id}}">
 							{{dpt.name}}
@@ -58,94 +58,3 @@
 		</div>
 	</div>
 </div>
-
-<!--
-
-
-<input [(ngModel)]='search' placeholder="Search Employees"  />
-
-<form>
-<thead *ngIf='employees.length > 0'>
-	<th class='delete-btn'></th>
-	<th>First Name</th>
-	<th>Last Name</th>
-	<th>Extras</th>
-	<th>Department</th>
-</thead>
-<tbody>
-	<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
-		<td class='delete-btn' (click)="delete(emp.id)">X</td>
-		<td>
-			<span class='field'>
-				<span *ngIf='!emp.edit.first_name'>{{emp.first_name}}</span>
-				<input *ngIf='emp.edit.first_name' name='{{emp.first_name}}' type='text' placeholder='First name'
-				[(ngModel)]="emp.first_name" />
-			</span>
-			<span class='edit-field' (click)="edit(emp, 'first_name')">
-				<span *ngIf='!emp.edit.first_name'>edit</span>
-				<span *ngIf='emp.edit.first_name'>done</span>
-			</span>
-		</td>
-		<td>
-			<span class='field'>
-				<span *ngIf='!emp.edit.last_name'>{{emp.last_name}}</span>
-				<input *ngIf='emp.edit.last_name' name='{{emp.last_name}}' type='text' placeholder='First name'
-				[(ngModel)]="emp.last_name" />
-			</span>
-			<span class='edit-field' (click)="edit(emp, 'last_name')">
-				<span *ngIf='!emp.edit.last_name'>edit</span>
-				<span *ngIf='emp.edit.last_name'>done</span>
-			</span>
-		</td>
-		<td>
-			<span class='field'>
-				<span *ngIf='!emp.edit.extra'>{{emp.extra}}</span>
-				<input *ngIf='emp.edit.extra' name='{{emp.extra}}' type='text' placeholder='First name'
-				[(ngModel)]="emp.extra" />
-			</span>
-			<span class='edit-field' (click)="edit(emp, 'extra')">
-				<span *ngIf='!emp.edit.extra'>edit</span>
-				<span *ngIf='emp.edit.extra'>done</span>
-			</span>
-		</td>
-		<td>
-			<span *ngIf='emp.dpt'>
-				{{emp.dpt.name}}
-			</span>
-		</td>
-	</tr>
-	<tr class='add-emp'>
-		<td class='add-emp-td' (click)="add()">
-			<input type='submit' class='add-emp-btn' value='add new employee' />
-		</td>
-		<td>
-			<span class='field'>
-				<input name='new_first_name' type='text' placeholder='First name'
-				[(ngModel)]="first_name" />
-			</span>
-		</td>
-		<td>
-			<span class='field'>
-				<input name='new_last_name' type='text' placeholder='Last Name'
-				[(ngModel)]="last_name" />
-			</span>
-		</td>
-		<td>
-			<span class='field'>
-				<input name='new_extra' type='text' placeholder='Extras'
-				[(ngModel)]="extra" />
-			</span>
-		</td>
-		<td>
-			<span class='field'>
-				<select [(ngModel)]="dpt_id" name="new_dpt_id">
-					<option value=null selected disabled hidden>Choose a department</option>
-  					<option *ngFor="let dpt of departments; let i = index" value="{{dpt.id}}">
-						{{dpt.name}}
-					</option>
-				</select>
-			</span>
-		</td>
-	</tr>
-</tbody>
-</form> -->

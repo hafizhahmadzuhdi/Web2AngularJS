@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Employee } from './employee';
 import { DatabaseService } from '../database.service'
-import { EMPLOYEES } from './employees'
+// import { EMPLOYEES } from './employees'
 import { Dpt } from '../departments/dpt'
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +13,14 @@ export class EmployeeService {
 
     employees: Employee[];
 
-    constructor(private db: DatabaseService) {
+    constructor(private db: DatabaseService, private http: HttpClient) {
+        this.getAll().subscribe(emps =>
+            this.employees = emps
+        );
     }
 
-    // used to save the list in localStorage
-    // TODO uncomment this to use localstorage
-    // private persist(): void {
-    //     this.db.save('employees', this.employees);
-    // }
-
-    getAll() {
-        // TODO uncomment this to use localstorage
-        //this.employees = this.db.getEmployees();
-        if (!this.employees)
-            this.employees = EMPLOYEES;
-
-        return this.employees;
+    getAll(): Observable<Employee[]> {
+        return this.employees ? of(this.employees) : this.http.get<Employee[]>('http://i875395.hera.fhict.nl/api/420882/employee');
     }
 
     add(first_name: string, last_name: string, extra: string, dpt_id: number) : Employee {
@@ -41,8 +35,8 @@ export class EmployeeService {
             id: max_id + 1,
             first_name: first_name,
             last_name: last_name,
-            extra: extra,
-            dpt_id,
+            birth_date: extra,
+            department_id: dpt_id,
             dpt: null
         }
 
@@ -86,16 +80,18 @@ export class EmployeeService {
         }
     }
 
-    addDeptToEmp(departments) {
-        this.employees.map(emp => {
-            emp.dpt = this.getDepartmentById(emp.dpt_id, departments);
-        })
-    }
-
-    getDepartmentById(dpt_id, dpt_array): Dpt {
-        const dep = dpt_array.filter(dpt => {
-            return dpt.id === dpt_id;
-        });
-        return dep[0];
+    getEmployeesName(emp_ids){
+        const emp_names = [];
+        emp_ids.map(
+            id => {
+                this.employees.map(
+                    emp => {
+                        if (emp.id === id)
+                            emp_names.push(`${emp.first_name} ${emp.last_name}`);
+                    }
+                )
+            }
+        )
+        return emp_names;
     }
 }

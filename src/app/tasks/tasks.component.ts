@@ -49,7 +49,7 @@ export class TasksComponent implements OnInit {
 
   //
 
-  constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) { 
+  constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) {
   }
   //generate variable tasksService for service access
 
@@ -71,13 +71,13 @@ export class TasksComponent implements OnInit {
   }
 
   getEmployee(): void{
-    this.emp = this.empService.getAll();
+    this.empService.getAll().subscribe(data =>this.emp = data);
   }
 
   getDepartments(): void{
     //this.DepartmentService.getDepartments().subscribe(depts =>this.depts = depts);
     this.deptService.getDepartments().subscribe(depts =>this.depts = depts);
-    
+
   }
 
 
@@ -206,7 +206,7 @@ export class TasksComponent implements OnInit {
     console.log(this.tasks);
     console.log(this.due_date);
   }
-  
+
 
   getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
     if(this.current_taskID === taskID)
@@ -218,7 +218,7 @@ export class TasksComponent implements OnInit {
       this.get_due_date = due_date;
       this.get_emp_id = emp_id;
       this.get_dept_id = dept_id;
-      
+
     }
 
     console.log(this.get_priority);
@@ -247,6 +247,3 @@ export class TasksComponent implements OnInit {
 
 
 }
-
-
-
