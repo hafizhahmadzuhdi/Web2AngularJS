@@ -56,11 +56,10 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
   	this.getTasks();
-  	this.getTaskDescription;
-  	this.getTaskDueDate;
   	console.log(this.events);
   	this.viewDate;
-  	this.myFunction();
+  	//this.myFunction();
+  	console.log(this.tasks);
   }
 
   getTasks(): void{
@@ -85,7 +84,7 @@ export class CalendarComponent implements OnInit {
     }
     );
   });
-
+  	console.log(this.tasks);
   }
 
   modalData: {
