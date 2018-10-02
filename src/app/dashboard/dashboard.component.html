@@ -8,21 +8,21 @@
         <input class="form-control" [(ngModel)]="searchEmp" placeholder="Employee Name">
       </div>
 
-  <div class="col-2">
+  <div *ngIf="tasks" class="col-2">
       <h3>Tasks</h3>
       <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.description}}</li>
         </ul>
   </div>
 
-  <div class="col-2">
+  <div *ngIf="departments" class="col-2">
       <h3>Departments</h3>
       <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let department of departments | filter: searchDpt" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
         </ul>
   </div>
 
-  <div class="col-2">
+  <div *ngIf="employees" class="col-2">
       <h3>Employees</h3>
       <ul class="list-group list-group-flush">
           <li class="list-group-item" *ngFor="let employee of employees | filter: searchEmp" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
@@ -46,7 +46,7 @@
     <div *ngIf="selectedDepartment">
       <h2>Department: {{selectedDepartment.name}}</h2>
       <div>ID: {{selectedDepartment.id}}</div>
-      <div>Description: {{selectedDepartment.description}}</div>
+      <div>Building: {{selectedDepartment.building}}</div>
       <div>Employees: {{selectedDepartment.empNames}}</div>
     </div>
   </div>

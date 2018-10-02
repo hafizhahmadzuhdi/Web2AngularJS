@@ -41,18 +41,11 @@ export class EmployeesComponent implements OnInit {
     }
 
     getEmployees() : void {
-        // this.employees = this.employeeService.getAll();
         this.employeeService.getAll().subscribe(data => this.employees = data);
     }
 
     getDepartments() : void {
-        //this.departments = this.dptService.getDepartments().subscribe;
         this.dptService.getDepartments().subscribe(data => this.departments = data);
-    }
-
-    addDeptToEmp() : void {
-        this.employeeService.addDeptToEmp(this.departments);
-        console.log(this.employees);
     }
 
     delete(id) {

@@ -80,17 +80,18 @@ export class EmployeeService {
         }
     }
 
-    addDeptToEmp(departments) {
-        this.employees.map(emp => {
-            emp.dpt = this.getDepartmentById(emp.department_id, departments);
-        })
-        console.log("ICIIII");
-    }
-
-    getDepartmentById(dpt_id, dpt_array): Dpt {
-        const dep = dpt_array.filter(dpt => {
-            return dpt.id === dpt_id;
-        });
-        return dep[0];
+    getEmployeesName(emp_ids){
+        const emp_names = [];
+        emp_ids.map(
+            id => {
+                this.employees.map(
+                    emp => {
+                        if (emp.id === id)
+                            emp_names.push(`${emp.first_name} ${emp.last_name}`);
+                    }
+                )
+            }
+        )
+        return emp_names;
     }
 }
