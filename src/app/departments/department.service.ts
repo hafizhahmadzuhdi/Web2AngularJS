@@ -46,14 +46,14 @@ export class DepartmentService {
     // }
 
     addEmpToDept(departments, employees) : void {
-      this.departments.map(department=> {department.employees = []})
-     employees.map(employee => {
-        this.departments.map(department=> {
-          if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
-            department.empNames.push(employee.first_name + " " + employee.last_name);
-            department.employees.push(employee.dpt_id);
-      })
-    }
+        this.departments.map(department=> {department.employees = []});
+        employees.map(employee => {
+            this.departments.map(department=> {
+                if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
+                department.empNames.push(employee.first_name + " " + employee.last_name);
+                department.employees.push(employee.dpt_id);
+            })
+    });
     }
 
     getDepartmentById(dpt_id) {
