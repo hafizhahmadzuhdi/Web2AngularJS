@@ -14,12 +14,12 @@
   <div class="modal-body" *ngFor="let task of tasks">
     <div>
       Action:
-      {{task.description}}
+      {{task.name}}
     </div>
     <div>
       Event:
       {{task.due_date}}
-      {{task.taskID}}
+      {{task.id}}
     </div>
   </div>
   <div class="modal-footer">

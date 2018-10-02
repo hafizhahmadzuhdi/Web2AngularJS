@@ -80,7 +80,7 @@ export class CalendarComponent implements OnInit {
   	 this.events.push( {
       //start: startOfDay(new Date()),
       start: startOfDay(new Date(task.due_date)),
-      title: task.description,
+      title: task.name,
       color: colors.red
     }
     );

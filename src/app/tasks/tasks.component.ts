@@ -159,7 +159,7 @@ export class TasksComponent implements OnInit {
     }
     else {
       this.selected_taskID = taskID;
-      this.position = this.tasks.findIndex(task => task.taskID == this.selected_taskID);
+      this.position = this.tasks.findIndex(task => task.id == this.selected_taskID);
       //this.position = this.tasks.indexOf(this.selected_taskID, 1);
     }
     console.log(this.selected_taskID);
@@ -181,7 +181,7 @@ export class TasksComponent implements OnInit {
   }*/
 
   insert(){
-    let lastID = Math.max.apply(Math, this.tasks.map(task => task.taskID));
+    let lastID = Math.max.apply(Math, this.tasks.map(task => task.id));
     console.log(lastID);
     console.log(this.tasks);
     /*const myArray = [];
@@ -189,16 +189,16 @@ export class TasksComponent implements OnInit {
     //this is for getting a last ID for the last object in array
     this.tasks.push(
     {
-    taskID: lastID + 1,
-    description: this.description,
+    id: lastID + 1,
+    name: this.description,
     priority: this.priority,
     due_date: this.due_date.year + "-" + this.due_date.month + "-" + this.due_date.day,
     show_more: false,
     /*emp_id: this.tasks.map(taskku => {
       taskku.emp_id.push(this.emp_id);
     }),*/
-    emp_id: this.emp_id.map(Number),
-    dept_id: Number(this.dept_id)
+    employees: this.emp_id.map(Number),
+    department_id: Number(this.dept_id)
   }
   );
     console.log(this.emp_id);
@@ -232,12 +232,12 @@ export class TasksComponent implements OnInit {
   edit(taskID){
     this.tasks.map(
       (task) => {
-          if(task.taskID === taskID){
-            task.description = this.get_description;
+          if(task.id === taskID){
+            task.name = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
-            task.emp_id = [Number(this.get_emp_id)];//changed
-            task.dept_id = Number(this.get_dept_id);
+            task.employees = [Number(this.get_emp_id)];//changed
+            task.department_id = Number(this.get_dept_id);
           }
       });
       console.log(this.get_emp_id);
