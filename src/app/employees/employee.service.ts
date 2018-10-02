@@ -3,6 +3,7 @@ import { Employee } from './employee';
 import { DatabaseService } from '../database.service'
 import { EMPLOYEES } from './employees'
 import { Dpt } from '../departments/dpt'
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class EmployeeService {
 
     employees: Employee[];
 
-    constructor(private db: DatabaseService) {
+    constructor(private db: DatabaseService, private http: HttpClient) {
     }
 
     // used to save the list in localStorage
@@ -20,13 +21,18 @@ export class EmployeeService {
     //     this.db.save('employees', this.employees);
     // }
 
-    getAll() {
-        // TODO uncomment this to use localstorage
-        //this.employees = this.db.getEmployees();
-        if (!this.employees)
-            this.employees = EMPLOYEES;
+    // getAll() {
+    //     // TODO uncomment this to use localstorage
+    //     //this.employees = this.db.getEmployees();
+    //     // if (!this.employees)
+    //     //     this.employees = EMPLOYEES;
+    //     //
+    //     // return this.employees;
+    //
+    // }
 
-        return this.employees;
+    getAll(): Observable<Employee[]> {
+        return this.http.get('http://i875395.hera.fhict.nl/api/420882/employee');
     }
 
     add(first_name: string, last_name: string, extra: string, dpt_id: number) : Employee {

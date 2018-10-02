@@ -34,13 +34,21 @@ export class EmployeesComponent implements OnInit {
     }
 
     refresh() : void {
-        this.getEmployees();
-        this.getDepartments();
-        this.addDeptToEmp();
+        // this.getEmployees();
+        // this.getDepartments();
+        // this.addDeptToEmp();
+        this.employeeService.getAll().subscribe(data => {
+        this.employees = data;
+        this.dptService.getDepartments().subscribe(data => {
+            this.departments = data;
+            this.addDeptToEmp();
+            });
+        });
     }
 
     getEmployees() : void {
-        this.employees = this.employeeService.getAll();
+        // this.employees = this.employeeService.getAll();
+        this.employeeService.getAll().subscribe(data => this.employees = data);
     }
 
     getDepartments() : void {
