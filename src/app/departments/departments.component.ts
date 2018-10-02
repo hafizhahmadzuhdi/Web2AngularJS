@@ -23,23 +23,24 @@ export class DepartmentsComponent implements OnInit {
 
   id: null;
   name: null;
-  description: null;
+  building: null;
   currentDptId: null;
   editName: null;
-  editDescription: null;
+  editBuilding: null;
   emps: null;
+  employees: null;
   empNames: null;
   searchText: string;
 
   departments: Dpt[];
-  employees: Employee[];
+  employeesA: Employee[];
 
   getDepartments(): void {
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
   }
 
   getEmployees() : void {
-    this.employees = this.employeeService.getAll();
+    this.employeesA = this.employeeService.getAll();
   }
 
   /*
@@ -58,7 +59,7 @@ export class DepartmentsComponent implements OnInit {
   */
 
   addEmpToDept(departments) : void {
-    this.departmentService.addEmpToDept(departments, this.employees);
+    this.departmentService.addEmpToDept(departments, this.employeesA);
   }
 
   addDpt() {
@@ -67,28 +68,29 @@ export class DepartmentsComponent implements OnInit {
     this.departments.push({
       id: prevId + 1,
       name: this.name,
-      description: this.description,
+      building: this.building,
       show_extra: false,
-      emps: this.emps,
+      // emps: this.emps,
+      employees: this.employees,
       empNames: this.empNames
     });
   }
 
   //Turns the current department into a form in order to edit the values
-  editForm(id, name, description) {
+  editForm(id, name, building) {
     if(this.currentDptId === id) //if already in form/edit
       this.currentDptId = null;  //put back into read view
     else{
       this.currentDptId = id;
       this.editName = name; //put value in for user to see
-      this.editDescription = description;
+      this.editBuilding = building;
     }
   }
 
   updateDpt(id) {
     let n = this.departments.find(x => x.id === id); //find object to be edited
     n.name = this.editName;
-    n.description = this.editDescription;
+    n.building = this.editBuilding;
     this.currentDptId = null;
   }
 
@@ -96,5 +98,5 @@ export class DepartmentsComponent implements OnInit {
     let i = this.departments.findIndex(x => x.id === id);
     this.departments.splice(i, 1);
   }
-
+  
 }

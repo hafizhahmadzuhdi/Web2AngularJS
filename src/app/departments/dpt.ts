@@ -3,8 +3,9 @@ import { Employee } from '../employees/employee'
 export class Dpt {
     id: number;
     name: string;
-    description: string;
-    show_extra: boolean;
-    emps: Employee[];
+    building: string;
+    show_extra: boolean = false;
+    // emps: Employee[];
+    employees: number[];
     empNames: string[];
 }
