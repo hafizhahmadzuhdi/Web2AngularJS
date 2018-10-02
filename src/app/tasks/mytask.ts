@@ -7,7 +7,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 1
   }, 
   {
@@ -16,7 +16,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 2
   },
   {
@@ -25,7 +25,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 3
   },
   {
@@ -34,7 +34,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 0,
+    emp_id: [1,2],
     dept_id: 4
   },
   {
@@ -43,7 +43,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-9-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 4
   },
   {
@@ -52,7 +52,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 4
   },
   {
@@ -61,7 +61,7 @@ export const TASKS: Task[] = [
     priority: 'Medium',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 5
   },
   {
@@ -70,7 +70,7 @@ export const TASKS: Task[] = [
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,
-    emp_id: 1,
+    emp_id: [1,2],
     dept_id: 6
   }
  ];

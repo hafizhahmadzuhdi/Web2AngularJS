@@ -111,9 +111,13 @@
 			<input type="date" name="due_date" placeholder="due_date" ngbDatepicker [(ngModel)]="due_date" class="form-control">
 
 
-			<select name="employee" [(ngModel)]="emp_id" class="d-inline-block form-control">
+			<select name="employee" [(ngModel)]="emp_id[0]" class="d-inline-block form-control">
 					<option value=null selected disabled hidden>Employee</option>
 				<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
+			</select>
+			<select name="employee" [(ngModel)]="emp_id[1]" class="d-inline-block form-control">
+					<option value=null selected disabled hidden>Employee</option>
+				<option *ngFor="let secondmyemp of emp" value={{secondmyemp.id}}>{{secondmyemp.first_name}} {{secondmyemp.last_name}}</option>
 			</select>
 
 			<select name="department" [(ngModel)]="dept_id" class="d-inline-block form-control">

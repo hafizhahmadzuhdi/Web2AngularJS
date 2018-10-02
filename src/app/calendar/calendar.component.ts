@@ -52,7 +52,6 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
   	this.getTasks();
   	console.log(this.tasks);
-  	this.getTaskDescription();
   }
 
   getTasks(): void{
@@ -60,11 +59,17 @@ export class CalendarComponent implements OnInit {
   }
 
   getTaskDescription(): void{
-  	this.description = this.tasks['description'];
   }
 
 
   viewDate: Date = new Date();
+
+  view: CalendarView = CalendarView.Month;
+
+  CalendarView = CalendarView;
+
+  
+
   
   events: CalendarEvent[] = [
     {
@@ -73,6 +78,23 @@ export class CalendarComponent implements OnInit {
       color: colors.red,
     }
   ];
+
+  activeDayIsOpen: boolean = true;
+
+
+    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    if (isSameMonth(date, this.viewDate)) {
+      this.viewDate = date;
+      if (
+        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0
+      ) {
+        this.activeDayIsOpen = false;
+      } else {
+        this.activeDayIsOpen = true;
+      }
+    }
+  }
  
 
 

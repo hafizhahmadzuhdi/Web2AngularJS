@@ -1,6 +1,9 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Task } from './task';
 
+
+//in memory is used to be an API that stored our data there
+
 export class InMemoryDataTaskService implements InMemoryDbService {
 
 
@@ -8,7 +11,7 @@ export class InMemoryDataTaskService implements InMemoryDbService {
   	const tasks = [
   	{
     taskID: 1001,
-    description: 'Documents Financial Transactions',
+    description: 'Documenting Financial Transactions',
     priority: 'Urgent',
     due_date: '2018-12-1',
     show_more: false,

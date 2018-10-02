@@ -19,7 +19,7 @@ export class TasksComponent implements OnInit {
   description = null;
   priority = null;
   due_date = null;
-  emp_id = null;
+  emp_id: number[] = [];
   dept_id = null;
 
   current_taskID = null;
@@ -189,7 +189,7 @@ export class TasksComponent implements OnInit {
     priority: this.priority,
     due_date: this.due_date.year + "-" + this.due_date.month + "-" + this.due_date.day,
     show_more: false,
-    emp_id: Number(this.emp_id),
+    emp_id: this.emp_id.concat(Number(this.emp_id)),//changed
     dept_id: Number(this.dept_id)
   }
   );
@@ -228,7 +228,7 @@ export class TasksComponent implements OnInit {
             task.description = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
-            task.emp_id = Number(this.get_emp_id);
+            task.emp_id = [Number(this.get_emp_id)];//changed
             task.dept_id = Number(this.get_dept_id);
           }
       });

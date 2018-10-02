@@ -4,6 +4,6 @@ export class Task {
 	priority: string;
 	due_date: string;
 	show_more: boolean;
-	emp_id: number;
+	emp_id: number[];
 	dept_id: number;
 }
