@@ -11,7 +11,7 @@
   <div *ngIf="tasks" class="col-2">
       <h3>Tasks</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.description}}</li>
+          <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.name}}</li>
         </ul>
   </div>
 
