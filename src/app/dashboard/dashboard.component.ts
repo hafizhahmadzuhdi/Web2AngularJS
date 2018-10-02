@@ -62,7 +62,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getEmployee(): void{
-    this.employees = this.employeeService.getAll();
+    //this.employees = this.employeeService.getAll();
+    this.employeeService.getAll().subscribe(data =>this.employees = data);
   }
 
   getDepartments(): void{

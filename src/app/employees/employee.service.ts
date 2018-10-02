@@ -4,6 +4,7 @@ import { DatabaseService } from '../database.service'
 import { EMPLOYEES } from './employees'
 import { Dpt } from '../departments/dpt'
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class EmployeeService {
     // }
 
     getAll(): Observable<Employee[]> {
-        return this.http.get('http://i875395.hera.fhict.nl/api/420882/employee');
+        return this.http.get<Employee[]>('http://i875395.hera.fhict.nl/api/420882/employee');
     }
 
     add(first_name: string, last_name: string, extra: string, dpt_id: number) : Employee {
