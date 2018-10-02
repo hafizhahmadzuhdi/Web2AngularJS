@@ -42,44 +42,64 @@ import {
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-	
+	@ViewChild('modalContent')
+  	modalContent: TemplateRef<any>;
+
 	description : object;
 
 	tasks: Task[];
+	taskdesc = null;
+	taskduedate = null;
 
-  constructor(private tasksService: TasksService) { }
+
+  constructor(private tasksService: TasksService, private modal: NgbModal) { }
 
   ngOnInit() {
   	this.getTasks();
-  	console.log(this.tasks);
+  	this.getTaskDescription;
+  	this.getTaskDueDate;
+  	console.log(this.events);
+  	this.viewDate;
+  	this.myFunction();
   }
 
   getTasks(): void{
-    this.tasksService.getTasks().subscribe(tasks =>this.tasks = tasks);
+    this.tasksService.getTasks().subscribe(tasks =>{this.tasks = tasks; this.myFunction(); console.log(this.tasks); });
   }
 
   getTaskDescription(): void{
+  	//this.taskdesc = this.tasks.map(task => task.taskID);
   }
 
+  getTaskDueDate(): void{
+  	//this.taskduedate = this.tasks.map(task => task.due_date);
+  }
+
+  myFunction(): void {
+  	this.tasks.map(task => {
+  	 this.events.push( {
+      //start: startOfDay(new Date()),
+      start: startOfDay(new Date(task.due_date)),
+      title: task.description,
+      color: colors.red
+    }
+    );
+  });
+
+  }
+
+  modalData: {
+    action: string;
+    event: CalendarEvent;
+  };
 
   viewDate: Date = new Date();
-
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   
+  events: CalendarEvent[] = [];
 
-  
-  events: CalendarEvent[] = [
-    {
-      start: startOfDay(new Date()),
-      title: 'Doing presentation to the client',
-      color: colors.red,
-    }
-  ];
-
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = false;
 
 
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -95,7 +115,13 @@ export class CalendarComponent implements OnInit {
       }
     }
   }
- 
+
+  handleEvent(action: string, event: CalendarEvent): void {
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
+  }
+
+
 
 
 }

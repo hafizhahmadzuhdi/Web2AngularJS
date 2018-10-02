@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
   priority = null;
   due_date = null;
   emp_id: number[] = [];
+  //emp_id = [];
   dept_id = null;
 
   current_taskID = null;
@@ -42,6 +43,8 @@ export class TasksComponent implements OnInit {
   departments = [];
 
   closeResult: string;
+
+
 
 
   //
@@ -181,6 +184,8 @@ export class TasksComponent implements OnInit {
     let lastID = Math.max.apply(Math, this.tasks.map(task => task.taskID));
     console.log(lastID);
     console.log(this.tasks);
+    /*const myArray = [];
+    myArray.push(Number(this.emp_id));*/
     //this is for getting a last ID for the last object in array
     this.tasks.push(
     {
@@ -189,7 +194,10 @@ export class TasksComponent implements OnInit {
     priority: this.priority,
     due_date: this.due_date.year + "-" + this.due_date.month + "-" + this.due_date.day,
     show_more: false,
-    emp_id: this.emp_id.concat(Number(this.emp_id)),//changed
+    /*emp_id: this.tasks.map(taskku => {
+      taskku.emp_id.push(this.emp_id);
+    }),*/
+    emp_id: this.emp_id.map(Number),
     dept_id: Number(this.dept_id)
   }
   );
