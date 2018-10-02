@@ -36,6 +36,13 @@ export class DepartmentService {
       })
     }
 
+    getDepartmentById(dpt_id) {
+        const dep = DEPARTMENTS.filter(dpt => {
+            return dpt.id === dpt_id;
+        });
+        return dep[0];
+    }
+
   /*
   getDepartments(): Dpt[] {
     return DEPARTMENTS;

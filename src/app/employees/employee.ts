@@ -5,6 +5,6 @@ export class Employee {
     first_name: string;
     last_name: string;
     birth_date: string | null;
-    departement_id: number;
+    department_id: number;
     dpt: Dpt | null;
 }

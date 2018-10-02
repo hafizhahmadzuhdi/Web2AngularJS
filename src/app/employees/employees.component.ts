@@ -11,15 +11,17 @@ import { Dpt } from '../departments/dpt';
 })
 export class EmployeesComponent implements OnInit {
 
+    //TODO birthdate as a date and not a string
+
     // initalizing our templates variables
     first_name = null;
     last_name = null;
-    extra = null;
-    dpt_id = null;
+    birth_date = null;
+    department_id = null;
     current_edit_emp_id = null;
     edit_first_name = null;
     edit_last_name = null;
-    edit_extra = null;
+    edit_bd = null;
 
     search = null;
 
@@ -34,16 +36,8 @@ export class EmployeesComponent implements OnInit {
     }
 
     refresh() : void {
-        // this.getEmployees();
-        // this.getDepartments();
-        // this.addDeptToEmp();
-        this.employeeService.getAll().subscribe(data => {
-        this.employees = data;
-        this.dptService.getDepartments().subscribe(data => {
-            this.departments = data;
-            this.addDeptToEmp();
-            });
-        });
+        this.getEmployees();
+        this.getDepartments();
     }
 
     getEmployees() : void {
@@ -58,6 +52,7 @@ export class EmployeesComponent implements OnInit {
 
     addDeptToEmp() : void {
         this.employeeService.addDeptToEmp(this.departments);
+        console.log(this.employees);
     }
 
     delete(id) {
@@ -66,20 +61,20 @@ export class EmployeesComponent implements OnInit {
     }
 
     add() {
-        const emp = this.employeeService.add(this.first_name, this.last_name, this.extra, Number(this.dpt_id));
-        this.dptService.addDeptToEmp(emp, this.dpt_id);
+        const emp = this.employeeService.add(this.first_name, this.last_name, this.birth_date, Number(this.department_id));
+        this.dptService.addDeptToEmp(emp, this.department_id);
         this.refresh();
         this.first_name = null;
         this.last_name = null;
-        this.extra = null;
-        this.dpt_id = null;
+        this.birth_date = null;
+        this.department_id = null;
     }
 
     // edit(employee, field) {
     //     this.employeeService.start_editing(employee, field);
     // }
 
-    switch_edit_emp(id, f_name, l_name, extra) {
+    switch_edit_emp(id, f_name, l_name, birth_date) {
         // if it's already the current emp we clicked, we just reinit
         if (this.current_edit_emp_id === id)
             this.current_edit_emp_id = null;
@@ -87,7 +82,7 @@ export class EmployeesComponent implements OnInit {
             this.current_edit_emp_id = id;
             this.edit_first_name = f_name;
             this.edit_last_name = l_name;
-            this.edit_extra = extra;
+            this.edit_bd = birth_date;
         }
     }
 
@@ -97,10 +92,16 @@ export class EmployeesComponent implements OnInit {
                 if (emp.id === id) {
                     emp.first_name = this.edit_first_name;
                     emp.last_name = this.edit_last_name;
-                    emp.extra = this.edit_extra;
+                    emp.birth_date = this.edit_bd;
                 }
             }
         );
         this.current_edit_emp_id = null;
+    }
+
+    show_extra(emp) {
+        emp.show_extra = !emp.show_extra;
+        if (emp.show_extra)
+            emp.dpt = this.dptService.getDepartmentById(emp.department_id);
     }
 }
