@@ -7,16 +7,20 @@
         <div class="text">Search Employee:</div>
         <input class="form-control" [(ngModel)]="searchEmp" placeholder="Employee Name">
 
-      
+
 <div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
     <div *ngSwitchCase="'t'">
       <div *ngIf="selectedTask">
         <h2>Task: {{selectedTask.description}}</h2>
-        <div>ID: {{selectedTask.taskID}}</div>
+        <div>ID: {{selectedTask.id}}</div>
         <div>Priority: {{selectedTask.priority}}</div>
         <div>Due Date: {{selectedTask.due_date}}</div>
-       <div>Employees Assigned: {{selectedTask.emp_id}}</div>
-        <div>Departments Assigned: {{selectedTask.dept_id}}</div>
+       <div>Employees Assigned:
+           <span *ngFor='let emp of selectedTask.emps; let i = index'>
+               {{emp.first_name}} {{emp.last_name}}<span *ngIf='i !== (selectedTask.emps.length - 1)'>, </span>
+           </span>
+       </div>
+        <div>Department Assigned: {{selectedTask.department.name}}</div>
       </div>
     </div>
     <div *ngSwitchCase="'d'">
@@ -61,4 +65,3 @@
   </div>
 </div>
 </div>
-  
