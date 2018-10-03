@@ -11,7 +11,9 @@
 					<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
 						<td class="leftCol" *ngIf="current_edit_emp_id !== emp.id">
 					<tr>{{emp.first_name}} {{emp.last_name}}</tr>
-					<td *ngIf="emp.show_extra">Birth Date: {{emp.birth_date}}<br>Department: {{emp.dpt.name}}<br></td>
+					<td *ngIf="emp.show_extra">
+						<app-informations [employee]='emp'></app-informations>
+					</td>
 					</td>
 
 					<!--Edit Form-->

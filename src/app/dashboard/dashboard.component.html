@@ -12,30 +12,19 @@
     <div *ngSwitchCase="'t'">
       <div *ngIf="selectedTask">
         <h2>Task: {{selectedTask.description}}</h2>
-        <div>ID: {{selectedTask.id}}</div>
-        <div>Priority: {{selectedTask.priority}}</div>
-        <div>Due Date: {{selectedTask.due_date}}</div>
-       <div>Employees Assigned:
-           <span *ngFor='let emp of selectedTask.emps; let i = index'>
-               {{emp.first_name}} {{emp.last_name}}<span *ngIf='i !== (selectedTask.emps.length - 1)'>, </span>
-           </span>
-       </div>
-        <div>Department Assigned: {{selectedTask.department.name}}</div>
+        <app-informations [task]='selectedTask'></app-informations>
       </div>
     </div>
     <div *ngSwitchCase="'d'">
       <div *ngIf="selectedDepartment">
         <h2>Department: {{selectedDepartment.name}}</h2>
-        <div>ID: {{selectedDepartment.id}}</div>
-        <div>Building: {{selectedDepartment.building}}</div>
-        <div>Employees: {{selectedDepartment.empNames}}</div>
+        <app-informations [department]='selectedDepartment'></app-informations>
       </div>
     </div>
     <div *ngSwitchCase="'e'">
       <div *ngIf="selectedEmployee">
         <h2>Employee: {{selectedEmployee.first_name}} {{selectedEmployee.last_name}}</h2>
-        <div>ID: {{selectedEmployee.id}}</div>
-        <div>Department: {{selectedEmployee.dpt.name}}</div>
+        <app-informations [employee]='selectedEmployee'></app-informations>
       </div>
     </div>
   </div>

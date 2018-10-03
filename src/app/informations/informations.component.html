@@ -1,0 +1,28 @@
+<!-- EMPLOYEE -->
+<div *ngIf="employee">
+    ID: {{employee.id}}<br />
+    Birth Date: {{employee.birth_date}}<br />
+    Department: {{employee.dpt.name}}<br />
+</div>
+
+
+<!-- TASK -->
+<div *ngIf="task">
+    <div>ID: {{task.id}}</div>
+    <div>Priority: {{task.priority}}</div>
+    <div>Due Date: {{task.due_date}}</div>
+   <div>Employees Assigned:
+       <span *ngFor='let emp of task.emps; let i = index'>
+           {{emp.first_name}} {{emp.last_name}}<span *ngIf='i !== (task.emps.length - 1)'>, </span>
+       </span>
+   </div>
+    <div>Department Assigned: {{task.department.name}}</div>
+</div>
+
+
+<!-- DEPARTMENT -->
+<div *ngIf="department">
+    <div>ID: {{department.id}}</div>
+    <div>Building: {{department.building}}</div>
+    <div>Employees: {{department.empNames}}</div>
+</div>

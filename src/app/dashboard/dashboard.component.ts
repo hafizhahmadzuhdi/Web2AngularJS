@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
     this.selectedTask = task;
     this.selectedTask.emps = this.employeeService.getEmployees(task.employees);
     this.selectedTask.department = this.departmentService.getDepartmentById(task.department_id);
-    console.log(this.selectedTask);
     this.selected = "t";
     this.selectedDepartment = null;
     this.selectedEmployee = null;
