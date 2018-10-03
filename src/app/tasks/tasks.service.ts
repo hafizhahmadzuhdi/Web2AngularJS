@@ -41,6 +41,13 @@ export class TasksService {
 
   }
 
+  getTaskById(task_id) {
+        const tsk = this.tasks.filter(tsk => {
+            return tsk.id === task_id;
+        });
+        return tsk[0];
+    }
+
 
 
 /*  addEmpToTask(emp: Employee, task_id : number){
