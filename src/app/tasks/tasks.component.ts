@@ -198,7 +198,9 @@ export class TasksComponent implements OnInit {
       taskku.emp_id.push(this.emp_id);
     }),*/
     employees: this.emp_id.map(Number),
-    department_id: Number(this.dept_id)
+    department_id: Number(this.dept_id),
+    department: null,
+    emps: []
   }
   );
     console.log(this.emp_id);
