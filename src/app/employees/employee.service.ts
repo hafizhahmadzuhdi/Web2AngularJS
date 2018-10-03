@@ -94,4 +94,19 @@ export class EmployeeService {
         )
         return emp_names;
     }
+
+    getEmployees(emp_ids){
+        const emps = [];
+        emp_ids.map(
+            id => {
+                this.employees.map(
+                    emp => {
+                        if (emp.id === id)
+                            emps.push(emp);
+                    }
+                )
+            }
+        )
+        return emps;
+    }
 }
