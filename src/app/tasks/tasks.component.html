@@ -45,17 +45,15 @@
 
 			<input class="form-control" name='get_description' type='text' placeholder='Description' [(ngModel)]="get_description" />
 			<select class="d-inline-block form-control" name="get_priority" [(ngModel)]="get_priority">
-				<option value=null selected disabled hidden>Priority</option>
 				<option value="Urgent">Urgent</option>
 				<option value="Medium">Medium</option>
 				<option value="Low">Low</option>
 			</select>
 			<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date" class="form-control">
-			<select class="d-inline-block form-control" name="get_emp_id" [(ngModel)]="get_emp_id">
+			<!-- This is weird to include in the edit section because you can only edit one employee. -->
+			<!-- <select class="d-inline-block form-control" name="get_emp_id" [(ngModel)]="get_emp_id">
 				<option *ngFor="let myemp2 of emp" name="emp_id" value={{myemp2.id}}>{{myemp2.first_name}} {{myemp2.last_name}}</option>
-			</select>
-
-
+			</select> --> 
 			<select class="d-inline-block form-control" name="dept_id" [(ngModel)]="get_dept_id">
 				<option *ngFor="let mydept2 of depts" value={{mydept2.id}}>{{mydept2.name}}</option>
 			</select>
@@ -68,7 +66,9 @@
 			<span *ngIf='!task.show_more'>Show More</span>
 			<span *ngIf='task.show_more'>Show Less</span>
 		</div>
-		<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.employees, task.department_id)'>Edit</div>
+		<!-- Removed task.employees from the function -->
+		<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.department_id)'>Edit</div>
+		<!-- <div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.employees, task.department_id)'>Edit</div> -->
 		<div class="btn btn-sm btn-dark" (click)='deleteq(task.id)'>Delete</div>
 	</td>
 

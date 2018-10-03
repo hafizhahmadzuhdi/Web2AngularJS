@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { TasksService } from '../tasks/tasks.service';
+import { DepartmentService } from '../departments/department.service';
+import { EmployeeService } from '../employees/employee.service';
 import { Task } from '../tasks/task';
+import { Employee } from '../employees/employee';
+import { Dpt } from '../departments/dpt';
 import {
   startOfDay,
   endOfDay,
@@ -56,16 +60,28 @@ export class CalendarComponent implements OnInit {
 	task_id = null;
   current_id = null;
   selectedTask: Task;
+  depts: Dpt[];
+  emp: Employee[];
 
-
-  constructor(private tasksService: TasksService, private modal: NgbModal) { }
+  constructor(private tasksService: TasksService, private modal: NgbModal, private deptService: DepartmentService, private empService: EmployeeService) { }
 
   ngOnInit() {
-  	this.getTasks();
+    this.getTasks();
+    this.getEmployee();
+    this.getDepartments();
   	console.log(this.events);
   	this.viewDate;
   	//this.myFunction();
   	console.log(this.tasks);
+  }
+
+  getEmployee(): void{
+    this.empService.getAll().subscribe(data =>this.emp = data);
+  }
+
+  getDepartments(): void{
+    //this.DepartmentService.getDepartments().subscribe(depts =>this.depts = depts);
+    this.deptService.getDepartments().subscribe(depts =>this.depts = depts);
   }
 
   getTasks(): void{

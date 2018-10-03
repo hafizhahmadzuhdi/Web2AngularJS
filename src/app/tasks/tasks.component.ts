@@ -77,7 +77,6 @@ export class TasksComponent implements OnInit {
   getDepartments(): void{
     //this.DepartmentService.getDepartments().subscribe(depts =>this.depts = depts);
     this.deptService.getDepartments().subscribe(depts =>this.depts = depts);
-
   }
 
 
@@ -210,7 +209,9 @@ export class TasksComponent implements OnInit {
   }
 
 
-  getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
+  // Removed emp_id from the function. Otherwise, when editing task, all of the employees are deleted.  
+  // getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
+  getValueOfSelectedId(taskID, description, priority, due_date, dept_id){
     if(this.current_taskID === taskID)
       this.current_taskID = null; //it means that if its already selected return null
     else{ //if no then fill the variable
@@ -218,7 +219,7 @@ export class TasksComponent implements OnInit {
       this.get_description = description;
       this.get_priority = priority;
       this.get_due_date = due_date;
-      this.get_emp_id = emp_id;
+      // this.get_emp_id = emp_id;
       this.get_dept_id = dept_id;
 
     }
@@ -238,7 +239,7 @@ export class TasksComponent implements OnInit {
             task.name = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
-            task.employees = [Number(this.get_emp_id)];//changed
+            // task.employees = [Number(this.get_emp_id)];//changed
             task.department_id = Number(this.get_dept_id);
           }
       });
