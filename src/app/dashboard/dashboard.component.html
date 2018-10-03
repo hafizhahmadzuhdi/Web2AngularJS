@@ -6,7 +6,38 @@
         <input class="form-control" [(ngModel)]="searchDpt" placeholder="Department Name">
         <div class="text">Search Employee:</div>
         <input class="form-control" [(ngModel)]="searchEmp" placeholder="Employee Name">
+
+      
+<div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
+    <div *ngSwitchCase="'t'">
+      <div *ngIf="selectedTask">
+        <h2>Task: {{selectedTask.description}}</h2>
+        <div>ID: {{selectedTask.taskID}}</div>
+        <div>Priority: {{selectedTask.priority}}</div>
+        <div>Due Date: {{selectedTask.due_date}}</div>
+       <div>Employees Assigned: {{selectedTask.emp_id}}</div>
+        <div>Departments Assigned: {{selectedTask.dept_id}}</div>
       </div>
+    </div>
+    <div *ngSwitchCase="'d'">
+      <div *ngIf="selectedDepartment">
+        <h2>Department: {{selectedDepartment.name}}</h2>
+        <div>ID: {{selectedDepartment.id}}</div>
+        <div>Building: {{selectedDepartment.building}}</div>
+        <div>Employees: {{selectedDepartment.empNames}}</div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'e'">
+      <div *ngIf="selectedEmployee">
+        <h2>Employee: {{selectedEmployee.first_name}} {{selectedEmployee.last_name}}</h2>
+        <div>ID: {{selectedEmployee.id}}</div>
+        <div>Department: {{selectedEmployee.dpt.name}}</div>
+      </div>
+    </div>
+  </div>
+
+
+    </div>
 
   <div *ngIf="tasks" class="col-2">
       <h3>Tasks</h3>
@@ -29,40 +60,5 @@
         </ul>
   </div>
 </div>
-<br>
-
-<div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
-  <div *ngSwitchCase="'t'">
-    <div *ngIf="selectedTask">
-      <h2>Task: {{selectedTask.description}}</h2>
-      <div>ID: {{selectedTask.taskID}}</div>
-      <div>Priority: {{selectedTask.priority}}</div>
-      <div>Due Date: {{selectedTask.due_date}}</div>
-     <div>Employees Assigned: {{selectedTask.emp_id}}</div>
-      <div>Departments Assigned: {{selectedTask.dept_id}}</div>
-    </div>
-  </div>
-  <div *ngSwitchCase="'d'">
-    <div *ngIf="selectedDepartment">
-      <h2>Department: {{selectedDepartment.name}}</h2>
-      <div>ID: {{selectedDepartment.id}}</div>
-      <div>Building: {{selectedDepartment.building}}</div>
-      <div>Employees: {{selectedDepartment.empNames}}</div>
-    </div>
-  </div>
-  <div *ngSwitchCase="'e'">
-    <div *ngIf="selectedEmployee">
-      <h2>Employee: {{selectedEmployee.first_name}} {{selectedEmployee.last_name}}</h2>
-      <div>ID: {{selectedEmployee.id}}</div>
-      <div>Department: {{selectedEmployee.dpt.name}}</div>
-    </div>
-  </div>
 </div>
-
-   <!--
-    <div>
-      <label>Description:
-        <input [(ngModel)]="selectedTask.description" placeholder="name">
-      </label>
-    </div>
-    -->
+  

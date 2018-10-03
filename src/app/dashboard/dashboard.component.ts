@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
     this.selected = "t";
     this.selectedDepartment = null;
     this.selectedEmployee = null;
-    this.scrollToSelectedElement();
+    // this.scrollToSelectedElement();
   }
 
   onSelectD(dpt: Dpt): void {
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     this.selected = "d";
     this.selectedTask = null;
     this.selectedEmployee = null;
-    this.scrollToSelectedElement();
+    // this.scrollToSelectedElement();
   }
 
   onSelectE(emp: Employee): void {
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     this.selected = "e";
     this.selectedTask = null;
     this.selectedDepartment = null;
-    this.scrollToSelectedElement();
+    // this.scrollToSelectedElement();
   }
 
   getTasks(): void{
@@ -72,8 +72,8 @@ export class DashboardComponent implements OnInit {
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
   }
 
-  scrollToSelectedElement() {
-      const selectedElement = document.getElementById("selectedElement");
-      selectedElement.scrollIntoView();
-  }
+  // scrollToSelectedElement() {
+  //     const selectedElement = document.getElementById("selectedElement");
+  //     selectedElement.scrollIntoView();
+  // }
 }
