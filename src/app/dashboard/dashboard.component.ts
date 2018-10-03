@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     this.getTasks();
     this.getEmployee();
     this.getDepartments();
+    this.searchCategory = "tCheck";
     //this.departmentService.addEmpToDept(this.departments, this.employees);
     //this.employeeService.addDeptToEmp(this.departments);
   }
@@ -30,8 +31,13 @@ export class DashboardComponent implements OnInit {
   selectedDepartment: Dpt;
   selectedEmployee: Employee;
   selected: string;
+  searchTsk: string;
   searchDpt: string;
   searchEmp: string;
+  tCheck: string;
+  dCheck: string;
+  eCheck: string;
+  searchCategory: string;
 
   onSelectT(task: Task): void {
     this.selectedTask = task;
@@ -68,6 +74,12 @@ export class DashboardComponent implements OnInit {
 
   getDepartments(): void{
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
+  }
+
+  reset(): void {
+    this.searchTsk = null;
+    this.searchDpt = null;
+    this.searchEmp = null;
   }
 
   // scrollToSelectedElement() {

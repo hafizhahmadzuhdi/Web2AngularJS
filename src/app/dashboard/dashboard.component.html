@@ -2,12 +2,32 @@
 <div class="row justify-content-center">
 
     <div id="search">
-        <div class="text">Search Department:</div>
-        <input class="form-control" [(ngModel)]="searchDpt" placeholder="Department Name">
-        <div class="text">Search Employee:</div>
-        <input class="form-control" [(ngModel)]="searchEmp" placeholder="Employee Name">
-
-
+<!-- Search -->
+        <div class="text">Search:</div>
+        <div [ngSwitch]="searchCategory">
+            <input class="form-control" [(ngModel)]="searchTsk" placeholder="" *ngSwitchCase="'tCheck'">
+            <input class="form-control" [(ngModel)]="searchDpt" placeholder="" *ngSwitchCase="'dCheck'">
+            <input class="form-control" [(ngModel)]="searchEmp" placeholder="" *ngSwitchCase="'eCheck'">
+        </div><br>
+      
+        <form>
+<div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" id="tCheck" value="tCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
+    <label class="custom-control-label" for="tCheck">Tasks</label>
+  </div>
+  
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" id="dCheck" value="dCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
+    <label class="custom-control-label" for="dCheck">Departments</label>
+  </div>
+  
+  <div class="custom-control custom-radio">
+    <input type="radio" class="custom-control-input" id="eCheck" value="eCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
+    <label class="custom-control-label" for="eCheck">Employees</label>
+  </div>
+      </form>
+        
+<!-- Selected Item Details -->
 <div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
     <div *ngSwitchCase="'t'">
       <div *ngIf="selectedTask">
@@ -28,14 +48,13 @@
       </div>
     </div>
   </div>
+  </div>
 
-
-    </div>
-
+  <!-- Dashboard Columns -->
   <div *ngIf="tasks" class="col-2">
       <h3>Tasks</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let task of tasks" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.name}}</li>
+          <li class="list-group-item" *ngFor="let task of tasks | filter: searchTsk" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.name}}</li>
         </ul>
   </div>
 
@@ -54,3 +73,16 @@
   </div>
 </div>
 </div>
+
+
+<!-- <div class="form-group btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="tCheck" value="tCheck" autocomplete="off" [(ngModel)]="searchCategory">Tasks
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="dCheck" value="dCheck" autocomplete="off" [(ngModel)]="searchCategory">Departments
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="eCheck" value="eCheck" autocomplete="off" [(ngModel)]="searchCategory">Employees
+              </label>
+      </div> -->

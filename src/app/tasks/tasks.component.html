@@ -45,6 +45,7 @@
 
 			<input class="form-control" name='get_description' type='text' placeholder='Description' [(ngModel)]="get_description" />
 			<select class="d-inline-block form-control" name="get_priority" [(ngModel)]="get_priority">
+				<option value=null selected disabled hidden>Priority</option>
 				<option value="Urgent">Urgent</option>
 				<option value="Medium">Medium</option>
 				<option value="Low">Low</option>
