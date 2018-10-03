@@ -9,6 +9,6 @@ export class Task {
 	show_more: boolean;
 	employees: number[];
 	department_id: number;
-	department: Dpt | null;
+	department: Dpt;
 	emps: Employee[] | null;
 }

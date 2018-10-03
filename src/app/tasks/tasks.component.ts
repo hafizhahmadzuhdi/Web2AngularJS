@@ -183,6 +183,9 @@ export class TasksComponent implements OnInit {
     let lastID = Math.max.apply(Math, this.tasks.map(task => task.id));
     console.log(lastID);
     console.log(this.tasks);
+    if (this.due_date == null) {
+      alert("Due date must be entered for all new tasks");
+    }
     /*const myArray = [];
     myArray.push(Number(this.emp_id));*/
     //this is for getting a last ID for the last object in array

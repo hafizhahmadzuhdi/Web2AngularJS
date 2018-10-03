@@ -12,14 +12,14 @@
             <td class="leftCol" *ngIf="currentDptId !== department.id">
           <tr>{{department.name}}</tr>
           <td *ngIf="department.show_extra">
-              <app-informations [department]='department'></app-informations>
+              <app-informations [department]="department"></app-informations>
           </td>
           </td>
           <!--Edit Form-->
           <td *ngIf="currentDptId === department.id">
             <form>
               <input type='text' class="form-control" [(ngModel)]="editName" name='editName' placeholder='Department Name'>
-              <input type='text' class="form-control" [(ngModel)]="editDescription" name='editDesc' placeholder='Description'>
+              <input type='text' class="form-control" [(ngModel)]="editBuilding" name='editBuilding' placeholder='Building'>
               <input type='submit' id="right" class="btn-info" value='Save' (click)='updateDpt(department.id)'>
             </form>
           </td>
@@ -31,6 +31,8 @@
             </div>
             <div class="btn btn-sm btn-light" (click)='editForm(department.id, department.name, department.building)'>Edit</div>
             <div class="btn btn-sm btn-dark" (click)='deleteDpt(department.id)'>Delete</div>
+            <div class="btn btn-sm btn-danger" (click)="open(content); pullCurrentDptId(department.id)">Add Task</div>
+            <!-- <div class="btn btn-sm btn-danger" (click)='addTaskForm(department.id)'>Add Task</div> -->
           </td>
           </tr>
         </tbody>
@@ -39,12 +41,49 @@
       <!--Add Form-->
       <div>
         <div class='text'>Add a department to the list:</div>
-        <form #add="ngForm" (ngSubmit)=addDpt()>
+        <form>
           <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Department Name">
           <input type="text" class="form-control" [(ngModel)]="building" name="building" placeholder="Building">
-          <input type="submit" id="right" class="btn btn-info" name="addDpt" value="Add Department">
+          <input type="submit" id="right" class="btn btn-info" name="addDpt" value="Add Department" (click)="addDpt()">
         </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Add task form -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add a new task to this department</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+                <div class = "addTaskFormTxt">Task Description:</div>
+                <input name='taskDescription' type='text' [(ngModel)]="taskDescription" class="form-control" />
+                <div class = "addTaskFormTxt">Priority:</div>
+                <select name="taskPriority" [(ngModel)]="taskPriority" class="d-inline-block form-control">
+                  <option value="Urgent">Urgent</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+                <div class = "addTaskFormTxt">Due Date:</div>
+                <input type="date" name="task_due_date" ngbDatepicker [(ngModel)]="task_due_date" class="form-control">
+                <div class = "addTaskFormTxt">Employees:</div>
+                <select name="employee" [(ngModel)]="taskEmpId[0]" class="d-inline-block form-control">
+                  <option *ngFor="let employee of employees" value={{employee.id}}>{{employee.first_name}} {{employee.last_name}}</option>
+                </select>
+                <!-- <select name="employee" [(ngModel)]="taskEmpId[1]" class="d-inline-block form-control">
+                    <option value=null selected disabled hidden>Additional Employee</option>
+                  <option *ngFor="let employee2 of emp" value={{employee2.id}}>{{employee2.first_name}} {{employee2.last_name}}</option>
+                </select> -->
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-dark" (click)="modal.close('Save click'); insertTask();">Add</button>
+    </div>
+  </ng-template>
