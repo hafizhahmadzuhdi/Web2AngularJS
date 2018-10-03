@@ -12,15 +12,11 @@
     </button>
   </div>
   <div class="modal-body" *ngFor="let task of tasks">
+    <div *ngIf="selectedTask.id === task.id">
     <div>
-      Action:
-      {{task.name}}
+      <app-informations [task]='selectedTask'></app-informations>
     </div>
-    <div>
-      Event:
-      {{task.due_date}}
-      {{task.id}}
-    </div>
+  </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
