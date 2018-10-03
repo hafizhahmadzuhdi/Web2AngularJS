@@ -19,7 +19,7 @@
 						<form>
 							<input type='text' class="form-control" [(ngModel)]="edit_first_name" placeholder='First Name' name="edit_first_name">
 							<input type='text' class="form-control" [(ngModel)]="edit_last_name" placeholder='Last Name' name="edit_last_name">
-							<input type='text' class="form-control" placeholder='birth_date' [(ngModel)]="edit_bd" name="edit_bd" />
+							<input type='date' class="form-control" placeholder='Birth Date' [(ngModel)]="edit_bd" name="edit_bd" />
 							<input type='submit' id="right" class="btn-info" value='Save' (click)='update(emp.id)'>
 							<!--Doesn't look -->
 						</form>
@@ -31,7 +31,7 @@
 							<span *ngIf='!emp.show_extra'>Show More</span>
 							<span *ngIf='emp.show_extra'>Show Less</span>
 						</div>
-						<div class="btn btn-sm btn-light" (click)="switch_edit_emp(emp.id, emp.first_name, emp.last_name, emp.extra)">Edit</div>
+						<div class="btn btn-sm btn-light" (click)="switch_edit_emp(emp.id, emp.first_name, emp.last_name, emp.birth_date)">Edit</div>
 						<div class="btn btn-sm btn-dark" (click)="delete(emp.id)">Delete</div>
 					</td>
 				</tr>
@@ -45,7 +45,7 @@
 				<form>
 					<input type="text" class="form-control" [(ngModel)]="first_name" placeholder="First Name" name="first_name">
 					<input type="text" class="form-control" [(ngModel)]="last_name" placeholder="Last Name" name="last_name">
-					<input type='text' class="form-control" placeholder='Birth Date' [(ngModel)]="birth_date" name="birth_date"/>
+					<input type='date' class="form-control" placeholder='Birth Date' [(ngModel)]="birth_date" name="birth_date"/>
 					<select class="d-inline-block form-control" [(ngModel)]="department_id" name="department_id">
 						<option value=null selected disabled hidden>Choose a department</option>
 						<option *ngFor="let dpt of departments; let i = index" value="{{dpt.id}}">

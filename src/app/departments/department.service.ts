@@ -27,9 +27,10 @@ export class DepartmentService {
     addDeptToEmp(emp : Employee, dpt_id : number) {
         this.departments.map(dpt => {
             if (dpt.id == dpt_id) {
-                // dpt.emps.push(emp);
+                if (!dpt.empNames)
+                    dpt.empNames = [];
                 dpt.empNames.push(`${emp.first_name} ${emp.last_name}`);
-                dpt.employees.push(emp.id)//
+                dpt.employees.push(emp.id);
             }
         });
     }

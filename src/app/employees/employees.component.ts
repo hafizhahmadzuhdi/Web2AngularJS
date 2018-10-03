@@ -11,8 +11,6 @@ import { Dpt } from '../departments/dpt';
 })
 export class EmployeesComponent implements OnInit {
 
-    //TODO birthdate as a date and not a string
-
     // initalizing our templates variables
     first_name = null;
     last_name = null;
@@ -62,10 +60,6 @@ export class EmployeesComponent implements OnInit {
         this.birth_date = null;
         this.department_id = null;
     }
-
-    // edit(employee, field) {
-    //     this.employeeService.start_editing(employee, field);
-    // }
 
     switch_edit_emp(id, f_name, l_name, birth_date) {
         // if it's already the current emp we clicked, we just reinit
