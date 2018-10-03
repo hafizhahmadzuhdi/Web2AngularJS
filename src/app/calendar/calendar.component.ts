@@ -54,7 +54,8 @@ export class CalendarComponent implements OnInit {
 	taskpriority = null;
 	taskemployee = null;
 	task_id = null;
-	current_id = null;
+  current_id = null;
+  selectedTask: Task;
 
 
   constructor(private tasksService: TasksService, private modal: NgbModal) { }
@@ -84,7 +85,7 @@ export class CalendarComponent implements OnInit {
   	 this.events.push( {
       //start: startOfDay(new Date()),
       start: startOfDay(new Date(task.due_date)),
-      title: task.name,
+      title: String(task.id),
       color: colors.red
     }
     );
@@ -123,6 +124,8 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
+    this.task_id = Number(event.title);
+    this.selectedTask = this.tasksService.getTaskById(this.task_id);
   }
 
 /*    getValueOfSelectedId(taskID, description, priority, dept_id){
