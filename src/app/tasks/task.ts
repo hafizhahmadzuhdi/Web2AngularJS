@@ -1,9 +1,9 @@
 export class Task {
-	taskID: number;
-	description: string;
+	id: number;
+	name: string;
 	priority: string;
 	due_date: string;
 	show_more: boolean;
-	emp_id: number[];
-	dept_id: number;
+	employees: number[];
+	department_id: number;
 }

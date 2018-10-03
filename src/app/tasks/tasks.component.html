@@ -9,7 +9,7 @@
 		<form>
 			<div class="form-group">
 				<label for="">Read this carefully! Our group are consisted of Thibault, Nhi and Hafizh. This project is designed by
-					using Angular and Bootstrap</label>
+				using Angular and Bootstrap</label>
 			</div>
 		</form>
 	</div>
@@ -24,28 +24,36 @@
 	<div class="row justify-content-center">
 		<div class="col-8">
 			<div class="text">Search Task:</div>
-			<input class="form-control" [(ngModel)]="searchText" placeholder="Task Description">
+			<input class="form-control" name="description" [(ngModel)]="searchText" placeholder="Task Description">
 			<br>
 
 			<h2>Tasks</h2>
 			<table class="table table-hover">
 				<tbody>
 					<tr *ngFor="let task of tasks | filter: searchText">
-						<td class="leftCol" *ngIf="current_taskID !== task.taskID">
+						<td class="leftCol" *ngIf="current_taskID !== task.id">
 					<tr>
-						<div appTaskdirective>{{task.description}}</div>
+						<div appTaskdirective>{{task.name}}</div>
 					</tr>
 					<td *ngIf="task.show_more">
-						Task ID: {{task.taskID}}<br>Priority: {{task.priority}}<br>Task Due Date: {{task.due_date}}
+						Task ID: {{task.id}}<br>Priority: {{task.priority}}<br>Task Due Date: {{task.due_date}}
 						<div *ngFor="let myemp2 of emp">
-							<div *ngIf="task.emp_id === myemp2.id">
+							<div *ngFor="let myemp3 of emp">
+							<div *ngIf="task.employees[0] === myemp2.id && task.employees[1] === myemp3.id">
 					<tr>
-						Employee Name: {{myemp2.first_name}} {{myemp2.last_name}}
+						Employee 1 Name: 
+						{{myemp2.first_name}} {{myemp2.last_name}}
 					</tr>
+					<tr>
+						Employee 2 Name: 
+						{{myemp3.first_name}} {{myemp3.last_name}}
+					</tr>
+				</div>
+					
 		</div>
 	</div>
 	<div *ngFor="let mydept2 of depts">
-		<div *ngIf="task.dept_id === mydept2.id">
+		<div *ngIf="task.department_id === mydept2.id">
 			<tr>
 				Department Name: {{mydept2.name}}
 			</tr>
@@ -55,7 +63,7 @@
 	</td>
 
 	<!--Edit form-->
-	<td *ngIf="current_taskID === task.taskID">
+	<td *ngIf="current_taskID === task.id">
 		
 			<input class="form-control" name='get_description' type='text' placeholder='Description' [(ngModel)]="get_description" />
 			<select class="d-inline-block form-control" name="get_priority" [(ngModel)]="get_priority">
@@ -72,7 +80,7 @@
 			<select class="d-inline-block form-control" name="dept_id" [(ngModel)]="get_dept_id">
 				<option *ngFor="let mydept2 of depts" value={{mydept2.id}}>{{mydept2.name}}</option>
 			</select>
-			<input type='submit' id="right" class="btn-info" value='Save' (click)='edit(task.taskID)' />
+			<input type='submit' id="right" class="btn-info" value='Save' (click)='edit(task.id)' />
 		
 	</td>
 
@@ -81,8 +89,8 @@
 			<span *ngIf='!task.show_more'>Show More</span>
 			<span *ngIf='task.show_more'>Show Less</span>
 		</div>
-		<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date, task.emp_id, task.dept_id)'>Edit</div>
-		<div class="btn btn-sm btn-dark" (click)='deleteq(task.taskID)'>Delete</div>
+		<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.employees, task.department_id)'>Edit</div>
+		<div class="btn btn-sm btn-dark" (click)='deleteq(task.id)'>Delete</div>
 	</td>
 
 
@@ -119,6 +127,7 @@
 					<option value=null selected disabled hidden>Employee</option>
 				<option *ngFor="let secondmyemp of emp" value={{secondmyemp.id}}>{{secondmyemp.first_name}} {{secondmyemp.last_name}}</option>
 			</select>
+
 
 			<select name="department" [(ngModel)]="dept_id" class="d-inline-block form-control">
 					<option value=null selected disabled hidden>Department</option>

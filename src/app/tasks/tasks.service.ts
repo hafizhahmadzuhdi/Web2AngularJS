@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-import { TASKS } from './mytask';
+/*import { TASKS } from './mytask';*/
 // import { EMPLOYEES } from '../employees/employees';
 import { DEPARTMENTS } from '../departments/dptList';
 import { Employee } from '../employees/employee';
@@ -17,10 +17,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class TasksService {
 
   private tasksUrl = 'api/tasks';  // URL to web api
-  private myTaskUrl = 'http://i875395.hera.fhict.nl/api/416063/task'
+  private myTaskUrl = 'http://i875395.hera.fhict.nl/api/420882/task';
+
+  tasks: Task[];
 
   constructor(private http: HttpClient) {
-
+    this.getTasks().subscribe(mytask => this.tasks = mytask);
   }
 
   //README.md
@@ -31,10 +33,12 @@ export class TasksService {
 
   getTasks(): Observable<Task[]>{
     //return of(TASKS);
-    return this.http.get<Task[]>(this.myTaskUrl)
-    .pipe(
+    //return this.http.get<Task[]>(this.myTaskUrl);
+    /*.pipe(
       catchError(this.handleError('getTasks', []))
-    );
+    );*/
+    return this.tasks ? of(this.tasks) : this.http.get<Task[]>(this.myTaskUrl);
+
   }
 
 
