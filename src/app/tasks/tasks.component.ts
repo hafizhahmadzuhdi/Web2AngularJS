@@ -247,10 +247,6 @@ export class TasksComponent implements OnInit {
 
   show_more(task) {
       task.show_more = !task.show_more;
-      if (task.show_more){
-          task.emps = this.empService.getEmployees(task.employees);
-          task.department = this.deptService.getDepartmentById(task.department_id);
-      }
   }
 
 

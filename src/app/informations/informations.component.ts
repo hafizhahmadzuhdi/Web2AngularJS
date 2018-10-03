@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { DepartmentService } from '../departments/department.service';
+import { EmployeeService } from '../employees/employee.service';
 
 @Component({
   selector: 'app-informations',
@@ -7,13 +9,23 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class InformationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dptService: DepartmentService, private employeeService: EmployeeService) { }
 
   @Input() employee: any[];
   @Input() department: any[];
   @Input() task: any[];
 
-  ngOnInit() {
+  ngOnChanges(){
+      if (this.employee)
+          this.employee.dpt = this.dptService.getDepartmentById(this.employee.department_id);
+      else if (this.department)
+        this.department.empNames = this.employeeService.getEmployeesName(this.department.employees);
+      else if (this.task){
+          this.task.emps = this.employeeService.getEmployees(this.task.employees);
+          this.task.department = this.dptService.getDepartmentById(this.task.department_id);
+      }
+
+
   }
 
 

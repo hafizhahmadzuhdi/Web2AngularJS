@@ -35,8 +35,6 @@ export class DashboardComponent implements OnInit {
 
   onSelectT(task: Task): void {
     this.selectedTask = task;
-    this.selectedTask.emps = this.employeeService.getEmployees(task.employees);
-    this.selectedTask.department = this.departmentService.getDepartmentById(task.department_id);
     this.selected = "t";
     this.selectedDepartment = null;
     this.selectedEmployee = null;
@@ -45,7 +43,6 @@ export class DashboardComponent implements OnInit {
 
   onSelectD(dpt: Dpt): void {
     this.selectedDepartment = dpt;
-    this.selectedDepartment.empNames = this.employeeService.getEmployeesName(dpt.employees);
     this.selected = "d";
     this.selectedTask = null;
     this.selectedEmployee = null;
@@ -54,7 +51,6 @@ export class DashboardComponent implements OnInit {
 
   onSelectE(emp: Employee): void {
     this.selectedEmployee = emp;
-    this.selectedEmployee.dpt = this.departmentService.getDepartmentById(emp.department_id);
     this.selected = "e";
     this.selectedTask = null;
     this.selectedDepartment = null;

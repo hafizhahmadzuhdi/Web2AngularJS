@@ -88,7 +88,5 @@ export class EmployeesComponent implements OnInit {
 
     show_extra(emp) {
         emp.show_extra = !emp.show_extra;
-        if (emp.show_extra)
-            emp.dpt = this.dptService.getDepartmentById(emp.department_id);
     }
 }
