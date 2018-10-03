@@ -1,4 +1,4 @@
-#Nomapad Company
+##Nomapad Company
 
 This project is a web application that stores information for multiple tasks, departments, and employees in an organization. The information can be viewed, added to, edited, and deleted, and there are relationships that link what departments that each employee works for as well as the tasks that are assigned to them.
 
@@ -8,7 +8,7 @@ There is a dashboard that displays the overview of all of this information for t
 
 Access the web application at http://i420882.hera.fhict.nl/
 
-### Prerequisites
+## Prerequisites
 
 Firstly, if you want the application like this you need to generate npm install in your local computer. Then try to install angular with your terminal. Generate some components you needed and make sure you follow the Hero Tutorial in Angular Documentation.
 
