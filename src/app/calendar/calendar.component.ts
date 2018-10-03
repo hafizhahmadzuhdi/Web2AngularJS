@@ -50,6 +50,11 @@ export class CalendarComponent implements OnInit {
 	tasks: Task[];
 	taskdesc = null;
 	taskduedate = null;
+	taskdepartment = null;
+	taskpriority = null;
+	taskemployee = null;
+	task_id = null;
+	current_id = null;
 
 
   constructor(private tasksService: TasksService, private modal: NgbModal) { }
@@ -119,6 +124,17 @@ export class CalendarComponent implements OnInit {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
+
+/*    getValueOfSelectedId(taskID, description, priority, dept_id){
+    if(this.current_id === taskID)
+      this.current_id = null; //it means that if its already selected return null
+    else{ //if no then fill the variable
+      this.current_id = taskID;
+      this.taskdesc = description;
+      this.taskpriority = priority;
+      this.taskdepartment = dept_id;
+    }
+}*/
 
 
 
