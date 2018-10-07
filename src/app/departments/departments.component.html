@@ -24,14 +24,23 @@
             </form>
           </td>
           <!--Delete and Edit Functions-->
-          <td class="rightCol">
+          
+          <td class="row text-center">
+            <div class="col-md-4">
             <div class="btn btn-sm btn-info" (click)='show_extra(department)'>
               <span *ngIf='!department.show_extra'>Show More</span>
               <span *ngIf='department.show_extra'>Show Less</span>
             </div>
+          </div>
+            <div class="col-md-2">
             <div class="btn btn-sm btn-light" (click)='editForm(department.id, department.name, department.building)'>Edit</div>
+            </div>
+            <div class="col-md-3">
             <div class="btn btn-sm btn-dark" (click)='deleteDpt(department.id)'>Delete</div>
+            </div>
+            <div class="col-md-3">
             <div class="btn btn-sm btn-danger" (click)="open(content); pullCurrentDptId(department.id)">Add Task</div>
+            </div>
             <!-- <div class="btn btn-sm btn-danger" (click)='addTaskForm(department.id)'>Add Task</div> -->
           </td>
           </tr>
