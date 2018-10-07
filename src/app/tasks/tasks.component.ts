@@ -33,6 +33,11 @@ export class TasksComponent implements OnInit {
   get_emp_id = null;
   get_dept_id = null;
 
+  add_more : boolean = false;
+  emp_number = 0;
+  buttonaddemp : boolean = true;
+  buttondelemp : boolean = false;
+
 
   searchText: string;
   tasks: Task[];
@@ -47,7 +52,7 @@ export class TasksComponent implements OnInit {
 
 
 
-  //
+  
 
   constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) {
   }
@@ -254,6 +259,39 @@ export class TasksComponent implements OnInit {
   show_more(task) {
       task.show_more = !task.show_more;
   }
+
+  addmore_emp(){
+    /*var buttonadd = <HTMLInputElement> document.getElementById("button-add-emp");
+    var buttondel = <HTMLInputElement> document.getElementById("button-add-emp");*/
+  var buttonadd = <HTMLInputElement> document.getElementById("button-add-emp");
+  var buttondel = <HTMLInputElement> document.getElementById("button-del-emp");
+    {
+    this.add_more = true;
+    this.emp_number = this.emp_number + 1;
+    this.buttonaddemp = false;
+    this.buttondelemp = true;
+    buttonadd.disabled = true;
+    buttondel.disabled = false;
+    return this.add_more;
+    }
+  }
+
+  decrease_emp(){
+  var buttonadd = <HTMLInputElement> document.getElementById("button-add-emp");
+  var buttondel = <HTMLInputElement> document.getElementById("button-del-emp");
+
+    {
+    this.add_more = false;
+    this.emp_number = this.emp_number - 1;
+    this.buttonaddemp = true;
+    this.buttondelemp = false;
+    buttonadd.disabled = false;
+    buttondel.disabled = true;
+    return this.add_more;
+
+  }
+
+}
 
 
 }
