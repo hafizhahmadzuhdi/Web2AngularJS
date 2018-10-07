@@ -109,4 +109,11 @@ export class EmployeeService {
         )
         return emps;
     }
+
+    getEmployeeById(emp_id) {
+          const emps = this.employees.filter(emp => {
+              return emp.id === emp_id;
+          });
+          return emps[0];
+      }
 }
