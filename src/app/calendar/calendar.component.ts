@@ -24,6 +24,8 @@ import {
   CalendarView
 } from 'angular-calendar';
 
+import { CustomEvent } from './custom_event'
+
   const colors: any = {
   red: {
     primary: '#ad2121',
@@ -59,20 +61,22 @@ export class CalendarComponent implements OnInit {
 	taskemployee = null;
 	task_id = null;
   current_id = null;
-  selectedTask: Task;
+  selectedItem: Task | Employee;
   depts: Dpt[];
   emp: Employee[];
+
+  TYPE_EMP = 'emp';
+  TYPE_TASK = 'task';
+
+  currentType: string;
 
   constructor(private tasksService: TasksService, private modal: NgbModal, private deptService: DepartmentService, private empService: EmployeeService) { }
 
   ngOnInit() {
-    this.getTasks();
-    this.getEmployee();
-    this.getDepartments();
-  	console.log(this.events);
-  	this.viewDate;
-  	//this.myFunction();
-  	console.log(this.tasks);
+      this.getEmployee();
+      this.getTasks();
+      this.getDepartments();
+  	  this.viewDate;
   }
 
   getEmployee(): void{
@@ -85,7 +89,7 @@ export class CalendarComponent implements OnInit {
   }
 
   getTasks(): void{
-    this.tasksService.getTasks().subscribe(tasks =>{this.tasks = tasks; this.myFunction(); console.log(this.tasks); });
+    this.tasksService.getTasks().subscribe(tasks =>{this.tasks = tasks; this.myFunction();});
   }
 
   getTaskDescription(): void{
@@ -96,18 +100,30 @@ export class CalendarComponent implements OnInit {
   	//this.taskduedate = this.tasks.map(task => task.due_date);
   }
 
-  myFunction(): void {
-  	this.tasks.map(task => {
-  	 this.events.push( {
-      start: startOfDay(new Date(task.due_date)),
-      title: task.name,
-      color: colors.red,
-      id: String(task.id)
+    myFunction(): void {
+  	    this.tasks.map(task => {
+  	        this.events.push(
+                {
+                    start: startOfDay(new Date(task.due_date)),
+                    title: task.name,
+                    color: colors.red,
+                    id: task.id,
+                    type: this.TYPE_TASK
+                }
+            );
+        });
+        this.emp.map(emp => {
+  	        this.events.push(
+                {
+                    start: startOfDay(new Date(emp.birth_date)),
+                    title: emp.first_name + ' ' + emp.last_name,
+                    color: colors.yellow,
+                    id: emp.id,
+                    type: this.TYPE_EMP
+                }
+            );
+        });
     }
-    );
-  });
-  	console.log(this.tasks);
-  }
 
   modalData: {
     action: string;
@@ -118,12 +134,12 @@ export class CalendarComponent implements OnInit {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
 
-  events: CalendarEvent[] = [];
+  events: CustomEvent[] = [];
 
   activeDayIsOpen: boolean = false;
 
 
-    dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    dayClicked({ date, events }: { date: Date; events: CustomEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -137,11 +153,15 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  handleEvent(action: string, event: CustomEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
-    this.task_id = Number(event.id);
-    this.selectedTask = this.tasksService.getTaskById(this.task_id);
+    // this.id = Number(event.id);
+    this.currentType = event.type;
+    if (this.currentType === this.TYPE_TASK)
+        this.selectedItem = this.tasksService.getTaskById(event.id);
+    else if (this.currentType === this.TYPE_EMP)
+        this.selectedItem = this.empService.getEmployeeById(event.id);
   }
 
 /*    getValueOfSelectedId(taskID, description, priority, dept_id){

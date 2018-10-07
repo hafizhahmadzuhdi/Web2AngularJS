@@ -43,15 +43,19 @@
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">{{selectedTask.name}}</h5>
+    <h5 *ngIf="currentType === TYPE_TASK" class="modal-title">{{selectedItem.name}}</h5>
+    <h5 *ngIf="currentType === TYPE_EMP" class="modal-title">{{selectedItem.first_name}} {{selectedItem.last_name}}</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div>
-    <div>
-      <app-informations [task]='selectedTask'></app-informations>
+    <div *ngIf="currentType === TYPE_TASK">
+      <app-informations [task]='selectedItem'></app-informations>
+    </div>
+    <div *ngIf="currentType === TYPE_EMP">
+      <app-informations [employee]='selectedItem'></app-informations>
     </div>
   </div>
   </div>
