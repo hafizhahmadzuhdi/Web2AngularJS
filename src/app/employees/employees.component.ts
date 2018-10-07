@@ -20,6 +20,7 @@ export class EmployeesComponent implements OnInit {
     edit_first_name = null;
     edit_last_name = null;
     edit_bd = null;
+    edit_dpt = null;
 
     search = null;
 
@@ -61,7 +62,7 @@ export class EmployeesComponent implements OnInit {
         this.department_id = null;
     }
 
-    switch_edit_emp(id, f_name, l_name, birth_date) {
+    switch_edit_emp(id, f_name, l_name, birth_date, dpt_id) {
         // if it's already the current emp we clicked, we just reinit
         if (this.current_edit_emp_id === id)
             this.current_edit_emp_id = null;
@@ -70,6 +71,7 @@ export class EmployeesComponent implements OnInit {
             this.edit_first_name = f_name;
             this.edit_last_name = l_name;
             this.edit_bd = birth_date;
+            this.edit_dpt = dpt_id;
         }
     }
 
@@ -80,9 +82,11 @@ export class EmployeesComponent implements OnInit {
                     emp.first_name = this.edit_first_name;
                     emp.last_name = this.edit_last_name;
                     emp.birth_date = this.edit_bd;
+                    emp.department_id = Number(this.edit_dpt);
                 }
             }
         );
+        console.log(this.employees);
         this.current_edit_emp_id = null;
     }
 
