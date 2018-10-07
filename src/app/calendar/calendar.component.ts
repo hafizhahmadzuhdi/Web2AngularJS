@@ -99,10 +99,10 @@ export class CalendarComponent implements OnInit {
   myFunction(): void {
   	this.tasks.map(task => {
   	 this.events.push( {
-      //start: startOfDay(new Date()),
       start: startOfDay(new Date(task.due_date)),
-      title: String(task.id),
-      color: colors.red
+      title: task.name,
+      color: colors.red,
+      id: String(task.id)
     }
     );
   });
@@ -117,7 +117,7 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
-  
+
   events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = false;
@@ -140,7 +140,7 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
-    this.task_id = Number(event.title);
+    this.task_id = Number(event.id);
     this.selectedTask = this.tasksService.getTaskById(this.task_id);
   }
 
