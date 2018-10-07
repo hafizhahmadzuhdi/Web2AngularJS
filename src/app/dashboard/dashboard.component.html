@@ -31,7 +31,7 @@
 <div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
     <div *ngSwitchCase="'t'">
       <div *ngIf="selectedTask">
-        <h2>Task: {{selectedTask.description}}</h2>
+        <h2>Task: {{selectedTask.name}}</h2>
         <app-informations [task]='selectedTask'></app-informations>
       </div>
     </div>
