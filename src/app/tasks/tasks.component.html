@@ -57,6 +57,18 @@
 			<!-- <select class="d-inline-block form-control" name="get_emp_id" [(ngModel)]="get_emp_id">
 				<option *ngFor="let myemp2 of emp" name="emp_id" value={{myemp2.id}}>{{myemp2.first_name}} {{myemp2.last_name}}</option>
 			</select> --> 
+			<select class="d-inline-block form-control" [(ngModel)]="get_employees[0]" name="edit_dpt">
+				<option *ngFor="let myemp of emp" value="{{myemp.id}}">
+			{{myemp.first_name}} {{myemp.last_name}}
+			</option>
+			</select>
+
+			<select class="d-inline-block form-control" [(ngModel)]="get_employees[1]" name="edit_dpt2">
+				<option *ngFor="let myemp of emp" value="{{myemp.id}}">
+			{{myemp.first_name}} {{myemp.last_name}}
+			</option>
+			</select>
+
 			<select class="d-inline-block form-control" name="dept_id" [(ngModel)]="get_dept_id">
 				<option *ngFor="let mydept2 of depts" value={{mydept2.id}}>{{mydept2.name}}</option>
 			</select>
@@ -70,7 +82,7 @@
 			<span *ngIf='task.show_more'>Show Less</span>
 		</div>
 		<!-- Removed task.employees from the function -->
-		<div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.department_id)'>Edit</div>
+		<div class="btn btn-sm btn-light" (click)='switch_edit_task(task.id, task.name, task.priority, task.due_date, task.employees, task.department_id)'>Edit</div>
 		<!-- <div class="btn btn-sm btn-light" (click)='getValueOfSelectedId(task.id, task.name, task.priority, task.due_date, task.employees, task.department_id)'>Edit</div> -->
 		<div class="btn btn-sm btn-dark" (click)='deleteq(task.id)'>Delete</div>
 	</td>

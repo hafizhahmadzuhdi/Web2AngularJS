@@ -32,6 +32,10 @@ export class TasksComponent implements OnInit {
   get_due_date = null;
   get_emp_id = null;
   get_dept_id = null;
+  get_emp_id2 = null;
+  get_employees : number[] = [];
+
+  extra = null;
 
   add_more : boolean = false;
   emp_number = 0;
@@ -219,7 +223,7 @@ export class TasksComponent implements OnInit {
 
   // Removed emp_id from the function. Otherwise, when editing task, all of the employees are deleted.  
   // getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
-  getValueOfSelectedId(taskID, description, priority, due_date, dept_id){
+/*  getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
     if(this.current_taskID === taskID)
       this.current_taskID = null; //it means that if its already selected return null
     else{ //if no then fill the variable
@@ -227,18 +231,44 @@ export class TasksComponent implements OnInit {
       this.get_description = description;
       this.get_priority = priority;
       this.get_due_date = due_date;
-      // this.get_emp_id = emp_id;
+      this.get_emp_id_fix = emp_id;
+
       this.get_dept_id = dept_id;
+      /*for(let i=0, l=this.tasks.employees.length, i<=l, i++){
+      this.get_emp_id_fix = emp_id.item[i];
+      }*/
+      
 
-    }
-
+    /*}
+    console.log(this.get_emp_id_fix);
     console.log(this.get_priority);
     console.log(this.get_description);
     console.log(this.get_due_date);
     console.log(this.get_emp_id);
     console.log(this.get_dept_id);
 
-  }
+  }*/
+
+  switch_edit_task(id, name, priority, due_date, employees, dpt_id) {
+        // if it's already the current emp we clicked, we just reinit
+        if (this.current_taskID === id)
+            this.current_taskID = null;
+        else {
+            this.current_taskID = id;
+            this.get_description = name;
+            this.get_priority = priority;
+            this.get_due_date = due_date;
+            this.get_employees = employees;
+            this.get_dept_id = dpt_id;
+        }
+    /*console.log(this.get_priority);
+    console.log(this.get_description);
+    console.log(this.get_due_date);
+    console.log(this.get_employees);
+    console.log(this.get_dept_id);*/
+    }
+
+
 
   edit(taskID){
     this.tasks.map(
@@ -247,13 +277,18 @@ export class TasksComponent implements OnInit {
             task.name = this.get_description;
             task.priority = this.get_priority;
             task.due_date = this.get_due_date;
-            // task.employees = [Number(this.get_emp_id)];//changed
+            task.employees[0] = Number(this.get_employees[0]);
+            task.employees[1] = Number(this.get_employees[1]);
+            /*for(let i=0, l=this.get_employees.length; i<l; i++){
+              task.employees[i] = this.get_employees[i];
+            }*/
+            /*task.employees = [Number(this.get_emp_id)];//changed
+            task.employees = [Number(this.get_emp_id2)];//changed*/
             task.department_id = Number(this.get_dept_id);
           }
+          //console.log(task.employees);
       });
-      console.log(this.get_emp_id);
-      console.log(this.get_dept_id);
-    this.current_taskID = null;
+      this.current_taskID = null;
   }
 
   show_more(task) {
