@@ -108,7 +108,7 @@ export class CalendarComponent implements OnInit {
                 {
                     start: startOfDay(new Date(emp.birth_date)),
                     title: emp.first_name + ' ' + emp.last_name,
-                    color: colors.yellow,
+                    color: colors.blue,
                     id: emp.id,
                     type: this.TYPE_EMP
                 }
