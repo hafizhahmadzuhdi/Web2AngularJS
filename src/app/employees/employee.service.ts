@@ -14,9 +14,10 @@ export class EmployeeService {
     employees: Employee[];
 
     constructor(private db: DatabaseService, private http: HttpClient) {
-        this.getAll().subscribe(emps =>
-            this.employees = emps
-        );
+        this.getAll().subscribe(emps => {
+            this.employees = emps;
+            this.db.save('employees', this.employees);
+        });
     }
 
     persist(){

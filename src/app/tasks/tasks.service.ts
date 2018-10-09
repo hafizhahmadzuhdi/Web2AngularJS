@@ -23,7 +23,10 @@ export class TasksService {
   tasks: Task[];
 
   constructor(private http: HttpClient, private db: DatabaseService) {
-    this.getTasks().subscribe(mytask => this.tasks = mytask);
+    this.getTasks().subscribe(mytask => {
+        this.tasks = mytask;
+        this.db.save('tasks', this.tasks);
+    });
   }
 
   //README.md

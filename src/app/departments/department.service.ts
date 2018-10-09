@@ -14,9 +14,10 @@ export class DepartmentService {
     departments: Dpt[];
 
   constructor(private http: HttpClient, private db: DatabaseService) {
-      this.getDepartments().subscribe(dpts =>
-          this.departments = dpts
-      );
+      this.getDepartments().subscribe(dpts => {
+          this.departments = dpts;
+          this.db.save('dpts', this.departments);
+      });
   }
 
   getDepartments(): Observable<Dpt[]> {
