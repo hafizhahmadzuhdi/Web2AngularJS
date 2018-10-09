@@ -1,24 +1,3 @@
-/* .navbar {
-    width: 100%;
-    display: flex;
-}
-
-.navbar-item {
-    text-decoration: none;
-    color: white;
-    background: #fc7979;
-    padding: 5px 15px;
-    border: solid 1px black;
-}
-
-.navbar-item:hover {
-    background: #ff4949;
-}
-
-.active {
-    background: #ff4949;
-} */
-
 nav {
     margin-bottom: 30px;
 }

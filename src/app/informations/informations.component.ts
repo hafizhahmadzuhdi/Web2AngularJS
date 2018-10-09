@@ -27,8 +27,6 @@ export class InformationsComponent {
           this.task.emps = this.employeeService.getEmployees(this.task.employees);
           this.task.department = this.dptService.getDepartmentById(this.task.department_id);
       }
-
-
   }
 
 

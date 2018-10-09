@@ -24,7 +24,6 @@ export class DepartmentsComponent implements OnInit {
     this.getDepartments();
     this.getEmployees();
     this.getTasks();
-    // this.addEmpToDept(this.departments);
   }
 
   id: null;
@@ -71,7 +70,6 @@ export class DepartmentsComponent implements OnInit {
     this.departments.push({
       id: prevId + 1,
       name: this.name,
-//!!!!!!!!!!!!!!!!!!!!!!!! THE SHOW MORE ISN'T SHOWING ID, BUILDING AND THE REST.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       building: this.building,
       show_extra: false,
       employees: null,
@@ -139,7 +137,6 @@ export class DepartmentsComponent implements OnInit {
       show_more: false,
       employees: this.taskEmpId.map(Number),
       department_id: this.currentDptId2,
-      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS STUPID DEPARTMENT ISN'T GETTING PUSHED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       department: this.departmentService.getDepartmentById(this.currentDptId2),
       emps: []
     });

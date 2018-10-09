@@ -5,7 +5,6 @@ export class Dpt {
     name: string;
     building: string;
     show_extra: boolean = false;
-    // emps: Employee[];
     employees: number[];
     empNames: string[];
 }

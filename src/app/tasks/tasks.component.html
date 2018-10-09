@@ -1,5 +1,5 @@
 <ng-template #content let-modal>
-	
+
 	<div class="modal-header">
 		<h4 class="modal-title" id="modal-basic-title">Warning!</h4>
 		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -59,7 +59,7 @@
 			<!-- This is weird to include in the edit section because you can only edit one employee. -->
 			<!-- <select class="d-inline-block form-control" name="get_emp_id" [(ngModel)]="get_emp_id">
 				<option *ngFor="let myemp2 of emp" name="emp_id" value={{myemp2.id}}>{{myemp2.first_name}} {{myemp2.last_name}}</option>
-			</select> --> 
+			</select> -->
 			<select class="d-inline-block form-control" [(ngModel)]="get_employees[0]" name="edit_dpt">
 				<option *ngFor="let myemp of emp" value="{{myemp.id}}">
 			{{myemp.first_name}} {{myemp.last_name}}
@@ -125,7 +125,7 @@
 				<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
 			</select>
 
-			
+
 				<div *ngIf="add_more === true">
 				<select name="employee" [(ngModel)]="emp_id[1]" class="d-inline-block form-control">
 						<option value=null selected disabled hidden>Employee</option>
@@ -141,7 +141,7 @@
 						<button id="button-del-emp" class="btn btn-lg btn-outline-primary" (click)="decrease_emp()">Delete second employee</button>
 					</div>
 				</div>
-			
+
 			<div class="row text-center">
 				<div class="col-md-7">
 			<input type="submit" value='Add Task' (click)='insert()' id="right" class="btn btn-info" />
@@ -153,160 +153,3 @@
 </div>
 </div>
 </div>
-
-
-<!--HAFIZH'S CODE-->
-
-
-<!-- <div class="container">
-	<table id="table1">
-		<thead>
-			<th>Task Description</th>
-			<th>Delete</th>
-			<th>Edit</th>
-			<th>Details</th>
-		</thead>
-		<tbody>
-
-			<tr *ngFor="let task of tasks | filterTask: searchText">
-				<td *ngIf="current_taskID !== task.taskID">
-			<tr class='name'>
-				<p appTaskdirective>{{task.description}}</p>
-			</tr>
-			<div>
-				<tr class='taskID' *ngIf="task.show_more">
-					taskID : {{task.taskID}}
-				</tr>
-			</div>
-			<div>
-				<tr class='priority' *ngIf="task.show_more">
-					Priority : {{task.priority}}
-				</tr>
-			</div>
-			<div>
-				<tr class='due_date' *ngIf="task.show_more">
-					Task Due Date : {{task.due_date}}
-				</tr>
-			</div>
-
-			<div *ngFor="let myemp2 of emp">
-				<div *ngIf="task.show_more && task.emp_id === myemp2.id">
-					<tr class='emp_id'>
-						Employee Name : {{myemp2.first_name}} {{myemp2.last_name}}
-					</tr>
-				</div>
-			</div>
-			<div *ngFor="let mydept2 of depts">
-				<div *ngIf="task.show_more && task.dept_id === mydept2.id">
-					<tr class="dept_id">
-						Department Name : {{mydept2.name}}
-					</tr>
-				</div>
-			</div>
-			</td>
-
-
-			<td *ngIf="current_taskID === task.taskID" class="form">
-				<tr>
-					<input id="desc_edit" name='get_description' type='text' placeholder='description' [(ngModel)]="get_description" />
-				</tr>
-				<tr>
-					<select [(ngModel)]="get_priority">
-						<option value="Urgent">Urgent</option>
-						<option value="Medium">Medium</option>
-						<option value="Low">Low</option>
-					</select>
-				</tr>
-				<tr>
-					<input type="date" name="due_date" placeholder="due_date" [(ngModel)]="get_due_date">
-				</tr>
-				<tr>
-					<select [(ngModel)]="get_emp_id">
-						<option value="">Employee</option>
-						<option value=0>0</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-					</select>
-				</tr>
-				<tr>
-					<select [(ngModel)]="get_dept_id">
-						<option value="">Department</option>
-						<option value=1>1</option>
-						<option value=2>2</option>
-						<option value=3>3</option>
-						<option value=4>4</option>
-						<option value=5>5</option>
-						<option value=6>6</option>
-					</select>
-				</tr>
-				<tr>
-					<input type='submit' value='save' (click)='edit(task.taskID)' />
-				</tr>
-			</td>
-
-			<td><button class="btn-function1" (click)='deleteq(task.taskID)'>Delete</button></td>
-			<td><button class="btn-function2" (click)='getValueOfSelectedId(task.taskID, task.description, task.priority, task.due_date, task.emp_id, task.dept_id)'>Edit</button></td>
-			<td class='view-more' (click)='task.show_more =!task.show_more'>
-				<span *ngIf='!task.show_more'>Show More</span>
-				<span *ngIf='task.show_more'>Show Less</span>
-
-			</td>
-
-
-
-			</tr>
-
-		</tbody>
-	</table>
-</div>
-
-<div class="addTask">
-	<form>
-		<input name='description' type='text' placeholder='description' [(ngModel)]="description" />
- -->		<!-- <input type="radio" name="priority" value="Urgent" [(ngModel)]="priority" checked> Urgent <br>
-  		<input type="radio" name="priority" value="Medium" [(ngModel)]="priority"> Medium <br>
-  		<input type="radio" name="priority" value="Low" [(ngModel)]="priority"> Low <br> -->
-<!-- 		<select name="priority" [(ngModel)]="priority">
-			<option value="Urgent">Urgent</option>
-			<option value="Medium">Medium</option>
-			<option value="Low">Low</option>
-		</select> -->
-		<!-- <input type="date" name="due_date" placeholder="due_date" [(ngModel)]="due_date"> -->
-<!-- 		<input type="text" id="calendarduedate" ngbDatepicker (dateSelect)=[(ngModel)] />
-		<button (click)="d.toggle()">Due Date</button>
-
-		<select name="employee" [(ngModel)]="emp_id">
-			<option value="">Employee</option>
-			<option *ngFor="let myemp of emp" value={{myemp.id}}>{{myemp.first_name}} {{myemp.last_name}}</option>
-		</select>
-
-		<select name="department" [(ngModel)]="dept_id">
-			<option value="">Department</option>
-			<option *ngFor="let mydept of depts" value={{mydept.id}}>{{mydept.name}}</option>
-		</select>
-
-		<input type="submit" value='add Task' (click)='insert()' />
-	</form>
-</div> -->
-
-
-
-<!-- <div class="row">
-			<div class="col">
-				<div ngbDropdown class="d-inline-block">
-      			<button [(ngModel)]="dept_id" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Employee</button>
-      			<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-		        <button *ngFor="let myemp of emp" value={{myemp.id}} class="dropdown-item">{{myemp.first_name}} {{myemp.last_name}}</button>
-		      </div>
-		    </div>
-		  </div>
-		</div> -->
-
-
-
-
-
-
-
-
-<!---COMMENT-->

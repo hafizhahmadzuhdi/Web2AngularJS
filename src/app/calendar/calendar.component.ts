@@ -84,20 +84,11 @@ export class CalendarComponent implements OnInit {
   }
 
   getDepartments(): void{
-    //this.DepartmentService.getDepartments().subscribe(depts =>this.depts = depts);
     this.deptService.getDepartments().subscribe(depts =>this.depts = depts);
   }
 
   getTasks(): void{
     this.tasksService.getTasks().subscribe(tasks =>{this.tasks = tasks; this.myFunction();});
-  }
-
-  getTaskDescription(): void{
-  	//this.taskdesc = this.tasks.map(task => task.taskID);
-  }
-
-  getTaskDueDate(): void{
-  	//this.taskduedate = this.tasks.map(task => task.due_date);
   }
 
     myFunction(): void {
@@ -156,24 +147,12 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CustomEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
-    // this.id = Number(event.id);
     this.currentType = event.type;
     if (this.currentType === this.TYPE_TASK)
         this.selectedItem = this.tasksService.getTaskById(event.id);
     else if (this.currentType === this.TYPE_EMP)
         this.selectedItem = this.empService.getEmployeeById(event.id);
   }
-
-/*    getValueOfSelectedId(taskID, description, priority, dept_id){
-    if(this.current_id === taskID)
-      this.current_id = null; //it means that if its already selected return null
-    else{ //if no then fill the variable
-      this.current_id = taskID;
-      this.taskdesc = description;
-      this.taskpriority = priority;
-      this.taskdepartment = dept_id;
-    }
-}*/
 
 
 

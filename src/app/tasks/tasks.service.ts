@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
-/*import { TASKS } from './mytask';*/
-// import { EMPLOYEES } from '../employees/employees';
-import { DEPARTMENTS } from '../departments/dptList';
 import { Employee } from '../employees/employee';
 import { Dpt } from '../departments/dpt';
 import { Observable, of} from 'rxjs';
@@ -28,11 +25,6 @@ export class TasksService {
         this.db.save('tasks', this.tasks);
     });
   }
-
-  //README.md
-  //Service is useful for getting data only
-  //The rests method still need to accessed via other component
-
 
   getTasks(): Observable<Task[]>{
     this.tasks = this.db.getTasks();

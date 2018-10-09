@@ -7,7 +7,6 @@ import { Task } from './tasks/task';
   providedIn: 'root'
 })
 
-// this service is not used atm, we will use it to store db in localstorage
 export class DatabaseService {
 
     constructor() { }
@@ -57,5 +56,11 @@ export class DatabaseService {
       } catch (e) {
           console.log(e);
       }
+  }
+
+  clearAll(){
+      localStorage.removeItem('tasks');
+      localStorage.removeItem('dpts');
+      localStorage.removeItem('employees');
   }
 }
