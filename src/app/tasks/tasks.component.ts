@@ -338,16 +338,16 @@ export class TasksComponent implements OnInit {
 
   sortByName(array: any[]) {
     this.sortName = true;
-    // array.sort((a,b) => a.name.localeCompare(b.name));
-    array.sort((a: any, b: any) => {
-      if (a.name < b.name) {
-        return -1;
-      } else if (a.name > b.name) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    array.sort((a,b) => a.name.localeCompare(b.name));
+    // array.sort((a: any, b: any) => {
+    //   if (a.name < b.name) {
+    //     return -1;
+    //   } else if (a.name > b.name) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // });
     this.tasks = array;
   }
 
