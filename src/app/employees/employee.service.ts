@@ -19,7 +19,12 @@ export class EmployeeService {
         );
     }
 
+    persist(){
+        this.db.save("employees", this.employees);
+    }
+
     getAll(): Observable<Employee[]> {
+        this.employees = this.db.getEmployees();
         return this.employees ? of(this.employees) : this.http.get<Employee[]>('http://i875395.hera.fhict.nl/api/420882/employee');
     }
 
@@ -42,8 +47,7 @@ export class EmployeeService {
 
         // add new employee to array
         this.employees.push(new_emp);
-        // TODO uncomment this to use localstorage
-        //this.persist();
+        this.persist();
 
         return new_emp;
     }
@@ -54,30 +58,21 @@ export class EmployeeService {
                 return emp.id !== id;
             }
         );
-        // TODO uncomment this to use localstorage
-        //this.persist();
+        this.persist();
     }
 
-    start_editing(employee, field){
-        switch (field) {
-            case 'first_name':
-                employee.edit.first_name = !employee.edit.first_name;
-                // if we just closed the edit field, we have to save the new value
-                // TODO uncomment this to use localstorage
-                //if (!employee.edit.first_name)
-                //    this.persist();
-                break;
-            case 'last_name':
-                employee.edit.last_name = !employee.edit.last_name;
-                //if (!employee.edit.last_name)
-                //    this.persist();
-                break;
-            case 'extra':
-                employee.edit.extra = !employee.edit.extra;
-                //if (!employee.edit.extra)
-                //    this.persist();
-                break;
-        }
+    update(id ,f_n, l_n, bd, dpt_id){
+        this.employees.map(
+            (emp) => {
+                if (emp.id === id) {
+                    emp.first_name = f_n;
+                    emp.last_name = l_n;
+                    emp.birth_date = bd;
+                    emp.department_id = dpt_id;
+                }
+            }
+        );
+        this.persist();
     }
 
     getEmployeesName(emp_ids){

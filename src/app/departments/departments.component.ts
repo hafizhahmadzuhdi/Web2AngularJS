@@ -7,6 +7,7 @@ import { EmployeeService } from '../employees/employee.service';
 import { Task } from '../tasks/task';
 import { TasksService } from '../tasks/tasks.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-departments',
@@ -16,7 +17,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 export class DepartmentsComponent implements OnInit {
 
-  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private modalService: NgbModal, private tasksService: TasksService) { }
+  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private modalService: NgbModal, private tasksService: TasksService,
+  private db: DatabaseService) { }
 
   ngOnInit() {
     this.getDepartments();
@@ -47,6 +49,10 @@ export class DepartmentsComponent implements OnInit {
   taskEmpId: number[] = [];
   taskDeptId;
 
+  persist(){
+      this.db.save("dpts", this.departments);
+  }
+
   getDepartments(): void {
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
   }
@@ -65,11 +71,12 @@ export class DepartmentsComponent implements OnInit {
       id: prevId + 1,
       name: this.name,
 //!!!!!!!!!!!!!!!!!!!!!!!! THE SHOW MORE ISN'T SHOWING ID, BUILDING AND THE REST.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      building: this.building, 
+      building: this.building,
       show_extra: false,
       employees: null,
       empNames: null
     });
+    this.persist();
   }
 
   //Turns the current department into a form in order to edit the values
@@ -98,11 +105,13 @@ export class DepartmentsComponent implements OnInit {
     n.name = this.editName;
     n.building = this.editBuilding;
     this.currentDptId = null;
+    this.persist();
   }
 
   deleteDpt(id) {
     let i = this.departments.findIndex(x => x.id === id);
     this.departments.splice(i, 1);
+    this.persist();
   }
 
   show_extra(dpt) {
@@ -137,6 +146,7 @@ export class DepartmentsComponent implements OnInit {
     this.taskPriority = null;
     this.task_due_date = null;
     this.taskEmpId = [];
+    this.db.save("tasks", this.tasks);
   }
 
   // Modal Stuff

@@ -76,17 +76,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     update(id) {
-        this.employees.map(
-            (emp) => {
-                if (emp.id === id) {
-                    emp.first_name = this.edit_first_name;
-                    emp.last_name = this.edit_last_name;
-                    emp.birth_date = this.edit_bd;
-                    emp.department_id = Number(this.edit_dpt);
-                }
-            }
-        );
-        console.log(this.employees);
+        this.employeeService.update(id, this.edit_first_name, this.edit_last_name, this.edit_bd, this.edit_dpt);
         this.current_edit_emp_id = null;
     }
 

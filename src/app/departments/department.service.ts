@@ -4,6 +4,7 @@ import { Employee } from '../employees/employee';
 import { EmployeeService } from '../employees/employee.service';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DatabaseService } from '../database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,14 @@ export class DepartmentService {
 
     departments: Dpt[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private db: DatabaseService) {
       this.getDepartments().subscribe(dpts =>
           this.departments = dpts
       );
   }
 
   getDepartments(): Observable<Dpt[]> {
+      this.departments = this.db.getDepartments();
      return this.departments ? of(this.departments) : this.http.get<Dpt[]>(this.departmentsUrl);
    }
 
@@ -34,17 +36,6 @@ export class DepartmentService {
             }
         });
     }
-
-    // addEmpToDept(departments, employees) : void {
-    //   this.departments.map(department=> {department.empNames = []})
-    //  employees.map(employee => {
-    //     this.departments.map(department=> {
-    //       if (employee.dpt_id == department.id && !department.empNames.includes(employee.first_name + " " + employee.last_name))
-    //         department.empNames.push(employee.first_name + " " + employee.last_name);
-    //         department.emps.push(employee);
-    //     })
-    //   })
-    // }
 
     addEmpToDept(departments, employees) : void {
         this.departments.map(department=> {department.employees = []});
