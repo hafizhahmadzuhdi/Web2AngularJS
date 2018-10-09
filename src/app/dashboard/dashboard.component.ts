@@ -20,8 +20,6 @@ export class DashboardComponent implements OnInit {
     this.getEmployee();
     this.getDepartments();
     this.searchCategory = "tCheck";
-    //this.departmentService.addEmpToDept(this.departments, this.employees);
-    //this.employeeService.addDeptToEmp(this.departments);
   }
 
   departments: Dpt[];
@@ -82,6 +80,29 @@ export class DashboardComponent implements OnInit {
     this.searchEmp = null;
   }
 
+  isAssociated(type, entity){
+      let resp = false;
+        switch (type) {
+            case 'dpt':
+                if (this.selectedEmployee && entity.id === this.selectedEmployee.department_id
+                    || this.selectedTask && this.selectedTask.department_id === entity.id
+                )
+                    resp = true;
+                break;
+            case "emp":
+                if (this.selectedTask && this.selectedTask.employees.includes(entity.id)
+                    || this.selectedDepartment && this.selectedDepartment.employees.includes(entity.id)
+                )
+                    resp = true;
+                break;
+            case "task":
+                if (this.selectedDepartment && entity.department_id === this.selectedDepartment.id
+                    || this.selectedEmployee && entity.employees.includes(this.selectedEmployee.id))
+                    resp = true;
+                break;
+      }
+      return resp;
+  }
   // scrollToSelectedElement() {
   //     const selectedElement = document.getElementById("selectedElement");
   //     selectedElement.scrollIntoView();
