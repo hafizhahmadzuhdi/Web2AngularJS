@@ -4,7 +4,7 @@ This project is a web application that stores information for multiple tasks, de
 
 There is a dashboard that displays the overview of all of this information for the users to view. Users can search for a specific task, department and employee. There is also a calendar that displays the tasks for the users to view.
 
-This project is also build with API with laravel that can be look at the link git : https://git.fhict.nl/I409310/angularapi.git
+This project is also build with API with laravel that can be look at the link git : https://git.fhict.nl/I409310/apistuffs.git
 
 
 ## Getting Started
