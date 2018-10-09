@@ -11,6 +11,8 @@ This project is also build with API with laravel that can be look at the link gi
 
 Access the web application at http://i420882.hera.fhict.nl/
 
+Access the web application that used Laravel API at  http://i409310.hera.fhict.nl/
+
 ## Prerequisites
 
 Firstly, if you want the application like this you need to generate npm install in your local computer. Then try to install angular with your terminal. Generate some components you needed and make sure you follow the Hero Tutorial in Angular Documentation.
