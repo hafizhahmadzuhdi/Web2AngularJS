@@ -172,12 +172,11 @@ export class DepartmentsComponent implements OnInit {
   sortByName(array: any[]) {
     this.sortName = true;
     array.sort((a,b) => a.name.localeCompare(b.name));
-    this.tasks = array;
+    this.departments = array;
   }
 
   sortByID(array: any[]) {
     this.sortName = false;
-
     array.sort((a: any, b: any) => {
       if (a.id < b.id) {
         return -1;
@@ -187,7 +186,7 @@ export class DepartmentsComponent implements OnInit {
         return 0;
       }
     });
-    this.tasks = array;
+    this.departments = array;
   }
 
 }
