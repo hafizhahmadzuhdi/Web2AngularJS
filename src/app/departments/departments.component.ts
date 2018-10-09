@@ -114,7 +114,6 @@ export class DepartmentsComponent implements OnInit {
 
   pullCurrentDptId(id) {
     this.currentDptId2 = id;
-    alert(this.currentDptId2);
   }
 
   insertTask() {
@@ -129,7 +128,7 @@ export class DepartmentsComponent implements OnInit {
       due_date: this.task_due_date.year + "-" + this.task_due_date.month + "-" + this.task_due_date.day,
       show_more: false,
       employees: this.taskEmpId.map(Number),
-      department_id: this.currentDptId,
+      department_id: this.currentDptId2,
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS STUPID DEPARTMENT ISN'T GETTING PUSHED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       department: this.departmentService.getDepartmentById(this.currentDptId2),
       emps: []
@@ -138,7 +137,6 @@ export class DepartmentsComponent implements OnInit {
     this.taskPriority = null;
     this.task_due_date = null;
     this.taskEmpId = [];
-    alert(this.currentDptId2);
   }
 
   // Modal Stuff
