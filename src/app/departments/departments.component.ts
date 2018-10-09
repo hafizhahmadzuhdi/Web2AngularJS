@@ -37,6 +37,7 @@ export class DepartmentsComponent implements OnInit {
   emps: null;
   empNames: null;
   searchText: string;
+  sortName: boolean = false;
 
   departments: Dpt[];
   employees: Employee[];
@@ -167,8 +168,26 @@ export class DepartmentsComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-}
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OTHER BUGS. sry yall!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//ONCE A TASK IS ADDED FROM DEPARTMENTS, IT DOESN'T SHOW UP IN CALENDER. and when going back to tasks, it no longer lets me scroll.
-//Tasks in the calendar are still showing up under ID, not the task description.
+  sortByName(array: any[]) {
+    this.sortName = true;
+    array.sort((a,b) => a.name.localeCompare(b.name));
+    this.tasks = array;
+  }
+
+  sortByID(array: any[]) {
+    this.sortName = false;
+
+    array.sort((a: any, b: any) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.tasks = array;
+  }
+
+}

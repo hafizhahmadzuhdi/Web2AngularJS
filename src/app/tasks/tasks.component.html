@@ -30,7 +30,10 @@
 			<input class="form-control" name="description" [(ngModel)]="searchText" placeholder="Task Description">
 			<br>
 
-			<h2>Tasks</h2>
+			<h2>Tasks
+				<div *ngIf='!sortName' class="btn btn-sm btn-dark" (click)='sortByName(tasks)'>Sort by Task Name</div>
+				<div *ngIf='sortName' class="btn btn-sm btn-dark" (click)='sortByID(tasks)'>Sort by Task ID</div>
+			</h2>
 			<table class="table table-hover">
 				<tbody *ngIf="tasks">
 					<tr *ngFor="let task of tasks | filter: searchText">

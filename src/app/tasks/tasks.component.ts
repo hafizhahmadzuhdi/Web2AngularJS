@@ -36,6 +36,7 @@ export class TasksComponent implements OnInit {
   get_employees : number[] = [];
 
   extra = null;
+  sortName: boolean = false;
 
   add_more : boolean = false;
   emp_number = 0;
@@ -335,5 +336,25 @@ export class TasksComponent implements OnInit {
 
 }
 
+  sortByName(array: any[]) {
+    this.sortName = true;
+    array.sort((a,b) => a.name.localeCompare(b.name));
+    this.tasks = array;
+  }
+
+  sortByID(array: any[]) {
+    this.sortName = false;
+
+    array.sort((a: any, b: any) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.tasks = array;
+  }
 
 }

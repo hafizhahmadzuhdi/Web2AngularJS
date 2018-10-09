@@ -21,6 +21,9 @@ export class EmployeesComponent implements OnInit {
     edit_last_name = null;
     edit_bd = null;
     edit_dpt = null;
+    sortFName = true;
+    sortLName = false;
+    sortID = false;
 
     search = null;
 
@@ -83,4 +86,34 @@ export class EmployeesComponent implements OnInit {
     show_extra(emp) {
         emp.show_extra = !emp.show_extra;
     }
+
+    sortByFName(array: any[]) {
+        this.sortLName = true;
+        // this.sortID = true;
+        this.sortFName = false;
+        array.sort((a,b) => a.first_name.localeCompare(b.first_name));
+        this.employees = array;
+      }
+    
+    sortByLName(array: any[]) {
+        this.sortID = true;
+        this.sortLName = false;
+        array.sort((a,b) => a.last_name.localeCompare(b.last_name));
+        this.employees = array;
+      }
+    
+      sortByID(array: any[]) {
+        this.sortFName = true;
+        this.sortID = false;
+        array.sort((a: any, b: any) => {
+          if (a.id < b.id) {
+            return -1;
+          } else if (a.id > b.id) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+        this.employees = array;
+      }
 }
