@@ -7,6 +7,7 @@ import { EmployeeService } from '../employees/employee.service';
 import { Task } from '../tasks/task';
 import { TasksService } from '../tasks/tasks.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-departments',
@@ -16,7 +17,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 export class DepartmentsComponent implements OnInit {
 
-  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private modalService: NgbModal, private tasksService: TasksService) { }
+  constructor(private departmentService: DepartmentService, private employeeService: EmployeeService, private modalService: NgbModal, private tasksService: TasksService,
+  private db: DatabaseService) { }
 
   ngOnInit() {
     this.getDepartments();
@@ -35,6 +37,7 @@ export class DepartmentsComponent implements OnInit {
   emps: null;
   empNames: null;
   searchText: string;
+  sortName: boolean = false;
 
   departments: Dpt[];
   employees: Employee[];
@@ -46,6 +49,10 @@ export class DepartmentsComponent implements OnInit {
   taskPriority: null;
   taskEmpId: number[] = [];
   taskDeptId;
+
+  persist(){
+      this.db.save("dpts", this.departments);
+  }
 
   getDepartments(): void {
     this.departmentService.getDepartments().subscribe(departments =>this.departments = departments);
@@ -65,11 +72,12 @@ export class DepartmentsComponent implements OnInit {
       id: prevId + 1,
       name: this.name,
 //!!!!!!!!!!!!!!!!!!!!!!!! THE SHOW MORE ISN'T SHOWING ID, BUILDING AND THE REST.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      building: this.building, 
+      building: this.building,
       show_extra: false,
       employees: null,
       empNames: null
     });
+    this.persist();
   }
 
   //Turns the current department into a form in order to edit the values
@@ -98,11 +106,13 @@ export class DepartmentsComponent implements OnInit {
     n.name = this.editName;
     n.building = this.editBuilding;
     this.currentDptId = null;
+    this.persist();
   }
 
   deleteDpt(id) {
     let i = this.departments.findIndex(x => x.id === id);
     this.departments.splice(i, 1);
+    this.persist();
   }
 
   show_extra(dpt) {
@@ -114,7 +124,6 @@ export class DepartmentsComponent implements OnInit {
 
   pullCurrentDptId(id) {
     this.currentDptId2 = id;
-    alert(this.currentDptId2);
   }
 
   insertTask() {
@@ -129,7 +138,7 @@ export class DepartmentsComponent implements OnInit {
       due_date: this.task_due_date.year + "-" + this.task_due_date.month + "-" + this.task_due_date.day,
       show_more: false,
       employees: this.taskEmpId.map(Number),
-      department_id: this.currentDptId,
+      department_id: this.currentDptId2,
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!THIS STUPID DEPARTMENT ISN'T GETTING PUSHED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       department: this.departmentService.getDepartmentById(this.currentDptId2),
       emps: []
@@ -138,7 +147,7 @@ export class DepartmentsComponent implements OnInit {
     this.taskPriority = null;
     this.task_due_date = null;
     this.taskEmpId = [];
-    alert(this.currentDptId2);
+    this.db.save("tasks", this.tasks);
   }
 
   // Modal Stuff
@@ -159,8 +168,25 @@ export class DepartmentsComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-}
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OTHER BUGS. sry yall!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//ONCE A TASK IS ADDED FROM DEPARTMENTS, IT DOESN'T SHOW UP IN CALENDER. and when going back to tasks, it no longer lets me scroll.
-//Tasks in the calendar are still showing up under ID, not the task description.
+  sortByName(array: any[]) {
+    this.sortName = true;
+    array.sort((a,b) => a.name.localeCompare(b.name));
+    this.departments = array;
+  }
+
+  sortByID(array: any[]) {
+    this.sortName = false;
+    array.sort((a: any, b: any) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.departments = array;
+  }
+
+}

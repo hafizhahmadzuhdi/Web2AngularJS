@@ -7,7 +7,7 @@ import { DepartmentService } from '../departments/department.service';
 import { EmployeeService } from '../employees/employee.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-tasks',
@@ -36,6 +36,7 @@ export class TasksComponent implements OnInit {
   get_employees : number[] = [];
 
   extra = null;
+  sortName: boolean = false;
 
   add_more : boolean = false;
   emp_number = 0;
@@ -56,9 +57,10 @@ export class TasksComponent implements OnInit {
 
 
 
-  
 
-  constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService) {
+
+  constructor(private modalService: NgbModal, private tasksService: TasksService, private deptService: DepartmentService, private empService: EmployeeService,
+  private db: DatabaseService) {
   }
   //generate variable tasksService for service access
 
@@ -73,6 +75,9 @@ export class TasksComponent implements OnInit {
 
 //ngOnInit will initialize when we refreshed our browser
 
+    persist(){
+        this.db.save("tasks", this.tasks);
+    }
   //Task datas are not imported in this file, because
   //One of service duties is to get the data itself
   getTasks(): void{
@@ -174,6 +179,7 @@ export class TasksComponent implements OnInit {
     console.log(this.position);
     this.tasks.splice(this.position, 1);
     console.log(this.tasks);
+    this.persist();
   }
 
   //when you want to make our project live version
@@ -218,10 +224,11 @@ export class TasksComponent implements OnInit {
     console.log(this.dept_id);
     console.log(this.tasks);
     console.log(this.due_date);
+    this.persist();
   }
 
 
-  // Removed emp_id from the function. Otherwise, when editing task, all of the employees are deleted.  
+  // Removed emp_id from the function. Otherwise, when editing task, all of the employees are deleted.
   // getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
 /*  getValueOfSelectedId(taskID, description, priority, due_date, emp_id, dept_id){
     if(this.current_taskID === taskID)
@@ -237,7 +244,7 @@ export class TasksComponent implements OnInit {
       /*for(let i=0, l=this.tasks.employees.length, i<=l, i++){
       this.get_emp_id_fix = emp_id.item[i];
       }*/
-      
+
 
     /*}
     console.log(this.get_emp_id_fix);
@@ -288,6 +295,7 @@ export class TasksComponent implements OnInit {
           }
           //console.log(task.employees);
       });
+      this.persist();
       this.current_taskID = null;
   }
 
@@ -328,5 +336,33 @@ export class TasksComponent implements OnInit {
 
 }
 
+  sortByName(array: any[]) {
+    this.sortName = true;
+    array.sort((a,b) => a.name.localeCompare(b.name));
+    // array.sort((a: any, b: any) => {
+    //   if (a.name < b.name) {
+    //     return -1;
+    //   } else if (a.name > b.name) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // });
+    this.tasks = array;
+  }
+
+  sortByID(array: any[]) {
+    this.sortName = false;
+    array.sort((a: any, b: any) => {
+      if (a.id < b.id) {
+        return -1;
+      } else if (a.id > b.id) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    this.tasks = array;
+  }
 
 }

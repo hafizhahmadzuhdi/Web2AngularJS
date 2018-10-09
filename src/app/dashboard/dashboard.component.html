@@ -9,24 +9,24 @@
             <input class="form-control" [(ngModel)]="searchDpt" placeholder="" *ngSwitchCase="'dCheck'">
             <input class="form-control" [(ngModel)]="searchEmp" placeholder="" *ngSwitchCase="'eCheck'">
         </div><br>
-      
+
         <form>
 <div class="custom-control custom-radio">
     <input type="radio" class="custom-control-input" id="tCheck" value="tCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
     <label class="custom-control-label" for="tCheck">Tasks</label>
   </div>
-  
+
   <div class="custom-control custom-radio">
     <input type="radio" class="custom-control-input" id="dCheck" value="dCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
     <label class="custom-control-label" for="dCheck">Departments</label>
   </div>
-  
+
   <div class="custom-control custom-radio">
     <input type="radio" class="custom-control-input" id="eCheck" value="eCheck" [(ngModel)]="searchCategory" name="groupOfDefaultRadios" (click)="reset()">
     <label class="custom-control-label" for="eCheck">Employees</label>
   </div>
       </form>
-        
+
 <!-- Selected Item Details -->
 <div [ngSwitch]="selected" class="row justify-content-center" id="selectedElement">
     <div *ngSwitchCase="'t'">
@@ -54,21 +54,30 @@
   <div *ngIf="tasks" class="col-2">
       <h3>Tasks</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let task of tasks | filter: searchTsk" [class.selected]="task === selectedTask" (click)="onSelectT(task)">{{task.name}}</li>
+          <li class="list-group-item" *ngFor="let task of tasks | filter: searchTsk"
+          [class.selected]="task === selectedTask" [class.associated]="isAssociated('task', task)" (click)="onSelectT(task)">
+            {{task.name}}
+          </li>
         </ul>
   </div>
 
   <div *ngIf="departments" class="col-2">
       <h3>Departments</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let department of departments | filter: searchDpt" [class.selected]="department === selectedDepartment" (click)="onSelectD(department)">{{department.name}}</li>
+            <li class="list-group-item" *ngFor="let department of departments | filter: searchDpt"
+            [class.selected]="department === selectedDepartment" [class.associated]="isAssociated('dpt', department)" (click)="onSelectD(department)">
+                {{department.name}}
+            </li>
         </ul>
   </div>
 
   <div *ngIf="employees" class="col-2">
       <h3>Employees</h3>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let employee of employees | filter: searchEmp" [class.selected]="employee === selectedEmployee" (click)="onSelectE(employee)">{{employee.first_name}} {{employee.last_name}}</li>
+            <li class="list-group-item" *ngFor="let employee of employees | filter: searchEmp"
+            [class.selected]="employee === selectedEmployee" [class.associated]="isAssociated('emp', employee)" (click)="onSelectE(employee)">
+                {{employee.first_name}} {{employee.last_name}}
+            </li>
         </ul>
   </div>
 </div>

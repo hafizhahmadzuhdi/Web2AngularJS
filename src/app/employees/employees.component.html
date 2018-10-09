@@ -5,7 +5,11 @@
 			<input class="form-control" [(ngModel)]='search' placeholder="Employee Name" />
 			<br>
 
-			<h2>Employees</h2>
+			<h2>Employees
+				<div *ngIf='sortFName' class="btn btn-sm btn-dark" (click)='sortByFName(employees)'>Sort by First Name</div>
+				<div *ngIf='sortLName' class="btn btn-sm btn-dark" (click)='sortByLName(employees)'>Sort by Last Name</div>
+				<div *ngIf='sortID' class="btn btn-sm btn-dark" (click)='sortByID(employees)'>Sort by Employee ID</div>
+			</h2>
 			<table class="table table-hover">
 				<tbody>
 					<tr *ngFor="let emp of employees | filter: search; let i = index" [ngClass]="{'colored-tr' : i % 2 === 0 }">
