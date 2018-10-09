@@ -11,8 +11,7 @@ This project is also build with API with laravel that can be look at the link gi
 
 Access the web application at http://i420882.hera.fhict.nl/
 
-Access the web application that used Laravel API at  http://i409310.hera.fhict.nl/
-(Unfortunately the link given above is unavailbale due to CORS problem related with our API, we will update it as soon as we got a solution)
+Access the web application that used Laravel API at  http://i409310.hera.fhict.nl/ (Unfortunately the link given beside is unavailbale due to CORS problem related with our API, we will update it as soon as we got a solution)
 
 ## Prerequisites
 
