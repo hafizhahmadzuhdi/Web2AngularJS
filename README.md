@@ -17,5 +17,11 @@ Access the web application that used Laravel API at  http://i409310.hera.fhict.n
 
 Firstly, if you want the application like this you need to generate npm install in your local computer. Then try to install angular with your terminal. Generate some components you needed and make sure you follow the Hero Tutorial in Angular Documentation.
 
+To run this project locally clone it.
+install the dependencies by typing npm install in your CLI.
+then, type npm start to run the server.
+
+To build a production ready version, just type npm run build-prod.
+
 ## Authors
 Authors: Nhi Do, Thibault Hentges, and Hafizh Zuhdi.
