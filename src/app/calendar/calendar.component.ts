@@ -76,7 +76,12 @@ export class CalendarComponent implements OnInit {
       this.getEmployee();
       this.getTasks();
       this.getDepartments();
-  	  this.viewDate;
+  }
+
+  changeDate(){
+      this.activeDayIsOpen = false;
+      this.events = [];
+      this.myFunction();
   }
 
   getEmployee(): void{
@@ -103,17 +108,7 @@ export class CalendarComponent implements OnInit {
                 }
             );
         });
-        this.emp.map(emp => {
-  	        this.events.push(
-                {
-                    start: startOfDay(new Date(emp.birth_date)),
-                    title: emp.first_name + ' ' + emp.last_name,
-                    color: colors.blue,
-                    id: emp.id,
-                    type: this.TYPE_EMP
-                }
-            );
-        });
+        this.map_birthdays();
     }
 
   modalData: {
@@ -154,7 +149,26 @@ export class CalendarComponent implements OnInit {
         this.selectedItem = this.empService.getEmployeeById(event.id);
   }
 
-
+  map_birthdays(){
+      this.emp.map(emp => {
+          let calendar_date = emp.birth_date;
+          if (calendar_date) {
+              // we change the year so that this is the current year and shows on calendar every year
+              calendar_date = calendar_date.substr(5);
+              calendar_date = this.viewDate.getFullYear() + '-' + calendar_date;
+          }
+          this.events.push(
+              {
+                  start: startOfDay(new Date(calendar_date)),
+                  title: emp.first_name + ' ' + emp.last_name,
+                  color: colors.blue,
+                  id: emp.id,
+                  type: this.TYPE_EMP
+              }
+          );
+          calendar_date = null;
+      });
+  }
 
 
 }
