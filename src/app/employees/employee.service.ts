@@ -16,6 +16,14 @@ export class EmployeeService {
     constructor(private db: DatabaseService, private http: HttpClient) {
         this.getAll().subscribe(emps => {
             this.employees = emps;
+
+            // put some birth_date to show on the calendar
+            if (this.employees[0] && !this.employees[0].birth_date)
+                this.employees[0].birth_date = '1995-10-12';
+
+            if (this.employees[2] && !this.employees[2].birth_date)
+                this.employees[2].birth_date = '1996-12-12';
+
             this.db.save('employees', this.employees);
         });
     }

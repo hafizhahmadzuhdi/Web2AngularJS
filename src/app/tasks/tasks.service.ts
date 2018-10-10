@@ -22,6 +22,12 @@ export class TasksService {
   constructor(private http: HttpClient, private db: DatabaseService) {
     this.getTasks().subscribe(mytask => {
         this.tasks = mytask;
+        // saving some due_dates to show on calendar without having to modify it
+        if (this.tasks[0] && !this.tasks[0].due_date)
+            this.tasks[0].due_date = '2018-10-15';
+
+        if (this.tasks[2] && !this.tasks[2].due_date)
+            this.tasks[2].due_date = '2018-11-10';
         this.db.save('tasks', this.tasks);
     });
   }
